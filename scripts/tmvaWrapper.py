@@ -731,7 +731,7 @@ if __name__ == "__main__":
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv"]
 
 						if channel == "em":
-							copy_cargs["quantities"] = ["mt_1", "mt_2", "pZetaMissVis", "m_jj", "H_pt", "jdeta", "diLep_diJet_deltaR"]
+							copy_cargs["quantities"] = ["mt_1", "mt_2", "pZetaMissVis", "mjj", "H_pt", "jdeta", "diLep_diJet_deltaR"]
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["mt_1", "pt_2", "mt_2", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 
