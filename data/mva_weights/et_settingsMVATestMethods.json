@@ -1,0 +1,67 @@
+{
+    "MVACustomWeights": [
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))",
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))",
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))",
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))",
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))",
+        "((x>=0)*(x<5)||(x>=10)*(x<15)||(x>=20)*(x<25)||(x>=30)*(x<35)||(x>=40)*(x<45)||(x>=50)*(x<55)||(x>=60)*(x<65)||(x>=70)*(x<75)||(x>=80)*(x<85)||(x>=90)*(x<95))",
+        "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))"
+    ],
+    "MVATestMethodsInputQuantities": [
+        "0;lep1Pt:=pt_1,lep2Pt:=pt_2,lep1MetMt:=mt_1,mvaMetPt:=mvamet,pZetaMissVis,diLepDeltaR",
+        "1;lep1Pt:=pt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,diLepMetPt:=H_pt,diLepDeltaR,mvaMetPt:=mvamet",
+        "2;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR",
+        "3;lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
+        "4;lep1Pt:=pt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,diLepMetPt:=H_pt,diLepDeltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta,diLep_diJet_deltaR"
+    ],
+    "MVATestMethodsMethods": [
+        "0;BDT",
+        "0;BDT",
+        "1;BDT",
+        "1;BDT",
+        "0;BDT",
+        "0;BDT",
+        "2;BDT",
+        "2;BDT",
+        "3;BDT",
+        "3;BDT",
+        "4;BDT",
+        "4;BDT"
+    ],
+    "MVATestMethodsNFolds": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+    ],
+    "MVATestMethodsNames": [
+        "ZeroJets_FakeDiscriminator",
+        "ZeroJets_TTDiscriminator",
+        "OneJets_FakeDiscriminator",
+        "OneJets_TTDiscriminator",
+        "TwoJets_FakeDiscriminator",
+        "TwoJets_TTDiscriminator"
+    ],
+    "MVATestMethodsWeights": [
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_et_2Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_et_2Jets_TTDiscriminator_rm_Nothing.weights.xml"
+    ]
+}

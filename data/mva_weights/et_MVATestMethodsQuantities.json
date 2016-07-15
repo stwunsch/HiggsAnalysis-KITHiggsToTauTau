@@ -1,0 +1,22 @@
+{
+    "property": [
+        "ZeroJets_FakeDiscriminator",
+        "T1ZeroJets_FakeDiscriminator",
+        "T2ZeroJets_FakeDiscriminator",
+        "ZeroJets_TTDiscriminator",
+        "T1ZeroJets_TTDiscriminator",
+        "T2ZeroJets_TTDiscriminator",
+        "OneJets_FakeDiscriminator",
+        "T1OneJets_FakeDiscriminator",
+        "T2OneJets_FakeDiscriminator",
+        "OneJets_TTDiscriminator",
+        "T1OneJets_TTDiscriminator",
+        "T2OneJets_TTDiscriminator",
+        "TwoJets_FakeDiscriminator",
+        "T1TwoJets_FakeDiscriminator",
+        "T2TwoJets_FakeDiscriminator",
+        "TwoJets_TTDiscriminator",
+        "T1TwoJets_TTDiscriminator",
+        "T2TwoJets_TTDiscriminator"
+    ]
+}
