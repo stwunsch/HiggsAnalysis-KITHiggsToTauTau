@@ -105,7 +105,7 @@ if __name__ == "__main__":
 		"weights": [
 			"weight*(classID==1)",
 			"weight*(classID==0)"
-				],
+				]*2,
 		"nicks": [],
 		"cut_efficiency_bkg_nicks": [],
 		"cut_efficiency_modes": ["sigEffVsBkgRej"],

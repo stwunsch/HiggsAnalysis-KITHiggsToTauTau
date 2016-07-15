@@ -14,13 +14,13 @@ energy = 13
 
 class Samples(samples.SamplesBase):
 
-	
+
 	# constants for all plots
 	default_lumi = 3.99*1000.0
 	data_format = "MINIAOD"
 	mc_campaign = "RunIISpring16MiniAODv.*"
 
-	@staticmethod 
+	@staticmethod
 	def root_file_folder(channel):
 		return channel+"_jecUncNom"+("_tauEsNom" if "t" in channel else "")+"/ntuple"
 
@@ -91,7 +91,7 @@ class Samples(samples.SamplesBase):
 		# execute bin correction modules after possible background estimation modules
 		if not kwargs.get("mssm", False):
 			config.setdefault("analysis_modules", []).sort(key=lambda module: module in ["BinErrorsOfEmptyBins", "CorrectNegativeBinContents"])
-		
+
 		return config
 
 	def projection(self, kwargs):
@@ -162,7 +162,7 @@ class Samples(samples.SamplesBase):
 		query["process"] = "DYJetsToLLM50"
 		query["campaign"] = self.mc_campaign + "2"
 		artus_files = artus_files + " " + self.artus_file_names(query , 1)
-		return artus_files 
+		return artus_files
 
 	def ztt(self, config, channel, category, weight, nick_suffix, lumi=default_lumi, exclude_cuts=None, cut_type="baseline", **kwargs):
 		if exclude_cuts is None:
@@ -172,7 +172,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("ZTT", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 
 		self.root_file_folder(channel),
@@ -216,7 +216,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("ZLL", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		if channel in ["mt", "et", "tt", "em", "mm"]:
 			Samples._add_input(
@@ -232,12 +232,12 @@ class Samples(samples.SamplesBase):
 			log.error("Sample config (ZLL) currently not implemented for channel \"%s\"!" % channel)
 		if not kwargs.get("mssm", False):
 			Samples._add_bin_corrections(config, "zll", nick_suffix)
-		
+
 		if channel in ["mt", "et"] and fakefactor_method == "standard":
 			config["weights"][config["nicks"].index("zll")] = config["weights"][config["nicks"].index("zll")]  + "*(gen_match_2 != 6)"
 		if channel in ["mt", "et"] and fakefactor_method == "comparison":
 			config["weights"][config["nicks"].index("zll")] = config["weights"][config["nicks"].index("zll")]  + "*(gen_match_2 == 6)"
-		
+
 		Samples._add_plot(config, "bkg", "HIST", "F", "zll", nick_suffix)
 		return config
 
@@ -252,7 +252,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("TTJ", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		Samples._add_input(
 				config,
@@ -340,19 +340,19 @@ class Samples(samples.SamplesBase):
 			log.error("Sample config (TTJ) currently not implemented for channel \"%s\"!" % channel)
 		if not kwargs.get("mssm", False):
 			Samples._add_bin_corrections(config, "ttj", nick_suffix)
-		
+
 		if channel in ["mt", "et"] and fakefactor_method == "standard":
 			config["weights"][config["nicks"].index("ttj")] = config["weights"][config["nicks"].index("ttj")]  + "*(gen_match_2 != 6)"
 		if channel in ["mt", "et"] and fakefactor_method == "comparison":
 			config["weights"][config["nicks"].index("ttj")] = config["weights"][config["nicks"].index("ttj")]  + "*(gen_match_2 == 6)"
-		
+
 		Samples._add_plot(config, "bkg", "HIST", "F", "ttj", nick_suffix)
 		return config
 
 	def files_vv(self, config):
-		artus_files = self.artus_file_names({ "process" : 
+		artus_files = self.artus_file_names({ "process" :
 		                                      "(WWTo1L1Nu2Q|"
-		                                    + "WZJets|WZTo1L1Nu2Q|WZTo1L3Nu|WZTo2L2Q|" 
+		                                    + "WZJets|WZTo1L1Nu2Q|WZTo1L3Nu|WZTo2L2Q|"
 		                                    + "ZZTo2L2Q|ZZTo4L|VVTo2L2Nu)",
 		                      "data" : False, "campaign" : self.mc_campaign, "generator" : "amcatnlo-pythia8"}, 6)
 
@@ -368,7 +368,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("Dibosons", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		if channel in ["mt", "et", "em", "tt", "mm"]:
 			Samples._add_input(
@@ -384,13 +384,71 @@ class Samples(samples.SamplesBase):
 			log.error("Sample config (VV) currently not implemented for channel \"%s\"!" % channel)
 		if not kwargs.get("mssm", False):
 			Samples._add_bin_corrections(config, "vv", nick_suffix)
-		
+
 		if channel in ["mt", "et"] and fakefactor_method == "standard":
 			config["weights"][config["nicks"].index("vv")] = config["weights"][config["nicks"].index("vv")]  + "*(gen_match_2 != 6)"
 		if channel in ["mt", "et"] and fakefactor_method == "comparison":
 			config["weights"][config["nicks"].index("vv")] = config["weights"][config["nicks"].index("vv")]  + "*(gen_match_2 == 6)"
-		
+
 		Samples._add_plot(config, "bkg", "HIST", "F", "vv", nick_suffix)
+		return config
+
+	def vv_gm(self, config, channel, category, weight, nick_suffix, lumi=default_lumi, exclude_cuts=None, cut_type="baseline", fakefactor_method=None, **kwargs):
+		#class provides gen matched VV sample for true decays in tau tau:
+
+		if exclude_cuts is None:
+			exclude_cuts = []
+
+		scale_factor = lumi
+		if not self.postfit_scales is None:
+			scale_factor *= self.postfit_scales.get("Dibosons", 1.0)
+
+		data_weight, mc_weight = self.projection(kwargs)
+
+		if channel in ["mt", "et", "em", "tt", "mm"]:
+			Samples._add_input(
+					config,
+					self.files_vv(channel),
+					self.root_file_folder(channel),
+					lumi,
+					mc_weight+weight+"*eventWeight*" + Samples.ztt_genmatch(channel) + self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type),
+					"vv_gm",
+					nick_suffix=nick_suffix
+			)
+		else:
+			log.error("Sample config (VV) currently not implemented for channel \"%s\"!" % channel)
+		if not kwargs.get("mssm", False):
+			Samples._add_bin_corrections(config, "vv_gm", nick_suffix)
+		Samples._add_plot(config, "bkg", "HIST", "F", "vv_gm", nick_suffix)
+		return config
+
+	def vv_ngm(self, config, channel, category, weight, nick_suffix, lumi=default_lumi, exclude_cuts=None, cut_type="baseline", fakefactor_method=None, **kwargs):
+		#class provides gen matched VV sample for true decays in tau tau:
+
+		if exclude_cuts is None:
+			exclude_cuts = []
+
+		scale_factor = lumi
+		if not self.postfit_scales is None:
+			scale_factor *= self.postfit_scales.get("Dibosons", 1.0)
+
+		data_weight, mc_weight = self.projection(kwargs)
+
+		if channel in ["mt", "et", "em", "tt", "mm"]:
+			Samples._add_input(
+					config,
+					self.files_vv(channel),
+					self.root_file_folder(channel),
+					lumi,
+					mc_weight+weight+"*eventWeight*" + Samples.ztt_genmatch(channel) + self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type),
+					"vv_ngm",
+					nick_suffix=nick_suffix
+			)
+		else:
+			log.error("Sample config (VV) currently not implemented for channel \"%s\"!" % channel)
+		if not kwargs.get("mssm", False):
+			Samples._add_bin_corrections(config, "vv_ngm", nick_suffix)
+		Samples._add_plot(config, "bkg", "HIST", "F", "vv_ngm", nick_suffix)
 		return config
 
 	def files_wj(self, channel):
@@ -404,7 +462,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("WJets", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		if channel in ["mt", "et"]:
 			if estimationMethod == "new":
@@ -730,7 +788,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("QCD", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		if channel in ["et", "mt", "em", "tt", "mm"]:
 			if estimationMethod == "classic":
@@ -1152,7 +1210,7 @@ class Samples(samples.SamplesBase):
 
 	def htt(self, config, channel, category, weight, nick_suffix, higgs_masses, normalise_signal_to_one_pb=False,
 	        lumi=default_lumi, exclude_cuts=None, additional_higgs_masses_for_shape=[], mssm=False, normalise_to_sm_xsec=False, **kwargs):
-		
+
 		if exclude_cuts is None:
 			exclude_cuts = []
 
@@ -1162,12 +1220,12 @@ class Samples(samples.SamplesBase):
 		if mssm and  normalise_to_sm_xsec:
 			config = self.ggh(config, channel, category, weight, nick_suffix+"_sm_noplot", higgs_masses,
 			                  normalise_signal_to_one_pb, lumi=lumi, exclude_cuts=exclude_cuts, no_plot=True, mssm=False, **kwargs)
-		
+
 		# vector boson fusion (SM)
 		if (not mssm) or normalise_to_sm_xsec:
 			config = self.qqh(config, channel, category, weight, nick_suffix+("_sm" if mssm else "")+"_noplot", higgs_masses+([] if mssm else additional_higgs_masses_for_shape),
 			                  normalise_signal_to_one_pb, lumi=lumi, exclude_cuts=exclude_cuts, no_plot=True, **kwargs)
-		
+
 		# Higgs strahlung (SM)
 		if (not mssm) or normalise_to_sm_xsec:
 			config = self.vh(config, channel, category, weight, nick_suffix+("_sm" if mssm else "")+"_noplot", higgs_masses+([] if mssm else additional_higgs_masses_for_shape),
@@ -1177,32 +1235,32 @@ class Samples(samples.SamplesBase):
 		if mssm:
 			config = self.bbh(config, channel, category, weight, nick_suffix+"_noplot", higgs_masses+additional_higgs_masses_for_shape,
 			                  normalise_signal_to_one_pb, lumi=lumi, exclude_cuts=exclude_cuts, no_plot=True, **kwargs)
-			
+
 		def final_nick(tmp_sample, tmp_mass, add_nick_suffix=True):
 			return tmp_sample+str(tmp_mass)+("_"+str(int(kwargs["scale_signal"])) if kwargs.get("scale_signal", 1.0) != 1.0 else "")+(nick_suffix if add_nick_suffix else "")
 
 		for index, mass in enumerate(additional_higgs_masses_for_shape+higgs_masses):
 			is_additional_mass = (index < len(additional_higgs_masses_for_shape))
-			
+
 			if not "AddHistograms" in config.get("analysis_modules", []):
 				config.setdefault("analysis_modules", []).append("AddHistograms")
 			config.setdefault("add_nicks", []).append(" ".join([final_nick(sample, mass)+"_noplot" for sample in ["ggh"]+(["bbh"] if mssm else ["qqh", "vh"])]))
 			config.setdefault("add_result_nicks", []).append(final_nick("htt", mass)+"_noplot")
-			
+
 			if not is_additional_mass:
 				config.setdefault("add_nicks", []).append(" ".join([final_nick("htt", m)+"_noplot" for m in [mass]+additional_higgs_masses_for_shape]))
 				config.setdefault("add_result_nicks", []).append(final_nick("htt", mass)+"_noplot_shape")
-				
+
 				if mssm and normalise_to_sm_xsec:
 					config.setdefault("add_nicks", []).append(" ".join([final_nick(sample, mass)+"_sm_noplot" for sample in ["ggh", "qqh", "vh"]]))
 					config.setdefault("add_result_nicks", []).append(final_nick("htt", mass)+"_sm_noplot")
-				
+
 				if not "ShapeYieldMerge" in config.get("analysis_modules", []):
 					config.setdefault("analysis_modules", []).append("ShapeYieldMerge")
 				config.setdefault("shape_nicks", []).append(final_nick("htt", mass)+"_noplot_shape")
 				config.setdefault("yield_nicks", []).append(final_nick("htt", mass)+("_sm" if mssm and normalise_to_sm_xsec else "")+"_noplot")
 				config.setdefault("shape_yield_nicks", []).append(final_nick("htt", mass))
-			
+
 			if (not kwargs.get("no_plot", False)) and (not is_additional_mass):
 				if not mssm:
 					Samples._add_bin_corrections(
@@ -1228,7 +1286,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("bbh", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		for mass in higgs_masses:
 			if channel in ["tt", "et", "mt", "em"]:
@@ -1275,7 +1333,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("ggh", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		for mass in higgs_masses:
 			if channel in ["tt", "et", "mt", "em", "mm"]:
@@ -1319,7 +1377,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("qqH", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		for mass in higgs_masses:
 			if channel in ["tt", "et", "mt", "em", "mm"]:
@@ -1400,7 +1458,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("WH", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		for mass in higgs_masses:
 			if channel in ["tt", "et", "mt", "em", "mm"]:
@@ -1459,7 +1517,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("ZH", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		for mass in higgs_masses:
 			if channel in ["tt", "et", "mt", "em", "mm"]:
@@ -1499,7 +1557,7 @@ class Samples(samples.SamplesBase):
 			exclude_cuts = []
 
 		data_weight = "(1.0)*"
-		
+
 		if channel == "mt":
 			Samples._add_input(
 					config,
@@ -1534,7 +1592,7 @@ class Samples(samples.SamplesBase):
 		if not self.postfit_scales is None:
 			scale_factor *= self.postfit_scales.get("Dibosons", 1.0)
 
-		data_weight, mc_weight = self.projection(kwargs) 
+		data_weight, mc_weight = self.projection(kwargs)
 
 		if channel in ["mt", "et"]:
 			Samples._add_input(
@@ -1548,11 +1606,11 @@ class Samples(samples.SamplesBase):
 			)
 		else:
 			log.error("Sample config (EWK) currently not implemented for channel \"%s\"!" % channel)
-		
+
 		if channel in ["mt", "et"] and fakefactor_method == "standard":
 			config["weights"][config["nicks"].index("ewk")] = config["weights"][config["nicks"].index("ewk")]  + "*(gen_match_2 != 6)"
 		if channel in ["mt", "et"] and fakefactor_method == "comparison":
 			config["weights"][config["nicks"].index("ewk")] = config["weights"][config["nicks"].index("ewk")]  + "*(gen_match_2 == 6)"
-		
+
 		Samples._add_plot(config, "bkg", "HIST", "F", "ewk", nick_suffix)
 		return config

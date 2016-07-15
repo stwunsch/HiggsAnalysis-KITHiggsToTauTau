@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
-def makePlots(variables, samples, data, dir_path, channel, category, sample_str, corr_dicts, red_plot):
+def makePlots(variables, samples, data, dir_path, channel, category, sample_str, corr_dicts, red_plot, var_or_mean):
 	tProfiles = {}
 	tProfiles_data = {}
 	nice_channel = {
@@ -96,6 +96,8 @@ def makePlots(variables, samples, data, dir_path, channel, category, sample_str,
 		y_vals_data = np.array([data_prof.GetBinContent(i) for i in range(1, data_prof.GetNbinsX()+1, 1)])
 		y_errs = np.array([mc_prof.GetBinError(i) for i in range(1, mc_prof.GetNbinsX()+1, 1)])
 		y_errs_data = np.array([data_prof.GetBinError(i) for i in range(1, data_prof.GetNbinsX()+1, 1)])
+		y_weights = np.array([mc_prof.GetBinEntries(i) for i in range(1, mc_prof.GetNbinsX()+1, 1)])
+		y_weights_data = np.array([data_prof.GetBinEntries(i) for i in range(1, data_prof.GetNbinsX()+1, 1)])
 
 		cov_data = 0
 		korr_data = 0
@@ -117,7 +119,15 @@ def makePlots(variables, samples, data, dir_path, channel, category, sample_str,
 		fig = plt.figure()
 		ax = fig.add_subplot(111)
 		ax.set_xlabel(name.split("+-+")[0], size="x-large")
-		ax.set_ylabel(name.split("+-+")[1], size="x-large")
+		if var_or_mean == "var":
+			ax.set_ylabel("Var(%s)"%name.split("+-+")[1], size="x-large")
+			name = "Var-"+name
+		elif var_or_mean == "mean":
+			ax.set_ylabel("Var(<%s>)"%name.split("+-+")[1], size="x-large")
+			y_errs = y_errs/y_weights**0.5
+			y_errs_data = y_errs_data/y_weights_data**0.5
+			name = "Mean-"+name
+
 		ax.errorbar(x_vals, y_vals, yerr=y_errs, label="MC", ls="None")
 		ax.errorbar(x_vals, y_vals_data, yerr=y_errs_data, label="data", ls="None")
 		lgd = ax.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0., numpoints=1)
@@ -132,7 +142,7 @@ def makePlots(variables, samples, data, dir_path, channel, category, sample_str,
 			ax.annotate(s="MC Correlation: %1.2f"%(korr_mc), xy=(x_vals[0],0.99*y_max-0.15*(y_max-y_min)), ha = "left", va = "center", fontsize='large')
 			fig.savefig(os.path.join(out_path, "combination", channel, category_string, sample_str, "%s.png"%name), bbox_extra_artists=(lgd, ans), bbox_inches='tight')
 			log.debug("save plot as: " + os.path.join(out_path, "combination", channel, category_string, sample_str, "%s.png"%name))
-		elif abs(korr_data-korr_mc) > 0.05:
+		elif abs(korr_data-korr_mc) >= 0.1:
 			y_min, y_max = ax.get_ylim()
 			y_max = y_max + 0.3 * (y_max-y_min)
 			ax.set_ylim(y_min, y_max)
@@ -166,6 +176,7 @@ if __name__ == "__main__":
 							default=False,
 							help="Use Json files instead of calculating correlation from profile. [Default: %(default)s]")
 	parser.add_argument("--corr-dict-name", default = "Correlations.json", help="Name of json file. [Default: %(default)s]")
+	parser.add_argument("--var-or-mean", default = "var", help="Plot variance (var) or variance (mean) of mean. [Default: %(default)s]")
 	parser.add_argument("-s", "--samples", nargs="+",
 						default=["ggh", "qqh", "vh", "ztt", "zll", "ttj", "vv", "wj", "data"],
 						choices=["ggh", "qqh", "vh", "ztt", "zll", "ttj", "vv", "wj", "data"],
@@ -224,4 +235,4 @@ if __name__ == "__main__":
 						data_corr = jsonTools.JsonDict(info_path.replace("Histograms.root", args.corr_dict_name))
 			#print mc_corr["correlations"], data_corr["correlations"]
 			#sys.exit()
-			makePlots(args.plot_vars, sample_list, data_sample, out_path, channel, category_string, "_".join(sample_strings), [mc_corr, data_corr], args.plot_critical)
+			makePlots(args.plot_vars, sample_list, data_sample, out_path, channel, category_string, "_".join(sample_strings), [mc_corr, data_corr], args.plot_critical, args.var_or_mean)
