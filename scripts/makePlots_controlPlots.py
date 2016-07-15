@@ -106,7 +106,7 @@ if __name__ == "__main__":
 	                    help="Input directory.")
 	parser.add_argument("-s", "--samples", nargs="+",
 	                    default=["ztt", "zll", "ttj", "vv", "wj", "qcd", "data"],
-	                    choices=["ztt", "zll", "zl", "zj", "ttj", "vv", "wj", "qcd", "ewk", "ff", "ggh", "qqh", "vh", "htt", "data"],
+	                    choices=["ztt", "zll", "zl", "zj", "ttj", "vv", "wj", "qcd", "ewk", "ff", "ggh", "qqh", "vh", "htt", "data", "vv_gm", "vv_ngm"],
 	                    help="Samples. [Default: %(default)s]")
 	parser.add_argument("--stack-signal", default=False, action="store_true",
 	                    help="Draw signal (htt) stacked on top of each backgrounds. [Default: %(default)s]")
@@ -210,6 +210,8 @@ if __name__ == "__main__":
 	if not args.run1:
 		if args.era == "2015":
 			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2 as samples
+		elif args.era == "2015old":
+			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015_old as samples
 		elif args.era == "2015new":
 			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015 as samples
 		elif args.era == "2016":
@@ -227,7 +229,7 @@ if __name__ == "__main__":
 		args.samples = [sample for sample in args.samples if hasattr(samples.Samples, sample)]
 		if not args.run1:
 			if "zl" in args.samples:
-				args.samples.remove("zl") 
+				args.samples.remove("zl")
 			if "zj" in args.samples:
 				args.samples.remove("zj")
 	if ("zj" in args.samples or "zl" in args.samples) and not args.run1:
