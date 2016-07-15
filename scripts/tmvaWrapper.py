@@ -83,9 +83,9 @@ def do_splitting(args, plot_configs):
 		for split in args["custom_splitting"]:
 			splits_list.append(split)
 	elif args["n_fold"]:
-		part_size = 100./((args["n_fold"])*4.)
+		part_size = 100./((args["n_fold"])*10.)
 		temp_splits = []
-		for i in range((args["n_fold"])*4):
+		for i in range((args["n_fold"])*10):
 			temp_splits.append("(TrainingSelectionValue>=%i)*(TrainingSelectionValue<%i)"%(int(i*part_size),int((i+1)*part_size)))
 		for i in range(args["n_fold"]):
 			splits_list.append("("+"||".join(temp_splits[i::args["n_fold"]])+")")
@@ -721,9 +721,9 @@ if __name__ == "__main__":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 
 						if channel == "em":
-							copy_cargs["quantities"] = ["pt_2", "mt_1", "pZetaMissVis", "H_pt", "mvamet", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
+							copy_cargs["quantities"] = ["mt_1", "pt_1", "H_pt", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 						if channel in ["et", "mt"]:
-							copy_cargs["quantities"] = ["pt_2", "mt_1", "H_pt", "mvamet", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "mjj", "jdeta", "diLep_diJet_deltaR"]
 							#copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "diLepJet1DeltaR"]
 
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_Cat1_rm_%s"%(channel,jets,"Nothing"))
@@ -731,9 +731,9 @@ if __name__ == "__main__":
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv"]
 
 						if channel == "em":
-							copy_cargs["quantities"] = ["H_pt", "mt_1", "pZetaMissVis", "mjj", "jdeta", "diLepDeltaR"]
+							copy_cargs["quantities"] = ["mt_1", "mt_2", "pZetaMissVis", "m_jj", "H_pt", "jdeta", "diLep_diJet_deltaR"]
 						if channel in ["et", "mt"]:
-							copy_cargs["quantities"] = ["pt_2", "mt_1", "H_pt", "mvamet", "pZetaMissVis", "jdeta", "mjj", "diLepDeltaR", "diLepJet1DeltaR"]
+							copy_cargs["quantities"] = ["mt_1", "pt_2", "mt_2", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_Cat2_rm_%s"%(channel,jets,"Nothing"))
 						config_list.append(copy.deepcopy(copy_cargs))
@@ -742,9 +742,9 @@ if __name__ == "__main__":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 
 						if channel == "em":
-							copy_cargs["quantities"] = ["pt_1", "mt_1", "pZetaMissVis", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 						if channel in ["et", "mt"]:
-							copy_cargs["quantities"] = ["pt_1", "mt_1", "pZetaMissVis", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_Cat1_rm_%s"%(channel,jets,"Nothing"))
 						config_list.append(copy.deepcopy(copy_cargs))
@@ -753,10 +753,10 @@ if __name__ == "__main__":
 
 						if channel == "em":
 							#copy_cargs["bkg_samples"] = ["ttj", "vv"]
-							copy_cargs["quantities"] = ["pt_1", "pt_2", "H_pt", "mt_1", "pZetaMissVis", "diLepJet1DeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "H_pt", "mt_1", "mt_2", "pZetaMissVis"]
 						if channel in ["et", "mt"]:
 							#copy_cargs["bkg_samples"] = ["wj", "zll"]
-							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepJet1DeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepDeltaR"]
 
 
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_Cat2_rm_%s"%(channel,jets,"Nothing"))
@@ -766,16 +766,16 @@ if __name__ == "__main__":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR"]
 
 						if channel == "em":
-							copy_cargs["quantities"] = ["pt_1", "pt_2", "H_pt", "mvamet", "pZetaMissVis"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "diLepDeltaR", "H_pt", "pZetaMissVis", "mt_1"]
 						if channel in ["et", "mt"]:
-							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "H_pt", "diLepDeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "mvamet"]
 
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_Cat1_rm_%s"%(channel,jets,"Nothing"))
 						config_list.append(copy.deepcopy(copy_cargs))
 
 						if channel == "em":
 							#continue
-							copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "pZetaMissVis", "H_pt", "diLepDeltaR"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "diLepDeltaR", "H_pt", "pZetaMissVis", "mt_2"]
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepDeltaR"]
 
