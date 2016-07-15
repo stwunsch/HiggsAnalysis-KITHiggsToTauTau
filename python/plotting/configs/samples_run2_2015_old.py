@@ -81,7 +81,7 @@ class Samples(samples.Samples):
 
 
 	def files_ttj(self, channel):
-		return super(Samples, self).files_ttj(channel)
+		return self.artus_file_names({"process" : "TT", "data": False, "campaign" : self.mc_campaign}, 1)
 
 
 	def files_vv(self, config):

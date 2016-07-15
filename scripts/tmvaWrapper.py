@@ -124,6 +124,8 @@ def do_splitting(args, plot_configs):
 			if (not cuts == "") and (not cuts == config["weights"][i]):
 				log.error("can not decide which weight to use for sample %s nick %s" %(config["request_nick"],nick))
 			cuts = config["weights"][i]
+		log.debug("Root-File for sample %s"%config["request_nick"])
+		log.debug("\t"+"\n\t".join(root_file_name_list))
 		for root_file_name in root_file_name_list:
 			#load the requested rootfiles with their containing ntuples
 			log.debug("Prepare Rootfile %s as Sample %s" %(root_file_name, config["request_nick"]))
@@ -271,6 +273,7 @@ def do_training(args):
 	info_log["dir_path"] = dir_path
 	#getting config
 	plot_configs, info_log = get_configs(args, info_log)
+	log.debug(plot_configs)
 	#acquire splitted samples
 	splits_list, stored_files_list, s_b_extension = do_splitting(args, plot_configs)
 	#TMVA Stuff
@@ -713,7 +716,7 @@ if __name__ == "__main__":
 				copy_cargs["signal_samples"] = ["ggh"]
 				copy_cargs["channels"] = [channel]
 				for jets in [0,1,2]:
-					copy_cargs["bkg_samples"] = ["ztt"]
+					copy_cargs["bkg_samples"] = ["ztt", "vv_gm"]
 					copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
 					if jets == 2:
 						copy_cargs["signal_samples"] = ["qqh"]
