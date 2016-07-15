@@ -102,10 +102,7 @@ if __name__ == "__main__":
 		"x_bins": [],
 		"formats": ["pdf", "png"],
 		"x_expressions": [],
-		"weights": [
-			"weight*(classID==1)",
-			"weight*(classID==0)"
-				]*2,
+		"weights": [],
 		"nicks": [],
 		"cut_efficiency_bkg_nicks": [],
 		"cut_efficiency_modes": ["sigEffVsBkgRej"],
@@ -138,6 +135,7 @@ if __name__ == "__main__":
 					config["cut_efficiency_nicks"] += ["roc_{var}_{count}".format(var=add_var, count=count)]
 					config["colors"] += [args.colors[accepted_counter]]
 					config["labels"] += [args.labels[accepted_counter]]
+					config["weights"] += ["weight*(classID==1)", "weight*(classID==0)"]
 					accepted_counter += 1
 
 			config["files"] += [c_file, c_file]
@@ -151,6 +149,7 @@ if __name__ == "__main__":
 			config["cut_efficiency_nicks"] += ["roc_{var}_{count}".format(var=accepted_counter, count=count)]
 			config["colors"] += [args.colors[accepted_counter]]
 			config["labels"] += [args.labels[accepted_counter]]
+			config["weights"] += ["weight*(classID==1)", "weight*(classID==0)"]
 			accepted_counter += 1
 		configs_list.append(config)
 	higgsplot.HiggsPlotter(list_of_config_dicts=configs_list,
