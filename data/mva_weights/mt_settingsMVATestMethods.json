@@ -51,17 +51,17 @@
         "TwoJets_TTDiscriminator"
     ],
     "MVATestMethodsWeights": [
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_2Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_2Jets_TTDiscriminator_rm_Nothing.weights.xml"
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_mt_2Jets_TTDiscriminator_rm_Nothing.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_mt_2Jets_TTDiscriminator_rm_Nothing.weights.xml"
     ]
 }
