@@ -127,8 +127,9 @@
 					"producer:DiJetQuantitiesProducer",
 					"producer:EventCategoryProducer",
 					"filter:MinimalPlotlevelFilter",
-					"#producer:MVATestMethodsProducer",
- 					"producer:SvfitProducer",
+					"producer:SvfitProducer",
+					"producer:MVAInputQuantitiesProducer",
+					"producer:MVATestMethodsProducer",
 					"producer:EventWeightProducer"
 				],
 				"DY.?JetsToLL" : [
@@ -162,9 +163,10 @@
 					"producer:EventCategoryProducer",
 					"producer:ZPtReweightProducer",
 					"filter:MinimalPlotlevelFilter",
-					"#producer:MVATestMethodsProducer",
- 					"producer:SvfitProducer",
- 					"producer:EleTauFakeRateWeightProducer",
+					"producer:SvfitProducer",
+					"producer:MVAInputQuantitiesProducer",
+					"producer:MVATestMethodsProducer",
+					"producer:EleTauFakeRateWeightProducer",
 					"producer:EventWeightProducer"
 				],
 				"Run201" : [
@@ -191,8 +193,9 @@
 					"producer:DiJetQuantitiesProducer",
 					"producer:EventCategoryProducer",
 					"filter:MinimalPlotlevelFilter",
-					"#producer:MVATestMethodsProducer",
- 					"producer:SvfitProducer",
+					"producer:SvfitProducer",
+					"producer:MVAInputQuantitiesProducer",
+					"producer:MVATestMethodsProducer",
 					"producer:EventWeightProducer"
 				]
 			}
@@ -203,7 +206,7 @@
 		"Consumers" : [
 			"KappaLambdaNtupleConsumer",
 			"cutflow_histogram",
- 			"SvfitCacheConsumer",
+			"SvfitCacheConsumer",
 			"#CutFlowTreeConsumer",
 			"#KappaTausConsumer",
 			"#KappaTaggedJetsConsumer",
