@@ -8,7 +8,7 @@
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2MSSM/Includes/settingsTauID.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2MSSM/Includes/settingsJEC.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2MSSM/Includes/settingsJetID.json",
-			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2MSSM/Includes/settingsBTaggedJetID.json",
+			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2Analysis/Includes/settingsBTaggedJetID.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Includes/settingsMVATestMethods.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2MSSM/Includes/settingsTauES.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2Analysis/Includes/settingsSvfit.json",
@@ -21,9 +21,18 @@
 				"default" : [
 					"HLT_DoubleMediumIsoPFTau40_Trk1_eta2p1_Reg"
 				],
-				"(Fall15MiniAODv2|Run2015D)" : [
+				"(Fall15MiniAODv2|Run2015D|Run2016)" : [
 					"HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg"
+				],
+				"Spring16" : [
+					"unavailable"
 				]
+			}
+		},
+		"NoHltFiltering" : {
+			"nick" : {
+				"default" : false,
+				"Spring16" : true
 			}
 		},
 		"TauID" : "TauIDRecommendation13TeV",
@@ -33,7 +42,7 @@
 				"default" : [
 					"45.0"
 				],
-				"(Fall15MiniAODv2|Run2015D)" : [
+				"(Fall15MiniAODv2|Run2015D|Run2016)" : [
 					"40.0"
 				]
 			}
@@ -43,6 +52,12 @@
 		],
 		"DiTauPairMinDeltaRCut" : 0.5,
 		"DiTauPairIsTauIsoMVA": true,
+		"DiTauPairNoHLT" : {
+			"nick" : {
+				"default" : false,
+				"Spring16" : true
+			}
+		},
 		"EventWeight" : "eventWeight",
 		"TauTauRestFrameReco" : "collinear_approximation",
 		"TauTriggerFilterNames" : {
@@ -50,7 +65,7 @@
 				"default" : [
 					"HLT_DoubleMediumIsoPFTau40_Trk1_eta2p1_Reg_v:hltDoublePFTau40TrackPt1MediumIsolationDz02Reg"
 				],
-				"(Fall15MiniAODv2|Run2015D)" : [
+				"(Fall15MiniAODv2|Run2015D|Run2016)" : [
 					"HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumIsolationDz02Reg",
 					"HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:l1extratauccolltection"
 				]
@@ -62,6 +77,10 @@
 		"InvalidateNonMatchingTaus" : true,
 		"InvalidateNonMatchingJets" : false,
 		"DirectIso" : true,
+		"BTagWPs" : [
+			"loose",
+			"medium"
+		],
 		"Quantities" : [
 			{
 				"include" : [
@@ -70,10 +89,9 @@
 				]
 			},
 			"nloosebtag",
+			"nmediumbtag",
 			"had_gen_match_pT_1",
-			"had_gen_match_pT_2",
-			"topPtReweightWeight",
-			"zPtReweightWeight"
+			"had_gen_match_pT_2"
 		],
 		"OSChargeLeptons" : true,
 		"Processors" : {
