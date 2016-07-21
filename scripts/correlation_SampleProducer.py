@@ -148,6 +148,7 @@ def calculate_partial_correlation(config):
 	#sys.exit()
 	i = 0.
 	n = 0
+	w2 = 0
 	zero_vals = {}
 	lumi_val = config["lumi"]
 	for event in root_inst:
@@ -183,6 +184,7 @@ def calculate_partial_correlation(config):
 
 		i += w
 		n += 1
+		w2 += w*w
 		if n%1000 == 0:
 			log.info( "processed: %i events"%n)
 
@@ -190,6 +192,7 @@ def calculate_partial_correlation(config):
 	for varxy in root_histograms.iterkeys():
 		root_histograms[varxy].Write()
 	corr_vars["weight_sum"] = i
+	corr_vars["weight_square"] = w2
 	corr_vars["n"] = n
 	hist_file.Close()
 	root_inf.Close()
@@ -225,7 +228,7 @@ if __name__ == "__main__":
 						help="Output filename. [Default: %(default)s]")
 	parser.add_argument("-e", "--exclude-cuts", nargs="+",
 						default=[],
-						choices=["pZetaMiss", "pZetaVis", "iso_1", "iso_2", "mt_1", "mt_2", "mt"],
+						choices=["pZetaMiss", "pZetaVis", "iso_1", "iso_2", "mt_1", "mt_2", "mt", "pzeta"],
 						help="""Exclude (default) selection cuts.
 						[Default: %(default)s]""")
 	parser.add_argument("-c", "--channels", nargs="*",
@@ -246,6 +249,10 @@ if __name__ == "__main__":
 						[Default: %(default)s]""")
 	parser.add_argument("--lumi", type=float, default=samples.default_lumi/1000,
 	                    help="Luminosity for the given data in fb^(-1). [Default: %(default)s]")
+	parser.add_argument("--splits", type=int, default=10,
+	                    help="Number of SubSamples [Default: %(default)s]")
+	parser.add_argument("--dry-run", action="store_true", default=False,
+	                    help="Dry Run - Abort before real work is done [Default: %(default)s]")
 	parser.add_argument("-m", "--mva-variables", action="store_true", default=False,
 						help="use the variables defined in MVATestMethods settings of artus run. [Default: %(default)s]")
 	args = parser.parse_args()
@@ -304,6 +311,10 @@ if __name__ == "__main__":
 					category_string = (category_string + "_{channel}_{category}").format(channel=channel, category=category)
 				for requested_sample in args.samples:
 					list_of_samples = [getattr(samples.Samples, requested_sample)]
+					#for splits in range(args.splits):
+					#diff = 100./args.splits
+					#weight = "*(TrainingSelectionValue <= %i && %i < TrainingSelectionValue)"%(int(splits*diff), int((splits+1)*diff))
+					weight = ""
 					config = sample_settings.get_config(
 							samples=list_of_samples,
 							channel=channel,
@@ -311,7 +322,7 @@ if __name__ == "__main__":
 							higgs_masses=args.higgs_masses,
 							normalise_signal_to_one_pb=False,
 							ztt_from_mc=False,
-							weight=args.weight,
+							weight="(%s)"%args.weight+weight,
 							exclude_cuts=args.exclude_cuts,
 							stack_signal=False,
 							lumi = args.lumi*1000,
@@ -323,6 +334,7 @@ if __name__ == "__main__":
 					config["channel"] = channel
 					config["prepare_samples"] = prepare_samples
 					config["overwrite_samples"] = overwrite_samples
+					#config["storage_name_extension"] = os.path.join(storage_name_extension, channel, category_string, requested_sample+"%i"%splits)
 					config["storage_name_extension"] = os.path.join(storage_name_extension, channel, category_string, requested_sample)
 					if not os.path.exists(config["storage_name_extension"]):
 						os.makedirs(config["storage_name_extension"])
@@ -417,4 +429,8 @@ if __name__ == "__main__":
 		if not os.path.exists(config["storage_name_extension"]):
 			os.makedirs(config["storage_name_extension"])
 
+	if args.dry_run:
+		print plot_configs[0]
+		print "Dry-Run aborting!", len(plot_configs)
+		sys.exit()
 	aTools.parallelize(calculate_partial_correlation, plot_configs, n_processes=args.n_processes)

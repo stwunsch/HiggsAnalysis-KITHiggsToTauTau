@@ -8,6 +8,8 @@ import argparse
 import os
 import sys
 import ROOT
+from scipy import stats
+import numpy as np
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
 
@@ -19,7 +21,38 @@ def get_tex_mask(samples, dim=2, form=""):
 	tex_string += r" \\"+"\n"
 	return tex_string
 
-
+def get_upper_limit(chi2_val, number):
+	nums = number*1.0
+	last_nums = number*0.9
+	stat = 0
+	last_stat = 0
+	if number < 1:
+		return 3.7
+	while True:
+		stat = stats.chi2.cdf(nums, 2 * (number+1))
+		if abs(stat - chi2_val) < 0.0001:
+			break
+		if stat > chi2_val and last_stat < chi2_val:
+			keep = nums
+			nums = last_nums + 0.5*(nums-last_nums)
+			last_nums = keep
+			last_stat = stat
+		elif stat < chi2_val and last_stat > chi2_val:
+			keep = nums
+			nums = nums + 0.5*(last_nums-nums)
+			last_nums = keep
+			last_stat = stat
+		elif stat > chi2_val and last_stat > chi2_val:
+			keep = nums
+			nums = nums * 0.5
+			last_nums = keep
+			last_stat = stat
+		elif stat < chi2_val and last_stat < chi2_val:
+			keep = nums
+			nums = nums * 2.
+			last_nums = keep
+			last_stat = stat
+	return nums/2.
 
 
 
@@ -51,6 +84,9 @@ if __name__ == "__main__":
 	parser.add_argument("-o", "--output-file",
 							default="XS-Table.tex",
 							help="Output dir. [Default: %(default)s]")
+	parser.add_argument("-n", "--norm",
+							default=False,
+							help="norm all XS to this samples XS. [Default: %(default)s]")
 	parser.add_argument("-s", "--samples", nargs="+",
 						default=["ggh", "qqh", "ztt", "zll", "ttj", "vv", "wj"],
 						choices=["ggh", "qqh", "ztt", "zll", "ttj", "vv", "wj", "vv_ngm", "vv_gm",],
@@ -72,8 +108,21 @@ if __name__ == "__main__":
 				sample_name = sample if sample not in ["ggh", "qqh"] else sample+args.higgs_mass
 				thist = infile.Get(sample_name)
 				number = thist.GetBinContent(1)
+				print sample, number
+				if sample == "ztt":
+					number = get_upper_limit(0.025, number)
+				else:
+					number = get_upper_limit(0.975, number)
 				number = number / args.lumi * 1000
 				info_vector[channel][category][sample]=number
+
+	if args.norm:
+		for channel in args.channels:
+			for category in args.categories:
+				norm_val = info_vector[channel][category][args.norm]
+				for sample in args.samples:
+					info_vector[channel][category][sample]/=norm_val
+
 	with open(args.output_file, "w") as out_file:
 		out_file.write(r"\begin{center}"+"\n"+r"\begin{tabular}{%s}"%("l"*(len(args.samples)+2))+"\n")
 		tex_mask = get_tex_mask(args.samples, 10)
@@ -84,5 +133,5 @@ if __name__ == "__main__":
 		for channel in args.channels:
 			for category in args.categories:
 				cat_string = category.replace("Jet30", "")
-				out_file.write(tex_mask.format(channel=channel, category=cat_string, **info_vector[channel][category]).replace("E+0",r"\cdot10^"))
+				out_file.write(tex_mask.format(channel="\\"+channel+"c", category=cat_string, **info_vector[channel][category]).replace("E+0",r"\cdot10^"))
 		out_file.write(r"\end{tabular}"+"\n"+r"\end{center}"+"\n")

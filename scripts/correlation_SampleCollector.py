@@ -15,21 +15,41 @@ import sys
 import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2 as samples
 import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.binnings as binnings
 import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.labels as labels
-import ROOT
 import glob
 import itertools
-import ROOT
+import math
 import matplotlib.pyplot as plt
 from matplotlib import cm
-ROOT.PyConfig.IgnoreCommandLineOptions = True
 
+def get_corr_err(value, neq):
+	val = value
+	if abs(value) >= 0.99:
+		val *= 0.99
+
+	zmean = math.atanh(val)
+	zmin = zmean - 1./(neq)**0.5
+	zmax = zmean + 1./(neq)**0.5
+	rmin = math.tanh(zmin)
+	rmax = math.tanh(zmax)
+	dr = max(abs(rmax-val), abs(val-rmin))
+	return dr
+
+def do_stat_test(val1, val2, neq1, neq2):
+	if val1 >= 0.99:
+		val1 *= 0.99
+	if val2 >= 0.99:
+		val2 *= 0.99
+	z1 = math.atanh(val1)
+	z2 = math.atanh(val2)
+	z = abs(z1-z2)/(1./(neq1-3.)+1./(neq2-2.))**0.5
+	return z
 def plot_correlations(parameters, correlation_dicts, dir_path, channel, category, samples, dimension=7, calc_diff=False):
 	sample = samples[0]
 	ranges = [[-1.0,1.0],[-1.0,1.0]]
 	if isinstance(channel, list):
 		channel = channel[0]
 	corr_list = [] #0 = MC; 1 = Data
-	name_list = ["Diff", "MC", "Data"]
+	name_list = ["MC", "Data"]
 	for count, correlation_dict in enumerate(correlation_dicts):
 		if correlation_dict is None:
 			continue
@@ -52,17 +72,22 @@ def plot_correlations(parameters, correlation_dicts, dir_path, channel, category
 			except ValueError:
 				log.error("ValueError: %s" %varxy)
 				corr_vars[varxy] = 0
-		corr_list.append(corr_vars)
 		corr_vars["weight_sum"] = ws
+		corr_vars["n"] = correlation_dict["n"]
+		corr_vars["weight_square"] = correlation_dict.get("weight_square", ws)
+		corr_vars["neq"] = ws**2/corr_vars["weight_square"]
+		corr_list.append(corr_vars)
 		jsonTools.JsonDict(corr_vars).save(os.path.join(dir_path, channel, category_string, sample, "FinalCorrelation%s.json"%name_list[count]), indent=4)
 	if calc_diff and len(corr_list) == 2:
 		add_corr = {}
 		for varxy in corr_list[0].iterkeys():
 			if "+-+" in varxy:
-				add_corr[varxy] = corr_list[0][varxy] - corr_list[1][varxy]
+				#add_corr[varxy] = corr_list[0][varxy] - corr_list[1][varxy]
+				add_corr[varxy] = do_stat_test(corr_list[1][varxy], corr_list[0][varxy], corr_list[1]["neq"], corr_list[0]["neq"])
 		corr_list.insert(0,add_corr)
 		samples.insert(0,"MC-Data")
-		ranges.insert(0,[-0.3,0.3])
+		ranges.insert(0,[0,3])
+		name_list.insert(0, "Diff")
 	elif calc_diff:
 		log.error("Diff. Correlation requested but no Data input requested")
 		sys.exit()
@@ -117,8 +142,19 @@ def plot_correlations(parameters, correlation_dicts, dir_path, channel, category
 					ax.set_yticklabels([labeldict.get_nice_label(channel+"_"+x).replace(" / \\mathrm{GeV}", "").replace("\\,", "\\;") for x in y_params], rotation = 45, size='medium', va='center', ha='right', rotation_mode='anchor')
 					if len(corr_list) == 3 and iter_count > 0:
 						for special_weight_count,triples in enumerate(zip(x_vals, y_vals, weights)):
-							#print i, j, special_weight
-							ax.annotate(s="{num:.2f}\n({err:.2f})".format(num=triples[2], err=special_weight[i][j-i][special_weight_count]), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
+							x_name = x_params[int(triples[0]-0.5)]
+							y_name = y_params[int(triples[1]-0.5)]
+							field_name = "+-+".join([x_name, y_name]) if "+-+".join([x_name, y_name]) in corr_list[1].keys() else "+-+".join([y_name, x_name])
+							ax.annotate(s="{num:.2f}\n$\\pm{err:.2g}$".format(num=triples[2], err=get_corr_err(corr_list[iter_count][field_name], corr_list[iter_count]["neq"])), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
+							#ax.annotate(s="{num:.2f}\n({err:.2f})".format(num=triples[2], err=get_diff_significance(special_weight[i][j-i][special_weight_count], float(triples[2]), corr_vars["neq"])), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
+					elif len(corr_list) == 3 and iter_count == 0:
+						for special_weight_count,triples in enumerate(zip(x_vals, y_vals, weights)):
+							x_name = x_params[int(triples[0]-0.5)]
+							y_name = y_params[int(triples[1]-0.5)]
+							field_name = "+-+".join([x_name, y_name]) if "+-+".join([x_name, y_name]) in corr_list[1].keys() else "+-+".join([y_name, x_name])
+							ax.annotate(s="{num:.2f}\n{err:.2f}".format(num=corr_list[1][field_name], err=corr_list[2][field_name]), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
+							#ax.annotate(s="{num:.2f}\n({err:.2f})".format(num=corr_list[1][field_name]-corr_list[2][field_name], err=do_stat_test(corr_list[1][field_name], corr_list[2][field_name], corr_list[1]["neq"], corr_list[2]["neq"])), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
+							#ax.annotate(s="{num:.2f}\n({err:.2f})".format(num=triples[2], err=get_diff_significance(special_weight[i][j-i][special_weight_count], float(triples[2]), corr_vars["neq"])), xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='x-small')
 					else:
 						for triples in zip(x_vals, y_vals, weights):
 							ax.annotate(s="%1.2f"%triples[2], xy=(triples[0],triples[1]), ha = "center", va = "center", fontsize='small')
@@ -171,6 +207,15 @@ if __name__ == "__main__":
 						help="dimension of the output matrices. [Default: %(default)s]")
 	parser.add_argument("--diff", default=False, action="store_true",
 	                    help="Calculate and plot corr(MC)-corr(Data). [Default: %(default)s]")
+	parser.add_argument("--scale-samples", nargs="+",
+						default=[],
+						choices=["ggh", "qqh", "vh", "ztt", "zll", "ttj", "vv", "wj", "data"],
+						help="Samples for correlation calculation and scatter plots. [Default: %(default)s]")
+	parser.add_argument("--scale-values", nargs="+",
+						default=[],
+						help="Samples for correlation calculation and scatter plots. [Default: %(default)s]")
+
+
 	args = parser.parse_args()
 	logger.initLogger(args)
 
@@ -195,6 +240,9 @@ if __name__ == "__main__":
 					category_string = "catHtt13TeV"
 				category_string = (category_string + "_{channel}_{category}").format(channel=channel, category=category)
 			for sample in args.samples:
+				scale = 1.0
+				if sample in args.scale_samples:
+					scale = float(args.scale_values[args.scale_samples.index[sample]])
 				log.debug("sample: %s; channel: %s; dir: %s"%(sample, channel, dir_path))
 				info_path = os.path.join(dir_path, channel, category_string, sample, "Correlations.json")
 				info_path = glob.glob(info_path)
@@ -226,7 +274,7 @@ if __name__ == "__main__":
 					overall_correlations = copy.copy(config["correlations"])
 				else:
 					for varxy in overall_correlations.iterkeys():
-						overall_correlations[varxy] += config["correlations"][varxy]
+						overall_correlations[varxy] += scale * config["correlations"][varxy]
 				sample_list.append(sample)
 			if not os.path.exists(os.path.join(out_path, "combination", channel, category_string, "_".join(sample_list))):
 				os.makedirs(os.path.join(out_path, "combination", channel, category_string, "_".join(sample_list)))
