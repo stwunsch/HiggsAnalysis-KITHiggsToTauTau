@@ -158,14 +158,14 @@ def do_splitting(args, plot_configs):
 				c_tree = c_tree_list2[0]
 			log.debug("Prepare Sample %s "%stored_files_list[-1])
 			storage_tree = ""
-			if config["request_nick"] in ["ztt", "zll"]:
-				mod_name = "ZTT" if config["request_nick"] == "zll" else "ZLL"
-				c_tree.SetBranchStatus("stitchWeight%s"%mod_name, 0)
-				storage_tree = c_tree.CopyTree("", "tree%i"%(j+1))
-				ptr = array.array('f',[1])
-				new_branch = storage_tree.Branch("stitchWeight%s"%mod_name, ptr, "ModWeight/F")
-				for evt in storage_tree:
-					new_branch.Fill()
+			#if config["request_nick"] in ["ztt", "zll"]:
+				#mod_name = "ZTT" if config["request_nick"] == "zll" else "ZLL"
+				#c_tree.SetBranchStatus("stitchWeight%s"%mod_name, 0)
+				#storage_tree = c_tree.CopyTree("", "tree%i"%(j+1))
+				#ptr = array.array('f',[1])
+				#new_branch = storage_tree.Branch("stitchWeight%s"%mod_name, ptr, "ModWeight/F")
+				#for evt in storage_tree:
+					#new_branch.Fill()
 			else:
 				storage_tree = c_tree.CopyTree("", "tree%i"%(j+1))
 			storage_tree.SetName("SplitTree")
@@ -324,15 +324,15 @@ def do_training(args):
 													1,
 													ROOT.TCut(''), "train")
 					log.debug("Add to Factory_%i sample %s as TrainingsSample as %s"%(ifac, stored_file+"split%i.root/SplitTree"%(i), s_b_extension[j]))
-		stitching = "stitchWeightZLL*stitchWeightZTT"
+		#stitching = "stitchWeightZLL*stitchWeightZTT"
 		#if 'ztt' in (args["bkg_samples"]+args['signal_samples']) and 'zll' in (args["bkg_samples"]+args['signal_samples']):
 			#log.error("Due to general weight expression there can be only one of the z samples, ZTT or ZLL")
 		#elif 'ztt' in (args["bkg_samples"]+args['signal_samples']):
 			#stitching = "stitchWeightZTT"
 		#elif 'zll' in (args["bkg_samples"]+args['signal_samples']):
 			#stitching = "stitchWeightZLL"
-		factory.SetBackgroundWeightExpression('eventWeight*{zstitch}*stitchWeightWJ'.format(zstitch=stitching) + (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
-		factory.SetSignalWeightExpression('eventWeight*{zstitch}*stitchWeightWJ'.format(zstitch=stitching) + (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
+		factory.SetBackgroundWeightExpression('eventWeight*'+ (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
+		factory.SetSignalWeightExpression('eventWeight*' + (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
 		factory.PrepareTrainingAndTestTree(ROOT.TCut(''),
 												ROOT.TCut(''),
 												"NormMode=None:!V")

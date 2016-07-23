@@ -60,7 +60,7 @@ def calculate_partial_correlation(config):
 		store_file = ROOT.TFile(root_storage_file, "RECREATE")
 		selection_string = cuts.replace("eventWeight*", "")
 		if config["request_nick"] in ["ztt", "zll"]:
-			selection_string = cuts.replace("eventWeight*", "").replace("*stitchWeight%s"%(config["request_nick"].upper()), "")
+			selection_string = cuts.replace("eventWeight*", "")
 		for index in range(len(c_tree_list)):
 			log.debug("Cut Tree %s for Sample %s "%(root_file_name_list[index], root_storage_file))
 			c_tree_list[index]=c_tree_list[index].CopyTree(selection_string)
@@ -154,8 +154,8 @@ def calculate_partial_correlation(config):
 	for event in root_inst:
 		calced_means = []
 		w = event.__getattr__(config["weight_variable"]) * lumi_val
-		if config["request_nick"] in ["ztt", "zll", "wj"]:
-			w *= event.__getattr__("stitchWeight%s"%(config["request_nick"].upper()))
+		#if config["request_nick"] in ["ztt", "zll", "wj"]:
+			#w *= event.__getattr__("stitchWeight%s"%(config["request_nick"].upper()))
 		for varxy in corr_vars.iterkeys():
 			if not "+-+" in varxy:
 				continue
