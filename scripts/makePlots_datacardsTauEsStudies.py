@@ -108,7 +108,10 @@ if __name__ == "__main__":
 	                    help="Era of samples to be used. [Default: %(default)s]")
 	parser.add_argument("--tighten-mass-window", action="store_true", default=False,
 						help="Enable to study effect mass window cut has on tau ES when using m_2. [Default: %(default)s]")
-	
+	parser.add_argument("--plot-with-shift", type=float, default=0.0,
+						help="For plot presentation purposes only: produce prefit plot for a certain energy scale shift. [Default: %(default)s]")
+	parser.add_argument("--colors-dm-dependent", action="store_true", default=False,
+						help="Use different colors for each decay mode corresponding to m_tau in TAU-14-001. [Default: %(default)s]")
 	
 	args = parser.parse_args()
 	logger.initLogger(args)
@@ -125,6 +128,9 @@ if __name__ == "__main__":
 		current_shift = round(es_shifts[-1]+args.shift_binning,4)
 		es_shifts.append(current_shift)
 		es_shifts_str.append(str(current_shift))
+	if args.plot_with_shift != 0.0:
+		es_shifts = [args.plot_with_shift-0.0001,args.plot_with_shift+0.0001]
+		es_shifts_str = [str(es_shifts[0]),str(es_shifts[1])]
 		
 	# produce decaymode bins
 	decay_modes = []
@@ -156,6 +162,8 @@ if __name__ == "__main__":
 		import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2 as samples
 	else:
 		import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2016 as samples
+		if args.lumi == parser.get_default("lumi"):
+			args.lumi = samples.default_lumi/1000.0
 	sample_settings = samples.Samples()
 	systematics_factory = systematics.SystematicsFactory()
 	www_output_dirs_postfit = []
@@ -443,6 +451,7 @@ if __name__ == "__main__":
 	tools.parallelize(_call_command, commands, n_processes=1)
 	
 	#plot nuisance impacts
+	datacards.print_pulls(datacards_cbs, args.n_processes, "-A -p {POI}".format(POI="mes"))
 	datacards.nuisance_impacts(datacards_cbs, datacards_workspaces, args.n_processes, "--redefineSignalPOIs mes")
 	
 	#postfitshapes call
@@ -502,6 +511,13 @@ if __name__ == "__main__":
 				config["stacks"] = ["bkg"]*len(processes_to_plot) + ["data"] + [""]
 				config["labels"] = [label.lower() for label in processes_to_plot + ["totalbkg"] + ["data_obs"]]
 				config["colors"] = [color.lower() for color in processes_to_plot + ["#000000 transgrey"] + ["data_obs"]]
+				if args.colors_dm_dependent:
+					if "OneProng" in category and not "OneProngPiZeros" in category:
+						config["colors"] = [color.replace("ztt", "#000000 #FF6633") for color in config["colors"]]
+					elif "OneProngPiZeros" in category:
+						config["colors"] = [color.replace("ztt", "#000000 kOrange-4") for color in config["colors"]]
+					elif "ThreeProng" in category:
+						config["colors"] = [color.replace("ztt", "#000000 #FFFFCC") for color in config["colors"]]
 				config["markers"] = ["HIST"]*len(processes_to_plot) + ["E2"] + ["E"]
 				config["legend_markers"] = ["F"]*len(processes_to_plot) + ["F"] + ["ELP"]
 				
@@ -511,7 +527,7 @@ if __name__ == "__main__":
 					config["x_lims"] = [0.2,1.4]
 				elif "ThreeProng" in category and quantity == "m_2":
 					config["x_label"] = "m_{#tau_{h}} [GeV]"
-					config["x_lims"] = [0.6,1.8]
+					config["x_lims"] = [0.8,1.5]
 				elif "AllDMs" in category and quantity == "m_2":
 					config["x_label"] = "m_{#tau_{h}} [GeV]"
 					config["x_lims"] = [0.2,1.8]
@@ -538,6 +554,7 @@ if __name__ == "__main__":
 				config["lumis"] = [float("%.1f" % args.lumi)]
 				config["cms"] = True
 				config["extra_text"] = "Preliminary"
+				config["year"] = args.era
 				config["output_dir"] = os.path.join(os.path.dirname(datacard), "plots")
 				config["filename"] = level+"_"+category+"_"+quantity
 				#config["formats"] = ["png", "pdf"]
@@ -664,9 +681,12 @@ if __name__ == "__main__":
 			config["x_expressions"] = [xvalues]
 			config["y_expressions"] = [yvalues]
 			config["texts"] = [decayMode_dict[decayMode]["label"], pt_strings[int(ptBin)], "1#sigma", "2#sigma"]
-			config["texts_x"] = [0.36, 0.35, 0.98, 0.98]
-			config["texts_y"] = [0.87, 0.82, 0.23, 0.46]
+			config["texts_x"] = [0.52, 0.52, 0.98, 0.98]
+			config["texts_y"] = [0.81, 0.74, 0.23, 0.46]
 			config["texts_size"] = [0.035]
+			config["cms"] = True
+			config["extra_text"] = "Preliminary"
+			config["year"] = args.era
 			
 			if not (config["output_dir"] in www_output_dirs_parabola):
 				www_output_dirs_parabola.append(config["output_dir"])
