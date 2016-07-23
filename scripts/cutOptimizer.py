@@ -73,7 +73,7 @@ if __name__ == "__main__":
 	import logging
 	import Artus.Utility.logger as logger
 	log = logging.getLogger(__name__)
-	import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2 as samples
+	import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015_old as samples
 	import HiggsAnalysis.KITHiggsToTauTau.plotting.higgsplot as higgsplot
 	import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.binnings as binnings
 
@@ -164,11 +164,11 @@ if __name__ == "__main__":
 	if args.category != None:
 		if(args.mssm):
 			category_string = "catHttMSSM13TeV"
+		elif args.mva:
+			category_string = "catMVAStudies"
 		else:
 			category_string = "catHtt13TeV"
 		category_string = (category_string + "_{channel}_{category}").format(channel=args.channel, category=args.category)
-		if args.mva:
-			category_string = args.category
 	config = sample_settings.get_config(
 			samples=list_of_samples,
 			channel=args.channel,

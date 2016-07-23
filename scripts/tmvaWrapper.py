@@ -166,8 +166,8 @@ def do_splitting(args, plot_configs):
 				#new_branch = storage_tree.Branch("stitchWeight%s"%mod_name, ptr, "ModWeight/F")
 				#for evt in storage_tree:
 					#new_branch.Fill()
-			else:
-				storage_tree = c_tree.CopyTree("", "tree%i"%(j+1))
+			#else:
+			storage_tree = c_tree.CopyTree("", "tree%i"%(j+1))
 			storage_tree.SetName("SplitTree")
 			storage_tree.Write()
 			store_file.Close()
@@ -331,8 +331,8 @@ def do_training(args):
 			#stitching = "stitchWeightZTT"
 		#elif 'zll' in (args["bkg_samples"]+args['signal_samples']):
 			#stitching = "stitchWeightZLL"
-		factory.SetBackgroundWeightExpression('eventWeight*'+ (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
-		factory.SetSignalWeightExpression('eventWeight*' + (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
+		factory.SetBackgroundWeightExpression('eventWeight'+ (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
+		factory.SetSignalWeightExpression('eventWeight' + (("*" + args["weight"]) if args["weight"] != "1.0" else ""))
 		factory.PrepareTrainingAndTestTree(ROOT.TCut(''),
 												ROOT.TCut(''),
 												"NormMode=None:!V")
@@ -786,6 +786,27 @@ if __name__ == "__main__":
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
 						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
 						config_list.append(copy.deepcopy(copy_cargs))
+
+		if 8 in cargs.modification:
+			#Final Set of Variables
+			copy_cargs = copy.deepcopy(cargs_values)
+			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
+			copy_cargs["n_fold"] = 2
+			copy_path = copy_cargs["output_file"]
+			for channel in ["em", "et", "mt"]:
+				copy_cargs["signal_samples"] = ["ggh", "qqh"]
+				copy_cargs["channels"] = [channel]
+				for jets in [0,1,2]:
+					copy_cargs["bkg_samples"] = ["ztt", "zll", "ttj", "wj", "vv"]
+					copy_cargs["category"] = "catMVAStudies_%s_%ijet_sig"%(channel,jets)
+					if jets == 2:
+						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "m_sv"]
+					if jets == 1:
+						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "m_sv"]
+					if jets == 0:
+						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "m_sv"]
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FinalDiscriminator"%(channel,jets))
+					config_list.append(copy.deepcopy(copy_cargs))
 
 		if 10 in cargs.modification:
 			"BDT;nCuts=1200:NTrees=1500:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=SDivSqrtSPlusB"

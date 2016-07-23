@@ -138,7 +138,7 @@ class CategoriesDict(object):
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)])
 						}
-					}					
+					}
 				}
 		self.categoriesDict["{analysis}{channel}FT_B{discriminator}"] = {
 				"channel": [
@@ -157,7 +157,7 @@ class CategoriesDict(object):
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)])
 						}
-					}					
+					}
 				}
 		self.categoriesDict["{analysis}{channel}FT_SB{discriminator}"] = {
 				"channel": [
@@ -947,12 +947,12 @@ class CategoriesDict(object):
 					"em_"
 					],
 				"expressions":{
-					"global":"(!((0.3<=ttj_1)*(0.45<=ztt_1)*(0.8<=vbf_1)))*(njetspt30==0)",
-					"mm_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"mt_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"et_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"tt_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"em_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
+					"global":"(njetspt30==0)",
+					"mm_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(((ZeroJets_TTDiscriminator>=0.44)*(ZeroJets_FakeDiscriminator>=0.4719)))",
+					"et_":"(((ZeroJets_TTDiscriminator>=0.3312)*(ZeroJets_FakeDiscriminator>=0.568)))",
+					"tt_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(((ZeroJets_TTDiscriminator>=0.0395)*(ZeroJets_FakeDiscriminator>=-0.3824)))",
 					"analysis": [
 						"catHtt13TeV_",
 						"catMVAStudies_"
@@ -978,12 +978,12 @@ class CategoriesDict(object):
 					"em_"
 					],
 				"expressions":{
-					"global":"(!((0.3<=ttj_1)*(0.45<=ztt_1)*(0.8<=vbf_1)))*(njetspt30==0)",
+					"global":"(njetspt30==0)",
 					"mm_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"mt_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"et_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(!((ZeroJets_TTDiscriminator>=0.44)*(ZeroJets_FakeDiscriminator>=0.4719)))",
+					"et_":"(!((ZeroJets_TTDiscriminator>=0.3312)*(ZeroJets_FakeDiscriminator>=0.568)))",
 					"tt_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"em_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(!((ZeroJets_TTDiscriminator>=0.0395)*(ZeroJets_FakeDiscriminator>=-0.3824)))",
 					"analysis": [
 						"catHtt13TeV_",
 						"catMVAStudies_"
@@ -1009,12 +1009,12 @@ class CategoriesDict(object):
 					"em_"
 					],
 				"expressions":{
-					"global":"(njetspt30>0)*(!((0.3<=ttj_1)*(0.45<=ztt_1)*(0.8<=vbf_1)))",
-					"mm_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"mt_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"et_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"tt_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
-					"em_":"((0.4<=ttj_1)*(0.4<=ztt_1))",
+					"global":"(njetspt30==1)",
+					"mm_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(((OneJets_TTDiscriminator>=0.1008)*(OneJets_FakeDiscriminator>=0.36)))",
+					"et_":"(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))",
+					"tt_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(((OneJets_TTDiscriminator>=-0.1952)*(OneJets_FakeDiscriminator>=-0.008)))",
 					"analysis": [
 						"catHtt13TeV_",
 						"catMVAStudies_"
@@ -1040,12 +1040,12 @@ class CategoriesDict(object):
 					"em_"
 					],
 				"expressions":{
-					"global":"(njetspt30>0)*(!((0.3<=ttj_1)*(0.45<=ztt_1)*(0.8<=vbf_1)))",
+					"global":"(njetspt30==1)",
 					"mm_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"mt_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"et_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(!((OneJets_TTDiscriminator>=0.1008)*(OneJets_FakeDiscriminator>=0.36)))",
+					"et_":"(!((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))",
 					"tt_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
-					"em_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(!((OneJets_TTDiscriminator>=-0.1952)*(OneJets_FakeDiscriminator>=-0.008)))",
 					"analysis": [
 						"catHtt13TeV_",
 						"catMVAStudies_"
@@ -1062,7 +1062,7 @@ class CategoriesDict(object):
 						}
 					}
 				}
-		self.categoriesDict["{analysis}{channel}2jet_vbf_bdt{discriminator}"] = {
+		self.categoriesDict["{analysis}{channel}2jet_sig{discriminator}"] = {
 				"channel": [
 					"mm_",
 					"mt_",
@@ -1071,7 +1071,43 @@ class CategoriesDict(object):
 					"em_"
 					],
 				"expressions":{
-					"global":"(0.3<=ttj_1)*(0.45<=ztt_1)*(0.8<=vbf_1)",
+					"global":"(njetspt30>1)",
+					"mm_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(((TwoJets_TTDiscriminator>=0.5)*(TwoJets_FakeDiscriminator>=0.5)))",
+					"et_":"(((TwoJets_TTDiscriminator>=0.5)*(TwoJets_FakeDiscriminator>=0.5)))",
+					"tt_":"(((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(((TwoJets_TTDiscriminator>=0.3279)*(TwoJets_FakeDiscriminator>=0.408)))",
+					"analysis": [
+						"catHtt13TeV_",
+						"catMVAStudies_"
+						],
+					},
+				"binnings":{
+					"analysis": [
+						"binningHtt13TeV_",
+						"binningMVAStudies_"
+						],
+					"global":{
+						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
+						"_disc_1": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						}
+					}
+				}
+		self.categoriesDict["{analysis}{channel}2jet_bkg{discriminator}"] = {
+				"channel": [
+					"mm_",
+					"mt_",
+					"et_",
+					"tt_",
+					"em_"
+					],
+				"expressions":{
+					"global":"(njetspt30>1)",
+					"mm_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"mt_":"(!((TwoJets_TTDiscriminator>=0.88)*(TwoJets_FakeDiscriminator>=0.8848)))",
+					"et_":"(!((TwoJets_TTDiscriminator>=0.904)*(TwoJets_FakeDiscriminator>=0.9295)))",
+					"tt_":"(!((0.4<=ttj_1)*(0.4<=ztt_1)))",
+					"em_":"(!((TwoJets_TTDiscriminator>=0.3279)*(TwoJets_FakeDiscriminator>=0.408)))",
 					"analysis": [
 						"catHtt13TeV_",
 						"catMVAStudies_"
@@ -1147,7 +1183,7 @@ class CategoriesDict(object):
 
 	def invert(self, expression):
 		tmp_expression = "(" + expression + ")"
-		return "(" + tmp_expression + "==0)" 
+		return "(" + tmp_expression + "==0)"
 
 	def combine(self, strings_to_combine):
 		return "(" + "*".join(strings_to_combine) + ")"
