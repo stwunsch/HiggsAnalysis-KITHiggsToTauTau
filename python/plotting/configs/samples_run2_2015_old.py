@@ -17,6 +17,7 @@ class Samples(samples.Samples):
 	data_format = "MINIAOD"
 	mc_campaign = "RunIIFall15MiniAOD.*"
 	default_lumi = 2.301*1000.0
+
 	# needs to be overwritten since extentions have not been available in Fall15 nicks
 	@staticmethod
 	def artus_file_names( query, expect_n_results = 1):
@@ -107,7 +108,7 @@ class Samples(samples.Samples):
 		return self.artus_file_names({"process" : "WminusHToTauTauM"+str(mass), "data": False, "campaign" : self.mc_campaign}, 1)
 
 	def files_wh_plus(self, channel, mass=125):
-		return self.artus_file_names({"process" : "WminusHToTauTauM"+str(mass), "data": False, "campaign" : self.mc_campaign}, 1)
+		return self.artus_file_names({"process" : "WplusHToTauTauM"+str(mass), "data": False, "campaign" : self.mc_campaign}, 1)
 
 	def files_zh(self, channel, mass=125):
 		return self.artus_file_names({"process" : "ZHToTauTauM"+str(mass), "data": False, "campaign" : self.mc_campaign}, 1)
@@ -133,7 +134,7 @@ class Samples(samples.Samples):
 		# Higgs strahlung (SM)
 		if (not mssm) or normalise_to_sm_xsec:
 			config = self.vh(config, channel, category, weight, nick_suffix+("_sm" if mssm else "")+"_noplot", higgs_masses+([] if mssm else additional_higgs_masses_for_shape),
-			                 normalise_signal_to_one_pb, lumi=0, exclude_cuts=exclude_cuts, no_plot=True, **kwargs)
+			                 normalise_signal_to_one_pb, lumi=lumi, exclude_cuts=exclude_cuts, no_plot=True, **kwargs)
 
 		# production in association with b-quarks (MSSM)
 		if mssm:
