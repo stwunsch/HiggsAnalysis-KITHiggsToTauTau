@@ -1,0 +1,458 @@
+{
+    "FT_cut_method": "bargaining", 
+    "FT_cut_parameter": 2.0, 
+    "N-Fold": 2, 
+    "Split": null, 
+    "batch_system": true, 
+    "bkg_samples": [
+        "ztt", 
+        "zll", 
+        "ttj", 
+        "wj", 
+        "vv"
+    ], 
+    "category": "catMVAStudies_et_1jet_sig", 
+    "channels": [
+        "et"
+    ], 
+    "comment": "/portal/ekpcms6/home/mschmitt/analysis/CMSSW_7_1_5/bin/slc6_amd64_gcc481/tmvaWrapper.py -i /storage/a/mschmitt/htautau/artus/NewRun/merged/ --higgs-masses 125 --modify --log-stream stdout --modification 8 --batch-system --config-number 4", 
+    "config_list": [
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "ztt"
+            ], 
+            "files": [
+                "DYJetsToLLM150_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY2JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY4JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY1JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY3JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM10to50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "ztt"
+            ], 
+            "legend_markers": [
+                "F"
+            ], 
+            "markers": [
+                "HIST"
+            ], 
+            "nicks": [
+                "ztt"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "ztt"
+            ], 
+            "nicks_empty_bins": [
+                "ztt"
+            ], 
+            "request_nick": "ztt", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Background", 
+            "stacks": [
+                "bkg"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(gen_match_2 == 5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "zll"
+            ], 
+            "files": [
+                "DY2JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY4JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY1JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY3JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM10to50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "zll"
+            ], 
+            "legend_markers": [
+                "F"
+            ], 
+            "markers": [
+                "HIST"
+            ], 
+            "nicks": [
+                "zll"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "zll"
+            ], 
+            "nicks_empty_bins": [
+                "zll"
+            ], 
+            "request_nick": "zll", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Background", 
+            "stacks": [
+                "bkg"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(gen_match_2 < 5 || gen_match_2 == 6)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "ttj"
+            ], 
+            "files": [
+                "TT_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "ttj"
+            ], 
+            "legend_markers": [
+                "F"
+            ], 
+            "markers": [
+                "HIST"
+            ], 
+            "nicks": [
+                "ttj"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "ttj"
+            ], 
+            "nicks_empty_bins": [
+                "ttj"
+            ], 
+            "request_nick": "ttj", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Background", 
+            "stacks": [
+                "bkg"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "EstimateWjets", 
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "wj"
+            ], 
+            "files": [
+                "W1JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root WJetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W3JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W4JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W2JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root", 
+                "SingleElectron_Run2015D_16Dec2015v1_13TeV_MINIAOD/*.root", 
+                "DYJetsToLLM150_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY2JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY4JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY1JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY3JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM10to50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root", 
+                "DY2JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY4JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY1JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DY3JetsToLLM50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root DYJetsToLLM10to50_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root", 
+                "TT_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root", 
+                "STt-channelantitop4fleptonDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root STtWtop5finclusiveDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WZTo1L3Nu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root ZZTo2L2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root STt-channeltop4fleptonDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WZTo2L2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root WZTo1L1Nu2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root WZJets_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root STtWantitop5finclusiveDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WWTo1L1Nu2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root ZZTo4L_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root VVTo2L2Nu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root", 
+                "W1JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root WJetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W3JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W4JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W2JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root", 
+                "W1JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root WJetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W3JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W4JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root W2JetsToLNu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_madgraph-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple", 
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "wj"
+            ], 
+            "legend_markers": [
+                "F"
+            ], 
+            "markers": [
+                "HIST"
+            ], 
+            "nicks": [
+                "wj", 
+                "noplot_wj_data_control", 
+                "noplot_ztt_mc_wj_control", 
+                "noplot_zll_wj_control", 
+                "noplot_ttj_wj_control", 
+                "noplot_vv_wj_control", 
+                "noplot_wj_mc_signal", 
+                "noplot_wj_mc_control"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "wj"
+            ], 
+            "nicks_empty_bins": [
+                "wj"
+            ], 
+            "request_nick": "wj", 
+            "scale_factors": [
+                2301.0, 
+                1.0, 
+                2301.0, 
+                2301.0, 
+                2301.0, 
+                2301.0, 
+                2301.0, 
+                2301.0
+            ], 
+            "sig_bkg": "Background", 
+            "stacks": [
+                "bkg"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)", 
+                "(1.0)*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)", 
+                "(1.0)*eventWeight*(gen_match_2 == 5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)", 
+                "(1.0)*eventWeight*(gen_match_2 < 5 || gen_match_2 == 6)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)", 
+                "(1.0)*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)", 
+                "(1.0)*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)", 
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)", 
+                "(1.0)*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)*(mt_1>70.0)"
+            ], 
+            "wjets_data_control_nicks": [
+                "noplot_wj_data_control"
+            ], 
+            "wjets_data_substract_nicks": [
+                "noplot_ztt_mc_wj_control noplot_zll_wj_control noplot_ttj_wj_control noplot_vv_wj_control"
+            ], 
+            "wjets_from_mc": [
+                false
+            ], 
+            "wjets_mc_control_nicks": [
+                "noplot_wj_mc_control"
+            ], 
+            "wjets_mc_signal_nicks": [
+                "noplot_wj_mc_signal"
+            ], 
+            "wjets_shape_nicks": [
+                "wj"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "vv"
+            ], 
+            "files": [
+                "STt-channelantitop4fleptonDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root STtWtop5finclusiveDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WZTo1L3Nu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root ZZTo2L2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root STt-channeltop4fleptonDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WZTo2L2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root WZTo1L1Nu2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root WZJets_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root STtWantitop5finclusiveDecays_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root WWTo1L1Nu2Q_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root ZZTo4L_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root VVTo2L2Nu_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_amcatnlo-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "vv"
+            ], 
+            "legend_markers": [
+                "F"
+            ], 
+            "markers": [
+                "HIST"
+            ], 
+            "nicks": [
+                "vv"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "vv"
+            ], 
+            "nicks_empty_bins": [
+                "vv"
+            ], 
+            "request_nick": "vv", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Background", 
+            "stacks": [
+                "bkg"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "ggh125"
+            ], 
+            "files": [
+                "GluGluHToTauTauM125_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "ggh125"
+            ], 
+            "legend_markers": [
+                "L"
+            ], 
+            "markers": [
+                "LINE"
+            ], 
+            "nicks": [
+                "ggh125"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "ggh125"
+            ], 
+            "nicks_empty_bins": [
+                "ggh125"
+            ], 
+            "request_nick": "ggh", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Signal", 
+            "stacks": [
+                "ggh"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }, 
+        {
+            "analysis_modules": [
+                "BinErrorsOfEmptyBins", 
+                "CorrectNegativeBinContents"
+            ], 
+            "colors": [
+                "qqh125"
+            ], 
+            "files": [
+                "VBFHToTauTauM125_RunIIFall15MiniAODv2_PU25nsData2015v1_13TeV_MINIAOD_powheg-pythia8/*.root"
+            ], 
+            "folders": [
+                "et_jecUncNom_tauEsNom/ntuple"
+            ], 
+            "labels": [
+                "qqh125"
+            ], 
+            "legend_markers": [
+                "L"
+            ], 
+            "markers": [
+                "LINE"
+            ], 
+            "nicks": [
+                "qqh125"
+            ], 
+            "nicks_blacklist": [
+                "noplot"
+            ], 
+            "nicks_correct_negative_bins": [
+                "qqh125"
+            ], 
+            "nicks_empty_bins": [
+                "qqh125"
+            ], 
+            "request_nick": "qqh", 
+            "scale_factors": [
+                2301.0
+            ], 
+            "sig_bkg": "Signal", 
+            "stacks": [
+                "qqh"
+            ], 
+            "weights": [
+                "(1.0)*((((njetspt30==1)*(((OneJets_TTDiscriminator>=0.072)*(OneJets_FakeDiscriminator>=0.6)))))*(1.0))*eventWeight*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(dilepton_veto < 0.5)*(againstElectronTightMVA6_2 > 0.5)*(mt_1<40.0)*(byTightIsolationMVArun2v1DBoldDMwLT_2 > 0.5)*(iso_1 < 0.1)*((q_1*q_2)<0.0)"
+            ]
+        }
+    ], 
+    "config_number": 4, 
+    "config_step": -1, 
+    "custom_splitting": [], 
+    "dir_path": "/tmp/264280.1.medium/29778_4/7896/CMSSW_7_1_5/workdir", 
+    "dry_run": false, 
+    "err_level": "info", 
+    "exclude_cuts": [], 
+    "factory_options": "", 
+    "focussed_training": 1, 
+    "higgs_masses": [
+        "125"
+    ], 
+    "input_dir": "/storage/a/mschmitt/htautau/artus/NewRun/merged/", 
+    "j": 1, 
+    "log_files": [], 
+    "log_level": "info", 
+    "log_stream": "stdout", 
+    "lumi": 2.301, 
+    "methods": [
+        "BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
+    ], 
+    "modification": [
+        8
+    ], 
+    "modify": true, 
+    "n_fold": 2, 
+    "out_level": "info", 
+    "output_file": "/tmp/264280.1.medium/29778_4/7896/CMSSW_7_1_5/workdir/et_1Jets_FinalDiscriminator", 
+    "pre_selection": "(1.0)", 
+    "preparation_trees_options": "", 
+    "quantities": [
+        "pt_1", 
+        "mt_1", 
+        "pt_2", 
+        "mt_2", 
+        "mvamet", 
+        "pZetaMissVis", 
+        "H_pt", 
+        "diLepDeltaR", 
+        "diLepJet1DeltaR", 
+        "m_sv"
+    ], 
+    "signal_samples": [
+        "ggh", 
+        "qqh"
+    ], 
+    "splits": [
+        "((TrainingSelectionValue>=0)*(TrainingSelectionValue<5)||(TrainingSelectionValue>=10)*(TrainingSelectionValue<15)||(TrainingSelectionValue>=20)*(TrainingSelectionValue<25)||(TrainingSelectionValue>=30)*(TrainingSelectionValue<35)||(TrainingSelectionValue>=40)*(TrainingSelectionValue<45)||(TrainingSelectionValue>=50)*(TrainingSelectionValue<55)||(TrainingSelectionValue>=60)*(TrainingSelectionValue<65)||(TrainingSelectionValue>=70)*(TrainingSelectionValue<75)||(TrainingSelectionValue>=80)*(TrainingSelectionValue<85)||(TrainingSelectionValue>=90)*(TrainingSelectionValue<95))", 
+        "((TrainingSelectionValue>=5)*(TrainingSelectionValue<10)||(TrainingSelectionValue>=15)*(TrainingSelectionValue<20)||(TrainingSelectionValue>=25)*(TrainingSelectionValue<30)||(TrainingSelectionValue>=35)*(TrainingSelectionValue<40)||(TrainingSelectionValue>=45)*(TrainingSelectionValue<50)||(TrainingSelectionValue>=55)*(TrainingSelectionValue<60)||(TrainingSelectionValue>=65)*(TrainingSelectionValue<70)||(TrainingSelectionValue>=75)*(TrainingSelectionValue<80)||(TrainingSelectionValue>=85)*(TrainingSelectionValue<90)||(TrainingSelectionValue>=95)*(TrainingSelectionValue<100))"
+    ], 
+    "training_name": "et_1Jets_FinalDiscriminator", 
+    "variables": "pt_1,mt_1,pt_2,mt_2,mvamet,pZetaMissVis,H_pt,diLepDeltaR,diLepJet1DeltaR,m_sv", 
+    "verbose": false, 
+    "weight": "1.0"
+}
