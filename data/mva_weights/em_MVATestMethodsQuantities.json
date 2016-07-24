@@ -1,14 +1,5 @@
 {
     "property": [
-        "ZeroJets_FakeBDT",
-        "ZeroJets_FakeBDT",
-        "ZeroJets_FakeBDT",
-        "ZeroJets_FinalBDT",
-        "ZeroJets_FinalBDT",
-        "ZeroJets_FinalBDT",
-        "ZeroJets_ZttBDT",
-        "ZeroJets_ZttBDT",
-        "ZeroJets_ZttBDT",
         "OneJets_FakeBDT",
         "OneJets_FakeBDT",
         "OneJets_FakeBDT",
@@ -26,6 +17,15 @@
         "TwoJets_FinalBDT",
         "TwoJets_ZttBDT",
         "TwoJets_ZttBDT",
-        "TwoJets_ZttBDT"
+        "TwoJets_ZttBDT",
+        "ZeroJets_FakeBDT",
+        "ZeroJets_FakeBDT",
+        "ZeroJets_FakeBDT",
+        "ZeroJets_FinalBDT",
+        "ZeroJets_FinalBDT",
+        "ZeroJets_FinalBDT",
+        "ZeroJets_ZttBDT",
+        "ZeroJets_ZttBDT",
+        "ZeroJets_ZttBDT"
     ]
 }

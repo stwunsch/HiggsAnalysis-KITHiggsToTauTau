@@ -20,15 +20,15 @@
         "((x>=5)*(x<10)||(x>=15)*(x<20)||(x>=25)*(x<30)||(x>=35)*(x<40)||(x>=45)*(x<50)||(x>=55)*(x<60)||(x>=65)*(x<70)||(x>=75)*(x<80)||(x>=85)*(x<90)||(x>=95)*(x<100))"
     ],
     "MVATestMethodsInputQuantities": [
-        "0;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep2MetMt:=mt_2",
-        "1;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,svfitMass:=m_sv",
-        "2;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep1MetMt:=mt_1",
-        "3;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepMetPt:=H_pt,lep1MetMt:=mt_1,lep2MetMt:=mt_2,pZetaMissVis",
-        "4;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR,svfitMass:=m_sv",
-        "5;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR",
-        "6;lep1MetMt:=mt_1,lep2MetMt:=mt_2,lep1Pt:=pt_1,diLepMetPt:=H_pt,pZetaMissVis,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
-        "7;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta,svfitMass:=m_sv",
-        "8;lep1MetMt:=mt_1,lep1Pt:=pt_1,diLepMetPt:=H_pt,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta"
+        "0;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepMetPt:=H_pt,lep1MetMt:=mt_1,lep2MetMt:=mt_2,pZetaMissVis",
+        "1;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR,svfitMass:=m_sv",
+        "2;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,diLepMetPt:=H_pt,diLepDeltaR,diLepJet1DeltaR",
+        "3;lep1MetMt:=mt_1,lep2MetMt:=mt_2,lep1Pt:=pt_1,diLepMetPt:=H_pt,pZetaMissVis,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
+        "4;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta,svfitMass:=m_sv",
+        "5;lep1MetMt:=mt_1,lep1Pt:=pt_1,diLepMetPt:=H_pt,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
+        "6;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep2MetMt:=mt_2",
+        "7;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,svfitMass:=m_sv",
+        "8;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep1MetMt:=mt_1"
     ],
     "MVATestMethodsMethods": [
         "0;BDT",
@@ -62,34 +62,34 @@
         2
     ],
     "MVATestMethodsNames": [
-        "ZeroJets_FakeBDT",
-        "ZeroJets_FinalBDT",
-        "ZeroJets_ZttBDT",
         "OneJets_FakeBDT",
         "OneJets_FinalBDT",
         "OneJets_ZttBDT",
         "TwoJets_FakeBDT",
         "TwoJets_FinalBDT",
-        "TwoJets_ZttBDT"
+        "TwoJets_ZttBDT",
+        "ZeroJets_FakeBDT",
+        "ZeroJets_FinalBDT",
+        "ZeroJets_ZttBDT"
     ],
     "MVATestMethodsWeights": [
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_0Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_0Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_0Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_0Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_1Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_1Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_1Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_1Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_2Jets_FakeDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_2Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_2Jets_FinalDiscriminator.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_2Jets_TTDiscriminator_rm_Nothing.weights.xml",
-        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_2Jets_TTDiscriminator_rm_Nothing.weights.xml"
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_OneJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_OneJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_OneJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_OneJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_OneJets_ZttBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_OneJets_ZttBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_TwoJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_TwoJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_TwoJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_TwoJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_TwoJets_ZttBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_TwoJets_ZttBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_ZeroJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_ZeroJets_FakeBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_ZeroJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_ZeroJets_FinalBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T1_BDT_em_ZeroJets_ZttBDT.weights.xml",
+        "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/mva_weights/T2_BDT_em_ZeroJets_ZttBDT.weights.xml"
     ]
 }
