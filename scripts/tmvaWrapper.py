@@ -561,7 +561,7 @@ if __name__ == "__main__":
 				copy_cargs["channels"] = [channel]
 				for jets in [2]:
 					copy_cargs["bkg_samples"] = ["ztt"]
-					copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
+					copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
 
 					if jets == 2:
 						copy_cargs["signal_samples"] = ["qqh"]
@@ -578,7 +578,7 @@ if __name__ == "__main__":
 							poped_name = poped
 							if "*" in poped:
 								poped_name = "function"
-							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 							config_list.append(copy.deepcopy(copy_cargs))
 							copy_cargs["quantities"].append(poped)
 
@@ -594,7 +594,7 @@ if __name__ == "__main__":
 							poped_name = poped
 							if "*" in poped:
 								poped_name = "function"
-							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 							copy_cargs["bkg_samples"] = ["ttj", "wj", "vv"]
 							config_list.append(copy.deepcopy(copy_cargs))
 							copy_cargs["quantities"].append(poped)
@@ -613,7 +613,7 @@ if __name__ == "__main__":
 							poped_name = poped
 							if "*" in poped:
 								poped_name = "function"
-							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 							config_list.append(copy.deepcopy(copy_cargs))
 							copy_cargs["quantities"].append(poped)
 						copy_cargs["bkg_samples"] = ["wj", "zll"]
@@ -631,7 +631,7 @@ if __name__ == "__main__":
 							poped_name = poped
 							if "*" in poped:
 								poped_name = "function"
-							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 							config_list.append(copy.deepcopy(copy_cargs))
 							copy_cargs["quantities"].append(poped)
 
@@ -647,7 +647,7 @@ if __name__ == "__main__":
 							poped_name = poped
 							if "*" in poped:
 								poped_name = "function"
-							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+							copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 							config_list.append(copy.deepcopy(copy_cargs))
 							copy_cargs["quantities"].append(poped)
 						if channel in ["et", "mt"]:
@@ -661,7 +661,7 @@ if __name__ == "__main__":
 								poped_name = poped
 								if "*" in poped:
 									poped_name = "function"
-								copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+								copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 								config_list.append(copy.deepcopy(copy_cargs))
 								copy_cargs["quantities"].append(poped)
 		if 6 in cargs.modification:
@@ -673,38 +673,38 @@ if __name__ == "__main__":
 			for channel in ["em", "et", "mt"]:
 				copy_cargs["signal_samples"] = ["ggh"]
 				copy_cargs["channels"] = [channel]
-				for jets in [0,1,2]:
+				for jets in ["Zero", "One", "Two"]:
 					copy_cargs["bkg_samples"] = ["ztt", "vv_gm"]
-					copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
+					copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
 					if jets == 2:
 						copy_cargs["signal_samples"] = ["qqh"]
 						copy_cargs["pre_selection"] = "(njetspt30>=%i)"%jets
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						#copy_cargs["bkg_samples"] = ["ttj", "wj", "vv"]
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
 						config_list.append(copy.deepcopy(copy_cargs))
 					if jets == 1:
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 						#copy_cargs["bkg_samples"] = ["wj", "zll"]
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
 						#if channel == "em":
 							#copy_cargs["bkg_samples"] = ["ttj", "vv"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 					if jets == 0:
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 						#if channel == "em":
 							#continue
 						#copy_cargs["bkg_samples"] = ["wj", "zll"]
 						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 		if 7 in cargs.modification:
 			#Final Set of Variables
@@ -713,14 +713,13 @@ if __name__ == "__main__":
 			copy_cargs["n_fold"] = 2
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
-				copy_cargs["signal_samples"] = ["ggh"]
+				copy_cargs["signal_samples"] = ["ggh", "qqh"]
 				copy_cargs["channels"] = [channel]
-				for jets in [0,1,2]:
-					copy_cargs["bkg_samples"] = ["ztt", "vv_gm"]
-					copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
-					if jets == 2:
-						copy_cargs["signal_samples"] = ["qqh"]
-						copy_cargs["pre_selection"] = "(njetspt30>=%i)"%jets
+				for jets in ["Zero", "One", "Two"]:
+					copy_cargs["bkg_samples"] = ["ztt"]
+					copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
+					if jets == "Two":
+						copy_cargs["signal_samples"] = ["ggh","qqh"]
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 
 						if channel == "em":
@@ -729,19 +728,19 @@ if __name__ == "__main__":
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "mjj", "jdeta", "diLep_diJet_deltaR"]
 							#copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "diLepJet1DeltaR"]
 
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
-						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
+						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv"]
 
 						if channel == "em":
 							copy_cargs["quantities"] = ["mt_1", "mt_2", "pt_1", "H_pt", "pZetaMissVis", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["mt_1", "pt_2", "mt_2", "mvamet", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta"]
 
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 
-					if jets == 1:
+					if jets == "One":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 
 						if channel == "em":
@@ -749,10 +748,10 @@ if __name__ == "__main__":
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 						#copy_cargs["bkg_samples"] = ["wj", "zll"]
-						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
+						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv"]
 
 						if channel == "em":
 							#copy_cargs["bkg_samples"] = ["ttj", "vv"]
@@ -762,10 +761,10 @@ if __name__ == "__main__":
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepDeltaR"]
 
 
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 
-					if jets == 0:
+					if jets == "Zero":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR"]
 
 						if channel == "em":
@@ -773,7 +772,7 @@ if __name__ == "__main__":
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_2", "H_pt", "diLepDeltaR", "mvamet"]
 
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_ZttBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 
 						if channel == "em":
@@ -783,29 +782,29 @@ if __name__ == "__main__":
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepDeltaR"]
 
 						#copy_cargs["bkg_samples"] = ["wj", "zll"]
-						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv_ngm"]
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,"Nothing"))
+						copy_cargs["bkg_samples"] = ["zll", "ttj", "wj", "vv"]
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeBDT"%(channel,jets))
 						config_list.append(copy.deepcopy(copy_cargs))
 
 		if 8 in cargs.modification:
 			#Final Set of Variables
 			copy_cargs = copy.deepcopy(cargs_values)
-			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
+			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=1000:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
 			copy_cargs["n_fold"] = 2
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
 				copy_cargs["signal_samples"] = ["ggh", "qqh"]
 				copy_cargs["channels"] = [channel]
-				for jets in [0,1,2]:
+				for jets in ["Zero", "One", "Two"]:
 					copy_cargs["bkg_samples"] = ["ztt", "zll", "ttj", "wj", "vv"]
-					copy_cargs["category"] = "catMVAStudies_%s_%ijet_sig"%(channel,jets)
-					if jets == 2:
-						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "m_sv"]
-					if jets == 1:
+					copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
+					if jets == "Two":
+						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "m_sv"]
+					if jets == "One":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "diLepJet1DeltaR", "m_sv"]
-					if jets == 0:
+					if jets == "Zero":
 						copy_cargs["quantities"] = ["pt_1", "mt_1", "pt_2", "mt_2", "mvamet", "pZetaMissVis", "H_pt", "diLepDeltaR", "m_sv"]
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FinalDiscriminator"%(channel,jets))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FinalBDT"%(channel,jets))
 					config_list.append(copy.deepcopy(copy_cargs))
 
 		if 10 in cargs.modification:
@@ -816,10 +815,10 @@ if __name__ == "__main__":
 			copy_cargs["signal_samples"] = ["ggh", "qqh"]
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
-				jets = 0
+				jets = "Zero"
 				copy_cargs["channels"] = [channel]
 				copy_cargs["bkg_samples"] = ["ztt"]
-				copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
+				copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
 				if channel == "em":
 					copy_cargs["quantities"] = ["pt_1", "pt_2", "mvamet"]
 				if channel == "et":
@@ -831,7 +830,7 @@ if __name__ == "__main__":
 					poped_name = poped
 					if "*" in poped:
 						poped_name = "function"
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 					config_list.append(copy.deepcopy(copy_cargs))
 					copy_cargs["quantities"].append(poped)
 				if channel in ["et", "mt"]:
@@ -845,7 +844,7 @@ if __name__ == "__main__":
 						poped_name = poped
 						if "*" in poped:
 							poped_name = "function"
-						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+						copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 						config_list.append(copy.deepcopy(copy_cargs))
 						copy_cargs["quantities"].append(poped)
 		if 11 in cargs.modification:
@@ -856,10 +855,10 @@ if __name__ == "__main__":
 			copy_cargs["signal_samples"] = ["ggh", "qqh"]
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
-				jets = 1
+				jets = "One"
 				copy_cargs["channels"] = [channel]
 				copy_cargs["bkg_samples"] = ["ztt"]
-				copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
+				copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
 				if channel == "em":
 					copy_cargs["quantities"] = ["H_pt", "diLepDeltaR", "diLepJet1DeltaR"]
 				if channel == "et":
@@ -873,7 +872,7 @@ if __name__ == "__main__":
 					poped_name = poped
 					if "*" in poped:
 						poped_name = "function"
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 					config_list.append(copy.deepcopy(copy_cargs))
 					copy_cargs["quantities"].append(poped)
 				copy_cargs["bkg_samples"] = ["wj", "zll"]
@@ -891,7 +890,7 @@ if __name__ == "__main__":
 					poped_name = poped
 					if "*" in poped:
 						poped_name = "function"
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 					config_list.append(copy.deepcopy(copy_cargs))
 					copy_cargs["quantities"].append(poped)
 		if 12 in cargs.modification:
@@ -902,10 +901,10 @@ if __name__ == "__main__":
 			copy_path = copy_cargs["output_file"]
 			copy_cargs["signal_samples"] = ["qqh"]
 			for channel in ["em", "et", "mt"]:
-				jets = 2
+				jets = "Two"
 				copy_cargs["channels"] = [channel]
 				copy_cargs["bkg_samples"] = ["ztt"]
-				copy_cargs["pre_selection"] = "(njetspt30==%i)"%jets
+				copy_cargs["category"] = "catMVAStudies_%s_%sJet30"%(channel,jets)
 				if channel == "em":
 					copy_cargs["quantities"] = ["H_pt", "diLepDeltaR", "diLep_diJet_deltaR", "mjj", "jdeta", "product_lep_centrality"]
 				if channel == "et":
@@ -918,7 +917,7 @@ if __name__ == "__main__":
 					poped_name = poped
 					if "*" in poped:
 						poped_name = "function"
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_TTDiscriminator_rm_%s"%(channel,jets,poped_name))
 					config_list.append(copy.deepcopy(copy_cargs))
 					copy_cargs["quantities"].append(poped)
 
@@ -934,7 +933,7 @@ if __name__ == "__main__":
 					poped_name = poped
 					if "*" in poped:
 						poped_name = "function"
-					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%iJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
+					copy_cargs["output_file"] = os.path.join(copy_path,"%s_%sJets_FakeDiscriminator_rm_%s"%(channel,jets,poped_name))
 					copy_cargs["bkg_samples"] = ["ttj", "wj", "vv"]
 					config_list.append(copy.deepcopy(copy_cargs))
 					copy_cargs["quantities"].append(poped)
