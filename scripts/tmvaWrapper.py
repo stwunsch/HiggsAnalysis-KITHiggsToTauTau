@@ -709,7 +709,7 @@ if __name__ == "__main__":
 		if 7 in cargs.modification:
 			#Final Set of Variables
 			copy_cargs = copy.deepcopy(cargs_values)
-			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
+			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=500:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
 			copy_cargs["n_fold"] = 2
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
@@ -777,7 +777,7 @@ if __name__ == "__main__":
 
 						if channel == "em":
 							#continue
-							copy_cargs["quantities"] = ["pt_1", "pt_2", "diLepDeltaR", "H_pt", "pZetaMissVis", "mt_2"]
+							copy_cargs["quantities"] = ["pt_1", "pt_2", "diLepDeltaR", "pZetaMissVis", "mt_2"]
 						if channel in ["et", "mt"]:
 							copy_cargs["quantities"] = ["pt_1", "pt_2", "mt_1", "mvamet", "pZetaMissVis", "diLepDeltaR"]
 
@@ -789,7 +789,7 @@ if __name__ == "__main__":
 		if 8 in cargs.modification:
 			#Final Set of Variables
 			copy_cargs = copy.deepcopy(cargs_values)
-			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=1000:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
+			copy_cargs["methods"] = ["BDT;nCuts=1000:NTrees=750:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"]
 			copy_cargs["n_fold"] = 2
 			copy_path = copy_cargs["output_file"]
 			for channel in ["em", "et", "mt"]:
@@ -850,7 +850,7 @@ if __name__ == "__main__":
 		if 11 in cargs.modification:
 			"BDT;nCuts=1200:NTrees=1500:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=SDivSqrtSPlusB"
 			copy_cargs = copy.deepcopy(cargs_values)
-			copy_cargs["methods"] = ["BDT;nCuts=1200:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=SDivSqrtSPlusB"]
+			copy_cargs["methods"] = ["BDT;nCuts=1200:NTrees=500:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=SDivSqrtSPlusB"]
 			copy_cargs["n_fold"] = 2
 			copy_cargs["signal_samples"] = ["ggh", "qqh"]
 			copy_path = copy_cargs["output_file"]

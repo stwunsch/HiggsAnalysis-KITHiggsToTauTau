@@ -158,7 +158,7 @@
     "config_number": 4, 
     "config_step": -1, 
     "custom_splitting": [], 
-    "dir_path": "/tmp/264315.1.medium/4590_4/19170/CMSSW_7_1_5/workdir", 
+    "dir_path": "/tmp/264370.1.medium/19252_4/3016/CMSSW_7_1_5/workdir", 
     "dry_run": false, 
     "err_level": "info", 
     "exclude_cuts": [], 
@@ -174,7 +174,7 @@
     "log_stream": "stdout", 
     "lumi": 2.301, 
     "methods": [
-        "BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
+        "BDT;nCuts=1000:NTrees=500:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
     ], 
     "modification": [
         7, 
@@ -183,7 +183,7 @@
     "modify": true, 
     "n_fold": 2, 
     "out_level": "info", 
-    "output_file": "/tmp/264315.1.medium/4590_4/19170/CMSSW_7_1_5/workdir/em_TwoJets_ZttBDT", 
+    "output_file": "/tmp/264370.1.medium/19252_4/3016/CMSSW_7_1_5/workdir/em_TwoJets_ZttBDT", 
     "pre_selection": "(1.0)", 
     "preparation_trees_options": "", 
     "quantities": [

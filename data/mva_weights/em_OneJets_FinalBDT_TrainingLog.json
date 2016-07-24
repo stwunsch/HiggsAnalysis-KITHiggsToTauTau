@@ -404,7 +404,7 @@
     "config_number": 19, 
     "config_step": -1, 
     "custom_splitting": [], 
-    "dir_path": "/tmp/264330.1.medium/8580_19/18449/CMSSW_7_1_5/workdir", 
+    "dir_path": "/tmp/264385.1.medium/4276_19/30600/CMSSW_7_1_5/workdir", 
     "dry_run": false, 
     "err_level": "info", 
     "exclude_cuts": [], 
@@ -420,7 +420,7 @@
     "log_stream": "stdout", 
     "lumi": 2.301, 
     "methods": [
-        "BDT;nCuts=1000:NTrees=1000:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
+        "BDT;nCuts=1000:NTrees=750:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
     ], 
     "modification": [
         7, 
@@ -429,7 +429,7 @@
     "modify": true, 
     "n_fold": 2, 
     "out_level": "info", 
-    "output_file": "/tmp/264330.1.medium/8580_19/18449/CMSSW_7_1_5/workdir/em_OneJets_FinalBDT", 
+    "output_file": "/tmp/264385.1.medium/4276_19/30600/CMSSW_7_1_5/workdir/em_OneJets_FinalBDT", 
     "pre_selection": "(1.0)", 
     "preparation_trees_options": "", 
     "quantities": [

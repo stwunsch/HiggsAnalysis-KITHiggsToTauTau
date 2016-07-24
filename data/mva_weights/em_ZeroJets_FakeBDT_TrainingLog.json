@@ -356,7 +356,7 @@
     "config_number": 1, 
     "config_step": -1, 
     "custom_splitting": [], 
-    "dir_path": "/tmp/264312.1.medium/11083_1/8632/CMSSW_7_1_5/workdir", 
+    "dir_path": "/tmp/264367.1.medium/31936_1/5385/CMSSW_7_1_5/workdir", 
     "dry_run": false, 
     "err_level": "info", 
     "exclude_cuts": [], 
@@ -372,7 +372,7 @@
     "log_stream": "stdout", 
     "lumi": 2.301, 
     "methods": [
-        "BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
+        "BDT;nCuts=1000:NTrees=500:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
     ], 
     "modification": [
         7, 
@@ -381,14 +381,13 @@
     "modify": true, 
     "n_fold": 2, 
     "out_level": "info", 
-    "output_file": "/tmp/264312.1.medium/11083_1/8632/CMSSW_7_1_5/workdir/em_ZeroJets_FakeBDT", 
+    "output_file": "/tmp/264367.1.medium/31936_1/5385/CMSSW_7_1_5/workdir/em_ZeroJets_FakeBDT", 
     "pre_selection": "(1.0)", 
     "preparation_trees_options": "", 
     "quantities": [
         "pt_1", 
         "pt_2", 
         "diLepDeltaR", 
-        "H_pt", 
         "pZetaMissVis", 
         "mt_2"
     ], 
@@ -401,7 +400,7 @@
         "((TrainingSelectionValue>=5)*(TrainingSelectionValue<10)||(TrainingSelectionValue>=15)*(TrainingSelectionValue<20)||(TrainingSelectionValue>=25)*(TrainingSelectionValue<30)||(TrainingSelectionValue>=35)*(TrainingSelectionValue<40)||(TrainingSelectionValue>=45)*(TrainingSelectionValue<50)||(TrainingSelectionValue>=55)*(TrainingSelectionValue<60)||(TrainingSelectionValue>=65)*(TrainingSelectionValue<70)||(TrainingSelectionValue>=75)*(TrainingSelectionValue<80)||(TrainingSelectionValue>=85)*(TrainingSelectionValue<90)||(TrainingSelectionValue>=95)*(TrainingSelectionValue<100))"
     ], 
     "training_name": "em_ZeroJets_FakeBDT", 
-    "variables": "pt_1,pt_2,diLepDeltaR,H_pt,pZetaMissVis,mt_2", 
+    "variables": "pt_1,pt_2,diLepDeltaR,pZetaMissVis,mt_2", 
     "verbose": false, 
     "weight": "1.0"
 }

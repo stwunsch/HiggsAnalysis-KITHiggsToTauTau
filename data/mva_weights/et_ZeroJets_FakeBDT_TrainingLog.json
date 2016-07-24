@@ -356,7 +356,7 @@
     "config_number": 7, 
     "config_step": -1, 
     "custom_splitting": [], 
-    "dir_path": "/tmp/264318.1.medium/13101_7/17948/CMSSW_7_1_5/workdir", 
+    "dir_path": "/tmp/264373.1.medium/25149_7/29051/CMSSW_7_1_5/workdir", 
     "dry_run": false, 
     "err_level": "info", 
     "exclude_cuts": [], 
@@ -372,7 +372,7 @@
     "log_stream": "stdout", 
     "lumi": 2.301, 
     "methods": [
-        "BDT;nCuts=1000:NTrees=750:MinNodeSize=2.5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
+        "BDT;nCuts=1000:NTrees=500:MinNodeSize=5:BoostType=Grad:Shrinkage=0.1:MaxDepth=3:SeparationType=GiniIndex"
     ], 
     "modification": [
         7, 
@@ -381,7 +381,7 @@
     "modify": true, 
     "n_fold": 2, 
     "out_level": "info", 
-    "output_file": "/tmp/264318.1.medium/13101_7/17948/CMSSW_7_1_5/workdir/et_ZeroJets_FakeBDT", 
+    "output_file": "/tmp/264373.1.medium/25149_7/29051/CMSSW_7_1_5/workdir/et_ZeroJets_FakeBDT", 
     "pre_selection": "(1.0)", 
     "preparation_trees_options": "", 
     "quantities": [

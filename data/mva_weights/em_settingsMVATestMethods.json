@@ -26,7 +26,7 @@
         "3;lep1MetMt:=mt_1,lep2MetMt:=mt_2,lep1Pt:=pt_1,diLepMetPt:=H_pt,pZetaMissVis,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
         "4;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta,svfitMass:=m_sv",
         "5;lep1MetMt:=mt_1,lep1Pt:=pt_1,diLepMetPt:=H_pt,diLepDeltaR,diLep_diJet_deltaR,diJetMass:=mjj,diJetAbsDeltaEta:=jdeta",
-        "6;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep2MetMt:=mt_2",
+        "6;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,pZetaMissVis,lep2MetMt:=mt_2",
         "7;lep1Pt:=pt_1,lep1MetMt:=mt_1,lep2Pt:=pt_2,lep2MetMt:=mt_2,mvaMetPt:=mvamet,pZetaMissVis,diLepMetPt:=H_pt,diLepDeltaR,svfitMass:=m_sv",
         "8;lep1Pt:=pt_1,lep2Pt:=pt_2,diLepDeltaR,diLepMetPt:=H_pt,pZetaMissVis,lep1MetMt:=mt_1"
     ],
