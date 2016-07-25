@@ -547,18 +547,23 @@ if __name__ == "__main__":
 					config = systematics_settings.get_config(shift=(0.0 if nominal else (1.0 if shift_up else -1.0)))
 					config["qcd_subtract_shape"] =[args.qcd_subtract_shapes]
 					config["x_expressions"] = [args.quantity]
-					if args.category_specific_quantity:
-						if sum([s in category for s in ["0jet"]]):
+					if args.category_specific_quantity and channel in ["em", "et", "mt"]:
+						if sum([s in category for s in ["0jet", "Zero"]]):
 							config["x_expressions"] = ["Zero"+args.quantity]
-						elif sum([s in category for s in ["1jet"]]):
+						elif sum([s in category for s in ["1jet", "One"]]):
 							config["x_expressions"] = ["One"+args.quantity]
-						elif sum([s in category for s in ["2jet"]]):
+						elif sum([s in category for s in ["2jet", "Two"]]):
 							config["x_expressions"] = ["Two"+args.quantity]
 						else:
 							config["x_expressions"] = ["m_sv"]
-						log.info("{category}: use Final Discriminator {disc}".format(category=category, disc=config["x_expressions"][0]))
+					elif args.category_specific_quantity:
+						config["x_expressions"] = ["m_sv"]
+
 
 					binnings_key = "binningMVAStudies_"+category+"_%s"%config["x_expressions"][0]
+					#print config["x_expressions"][0]
+					#print [key for key in binnings_settings.binnings_dict.keys() if "Zero" in key]
+					#sys.exit()
 					if binnings_key in binnings_settings.binnings_dict:
 						config["x_bins"] = [binnings_key]
 					else:
@@ -574,6 +579,7 @@ if __name__ == "__main__":
 							end = bins.split(" ")[-1]
 						config["x_bins"] = ["100," + start + "," + end]
 					config["directories"] = [args.input_dir]
+					log.info("{category}: use Final Discriminator {disc} - binning: {bins}".format(category=category, disc=config["x_expressions"][0], bins=str(config["x_bins"])))
 
 					histogram_name_template = bkg_histogram_name_template if nominal else bkg_syst_histogram_name_template
 					config["labels"] = [histogram_name_template.replace("$", "").format(
@@ -708,12 +714,13 @@ if __name__ == "__main__":
 	# Max. likelihood fit and postfit plots
 	stable_options = r"--robustFit=1 --preFitValue=1. --X-rtd FITTER_NEW_CROSSING_ALGO --minimizerAlgoForMinos=Minuit2 --minimizerToleranceForMinos=0.1 --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --minimizerAlgo=Minuit2 --minimizerStrategy=0 --minimizerTolerance=0.1 --cminFallbackAlgo \"Minuit2,0:1.\""
 	datacards.combine(datacards_cbs, datacards_workspaces, datacards_poi_ranges, args.n_processes, "-M MaxLikelihoodFit "+stable_options+" -n \"\"")
-	#datacards.nuisance_impacts(datacards_cbs, datacards_workspaces, args.n_processes)
+	datacards.nuisance_impacts(datacards_cbs, datacards_workspaces, args.n_processes)
 	datacards_postfit_shapes = datacards.postfit_shapes_fromworkspace(datacards_cbs, datacards_workspaces, False, args.n_processes, "--sampling" + (" --print" if args.n_processes <= 1 else ""))
 	datacards.prefit_postfit_plots(datacards_cbs, datacards_postfit_shapes, plotting_args={"ratio" : args.ratio, "args" : args.args, "lumi" : args.lumi, "x_expressions" : args.quantity}, n_processes=args.n_processes)
 	datacards.prefit_postfit_plots(datacards_cbs, datacards_postfit_shapes, plotting_args={"ratio" : args.ratio, "args" : args.args, "lumi" : args.lumi, "x_expressions" : "m_sv"}, n_processes=args.n_processes)
 	datacards.pull_plots(datacards_postfit_shapes, s_fit_only=False, plotting_args={"fit_poi" : ["r"], "formats" : ["pdf", "png"]}, n_processes=args.n_processes)
 	datacards.print_pulls(datacards_cbs, args.n_processes, "-A -p {POI}".format(POI="r"))
+
 	#datacards.annotate_trees(
 			#datacards_workspaces,
 			#"higgsCombine*MaxLikelihoodFit*mH*.root",
@@ -732,7 +739,7 @@ if __name__ == "__main__":
 	#)
 
 	# Asymptotic limits
-	datacards.combine(datacards_cbs, datacards_workspaces, None, args.n_processes, "--expectSignal=1 -t -1 -M Asymptotic -n \"\"")
+	#datacards.combine(datacards_cbs, datacards_workspaces, None, args.n_processes, "--expectSignal=1 -t -1 -M Asymptotic -n \"\"")
 	datacards.combine(datacards_cbs, datacards_workspaces, None, args.n_processes, "-M ProfileLikelihood -t -1 --expectSignal 1 --toysFrequentist --significance -s %s\"\""%index)
 	if args.remote:
 		#os.system("tar cfv " + os.path.join(args.output_dir, "jobresult.tar") + " " + os.path.join(args.output_dir, "datacards") + " " + os.path.join(args.output_dir, "input"))

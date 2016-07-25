@@ -264,7 +264,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_ZeroJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
@@ -290,7 +290,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_ZeroJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
@@ -316,7 +316,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_OneJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
@@ -342,7 +342,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_OneJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
@@ -368,7 +368,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_TwoJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
@@ -394,7 +394,7 @@ class CategoriesDict(object):
 						],
 					"global":{
 						"_m_sv":" ".join([str(float(f)) for f in range(0,30,15)+range(30, 120, 10)+range(120,151,15)]),
-						"Jets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
+						"_TwoJets_FinalBDT": "-1.0 "+" ".join([str(x/100.0) for x in range(-90,100,5)]) + " 1.0"
 						}
 					}
 				}
