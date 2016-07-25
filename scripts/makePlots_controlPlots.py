@@ -212,8 +212,6 @@ if __name__ == "__main__":
 			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2 as samples
 		elif args.era == "2015old":
 			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015_old as samples
-		elif args.era == "2015oldsw":
-			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015_oldsw as samples
 		elif args.era == "2015new":
 			import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples_run2_2015 as samples
 		elif args.era == "2016":
