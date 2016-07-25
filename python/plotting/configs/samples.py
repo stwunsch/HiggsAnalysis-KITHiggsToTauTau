@@ -116,6 +116,10 @@ class SamplesBase(object):
 		config.setdefault("scale_factors", []).append(scale_factor)
 		config.setdefault("weights", []).append(weight)
 		config.setdefault("nicks", []).append(nick+nick_suffix)
+		print input_file.split["/"][0]
+		config.setdefault("friend_filenames", []).append("/storage/jbod/epfeffer/updaterootfiles/"+input_file.split["/"][0])
+		config.setdefault("friend_treenames", []).append("update")
+		config.setdefault("nicks", []).append(nick+nick_suffix)
 		return config
 	
 	@staticmethod

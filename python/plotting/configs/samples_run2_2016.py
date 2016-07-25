@@ -22,7 +22,7 @@ class Samples(samples.SamplesBase):
 
 	@staticmethod 
 	def root_file_folder(channel):
-		return channel+"_jecUncNom"+("_tauEsNom" if "t" in channel else "")+"/ntuple"
+		return channel+"/ntuple"
 
 	@staticmethod
 	def artus_file_names( query, expect_n_results = 1):
