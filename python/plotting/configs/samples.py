@@ -116,8 +116,11 @@ class SamplesBase(object):
 		config.setdefault("scale_factors", []).append(scale_factor)
 		config.setdefault("weights", []).append(weight)
 		config.setdefault("nicks", []).append(nick+nick_suffix)
-		print input_file.split["/"][0]
-		config.setdefault("friend_filenames", []).append("/storage/jbod/epfeffer/updaterootfiles/"+input_file.split["/"][0])
+		classified_files = input_file.replace("/*.root", "").split(" ")
+		print classified_files
+		c_files = " ".join("/storage/jbod/epfeffer/updaterootfiles/" + ifile + "_update.root" for ifile in classified_files)
+		print c_files
+		config.setdefault("friend_filenames", []).append(c_files)
 		config.setdefault("friend_treenames", []).append("update")
 		config.setdefault("nicks", []).append(nick+nick_suffix)
 		return config
