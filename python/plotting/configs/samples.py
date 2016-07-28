@@ -119,7 +119,7 @@ class SamplesBase(object):
 		classified_files = input_file.replace("/*.root", "").split(" ")
 		c_files = " ".join("/storage/jbod/epfeffer/updaterootfiles/" + ifile + "_update.root" for ifile in classified_files)
 		config.setdefault("friend_filenames", []).append(c_files)
-		config.setdefault("friend_treenames", []).append("update "*len(c_files))
+		config.setdefault("friend_treenames", []).append("update "*len(classified_files))
 		config.setdefault("nicks", []).append(nick+nick_suffix)
 		return config
 	
