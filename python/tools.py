@@ -29,8 +29,11 @@ class PoissonYield(object):
 		integral_ranges.append(error)
 		integral = root_histogram.IntegralAndError(*integral_ranges)
 		error = error[0]
+		if abs(integral) <= 1.:
+			self.poisson_yield = uncertainties.ufloat(3.716, 3.716)
 		#self.poisson_yield = uncertainties.ufloat(integral, error)
-		self.poisson_yield = uncertainties.ufloat(integral, math.sqrt(abs(integral)))
+		else:
+			self.poisson_yield = uncertainties.ufloat(integral, math.sqrt(abs(integral)))
 
 	def __call__(self):
 		return self.poisson_yield

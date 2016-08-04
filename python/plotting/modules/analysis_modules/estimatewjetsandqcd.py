@@ -20,7 +20,7 @@ class EstimateWjetsAndQCD(estimatebase.EstimateBase):
 
 	def modify_argument_parser(self, parser, args):
 		super(EstimateWjetsAndQCD, self).modify_argument_parser(parser, args)
-		
+
 		self.estimate_wjets_and_qcd_options = parser.add_argument_group("WJets and QCD estimation options")
 		self.estimate_wjets_and_qcd_options.add_argument("--qcd-extrapolation-factors-ss-os", nargs="+", type=float, default=[1.00],
 				help="Extrapolation factors of QCD OS/SS yields. [Default: %(default)s]")
@@ -76,6 +76,7 @@ class EstimateWjetsAndQCD(estimatebase.EstimateBase):
 		for nicks in zip(*[plotData.plotdict[key] for key in self._plotdict_keys]):
 			for nick in nicks:
 				if isinstance(nick, basestring):
+					log.error(nick)
 					assert isinstance(plotData.plotdict["root_objects"].get(nick), ROOT.TH1)
 				elif (not isinstance(nick, float) and not isinstance(nick, bool)):
 					for subnick in nick:
