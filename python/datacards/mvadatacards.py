@@ -158,7 +158,7 @@ class MVADatacards(datacards.Datacards):
 
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["mm"], False)["mm"]:
-					self.cb.cp().channel(["mm"]).bin(["mm_"+category]).process(["ZLL"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
+					self.cb.cp().channel(["mm"]).bin(["mm_"+category]).process(["ZTT"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
 
 			# ======================================================================
 			# All channels

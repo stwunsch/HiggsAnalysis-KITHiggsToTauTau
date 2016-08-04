@@ -181,9 +181,10 @@ if __name__ == "__main__":
 	                    help="Higgs masses. [Default: %(default)s]")
 	parser.add_argument("--mssm", default=False, action="store_true",
 	                    help="Produce the plots for the MSSM. [Default: %(default)s]")
-	parser.add_argument("--qcd-subtract-shapes", action="store_false", default=True, help="subtract shapes for QCD estimation [Default:%(default)s]")
 	parser.add_argument("--mva", default=False, action="store_true",
 	                    help="Produce plots for the mva studies. [Default: %(default)s]")
+	parser.add_argument("--qcd-subtract-shapes", action="store_false", default=True, help="subtract shapes for QCD estimation [Default:%(default)s]")
+	parser.add_argument("--estimation-method", default="new", help="qcd estimation method [Default:%(default)s]")
 	parser.add_argument("--analysis-modules", default=[], nargs="+",
 	                    help="Additional analysis Modules. [Default: %(default)s]")
 	parser.add_argument("--era", default="2015",
@@ -300,6 +301,7 @@ if __name__ == "__main__":
 						project_to_lumi=args.project_to_lumi,
 						cut_mc_only=args.cut_mc_only,
 						scale_mc_only=args.scale_mc_only,
+						estimationMethod=args.estimation_method if channel in ["et", "mt"] else "classic",
 						mssm=args.mssm
 				)
 
