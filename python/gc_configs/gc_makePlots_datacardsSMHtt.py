@@ -7,15 +7,15 @@ import os
 print(time.time())
 active = ["0jet", "1jet", "2jet"]
 
-active = active[1]
+active = active[2]
 project_name = "FirstScan"
 print "doing stuff for " + active
 
 cfg = Settings()
-channels= ["et", "mt", "tt", "em"]
+channels= ["et", "mt", "em"]
 cfg.workflow.task = 'UserTask'
 cfg.workflow.backend = 'local'
-cfg.workflow.proxy = "VomsProxy"
+cfg.backend.proxy = "VomsProxy"
 
 cfg.jobs.wall_time = '12:00:00'
 cfg.jobs.set("memory", "14000")
@@ -40,17 +40,17 @@ extra=" --n-plots 1000 0 --auto-rebin --qcd-subtract-shape -n 1 --remote --use-a
 
 cfg.parameters.set("parameters", ["P1", "P2"])
 cfg.parameters.set("repeat", 1)
-cfg.parameters.set("P1", [str(x/100.-1.) for x in range(50,200,50)])
-cfg.parameters.set("P2", [str(x/100.-1.) for x in range(50,200,50)])
-#if active == "2jet":
-	#cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
-	#cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
-#elif active == "1jet":
-	#cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
-	#cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
-#else:
-	#cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
-	#cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
+#cfg.parameters.set("P1", [str(x/100.-1.) for x in range(50,200,50)])
+#cfg.parameters.set("P2", [str(x/100.-1.) for x in range(50,200,50)])
+if active == "2jet":
+	cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
+	cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
+elif active == "1jet":
+	cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
+	cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
+else:
+	cfg.parameters.set("P1", [str(x/100.-1.) for x in range(0,200,10)])
+	cfg.parameters.set("P2", [str(x/100.-1.) for x in range(0,200,10)])
 
 arguments = executable + " " + variable +" "+ mass +" "+ output_dir+ " " + extra + " " + input_dataset
 #for channel in channels:
@@ -68,7 +68,7 @@ if active == "1jet":
 	#arguments = arguments +" 1jet_120_40 i1jet_120_40 "
 
 if active == "2jet":
-	arguments = arguments +" vbf_@P1@_@P2@ ivbf_@P1@_@P2@ "
+	arguments = arguments +" 2jet_@P1@_@P2@ i2jet_@P1@_@P2@ "
 	#else:
 		#arguments = arguments +" TwoJet30 "
 		#arguments = arguments +" vbf_400_3.0 ivbf_400_3.0 "

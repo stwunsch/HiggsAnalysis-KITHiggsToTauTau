@@ -12,7 +12,7 @@ class CategoriesDict(object):
 		boosted_higgs_low_string = "(H_pt>30)"
 		vbf_medium_string = "(mjj>500&&jdeta>3.5)"
 		vbf_loose_string = "(mjj>200&&jdeta>2)"
-		jet2_string = "(njetspt30==2)"
+		jet2_string = "(njetspt30>=2)"
 		jet1_string = "(njetspt30==1)"
 		jet0_string = "(njetspt30==0)"
 		pt2_tight_string = "(pt_2>=45)"
@@ -23,10 +23,10 @@ class CategoriesDict(object):
 		self.categoriesDict = {}
 		for h_pt in range(0,200,10):
 			for pt_2 in range(0,200,10):
-				vbf_string = "(TwoJets_FakeBDT>" + str(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
+				vbf_string = "(TwoJets_FakeBDT>" + "%1.1f"%(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
 				if pt_2 > 0:
-					vbf_string += ("*" if len(vbf_string) > 0 else "" ) + "(TwoJets_ZttBDT>" + str(pt_2/100. - 1.) + ")"
-				self.categoriesDict["{analysis}{channel}vbf_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = {
+					vbf_string += ("*" if len(vbf_string) > 0 else "" ) + "(TwoJets_ZttBDT>" + "%1.1f"%(pt_2/100. - 1.) + ")"
+				self.categoriesDict["{analysis}{channel}2jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = {
 						"channel": [
 							"mt_",
 							"et_",
@@ -51,16 +51,16 @@ class CategoriesDict(object):
 								}
 							}
 						}
-				self.categoriesDict["{analysis}{channel}ivbf_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}vbf_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"])
-				self.categoriesDict["{analysis}{channel}ivbf_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"]["expressions"]["global"] = self.combine([self.invert(vbf_string), jet2_string])
+				self.categoriesDict["{analysis}{channel}i2jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}2jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"])
+				self.categoriesDict["{analysis}{channel}i2jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"]["expressions"]["global"] = self.combine([self.invert(vbf_string), jet2_string])
 
 
 		for h_pt in range(0,200,10):
 			for pt_2 in range(0,200,10):
-				cut_string = "(OneJets_FakeBDT>" + str(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
+				cut_string = "(OneJets_FakeBDT>" + "%1.1f"%(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
 				if pt_2 > 0:
-					cut_string += ("*" if len(cut_string) > 0 else "" ) + "(OneJets_ZttBDT>" + str(pt_2/100. - 1.) + ")"
-				self.categoriesDict["{analysis}{channel}1jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = {
+					cut_string += ("*" if len(cut_string) > 0 else "" ) + "(OneJets_ZttBDT>" + "%1.1f"%(pt_2/100. - 1.) + ")"
+				self.categoriesDict["{analysis}{channel}1jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = {
 						"channel": [
 							"mt_",
 							"et_",
@@ -85,15 +85,15 @@ class CategoriesDict(object):
 								}
 							}
 						}
-				self.categoriesDict["{analysis}{channel}i1jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}1jet_" + str(h_pt/100. - 1.) +"_"+ str(pt_2/100. - 1.) + "{discriminator}"])
-				self.categoriesDict["{analysis}{channel}i1jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"]["expressions"]["global"] = self.combine([self.invert(cut_string), jet1_string])
+				self.categoriesDict["{analysis}{channel}i1jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}1jet_" + "%1.1f"%(h_pt/100. - 1.) +"_"+ "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"])
+				self.categoriesDict["{analysis}{channel}i1jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"]["expressions"]["global"] = self.combine([self.invert(cut_string), jet1_string])
 
 		for h_pt in range(0,200,10):
 			for pt_2 in range(0,200,10):
-				cut_string = "(ZeroJets_FakeBDT>" + str(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
+				cut_string = "(ZeroJets_FakeBDT>" + "%1.1f"%(h_pt/100. - 1.) + ")" if h_pt > 0 else ""
 				if pt_2 > 0:
-					cut_string += ("*" if len(cut_string) > 0 else "" ) + "(ZeroJets_ZttBDT>" + str(pt_2/100. - 1.) + ")"
-				self.categoriesDict["{analysis}{channel}0jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = {
+					cut_string += ("*" if len(cut_string) > 0 else "" ) + "(ZeroJets_ZttBDT>" + "%1.1f"%(pt_2/100. - 1.) + ")"
+				self.categoriesDict["{analysis}{channel}0jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = {
 						"channel": [
 							"mt_",
 							"et_",
@@ -118,8 +118,8 @@ class CategoriesDict(object):
 								}
 							}
 						}
-				self.categoriesDict["{analysis}{channel}i0jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}0jet_" + str(h_pt/100. - 1.) +"_"+ str(pt_2/100. - 1.) + "{discriminator}"])
-				self.categoriesDict["{analysis}{channel}i0jet_" + str(h_pt/100. - 1.) + "_" + str(pt_2/100. - 1.) +"{discriminator}"]["expressions"]["global"] = self.combine([self.invert(cut_string), jet0_string])
+				self.categoriesDict["{analysis}{channel}i0jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"] = copy.deepcopy(self.categoriesDict["{analysis}{channel}0jet_" + "%1.1f"%(h_pt/100. - 1.) +"_"+ "%1.1f"%(pt_2/100. - 1.) + "{discriminator}"])
+				self.categoriesDict["{analysis}{channel}i0jet_" + "%1.1f"%(h_pt/100. - 1.) + "_" + "%1.1f"%(pt_2/100. - 1.) +"{discriminator}"]["expressions"]["global"] = self.combine([self.invert(cut_string), jet0_string])
 
 		self.categoriesDict["{analysis}{channel}FT_InsteadQCuts{discriminator}"] = {
 				"channel": [

@@ -38,10 +38,17 @@ if __name__ == "__main__":
 
 	x_range = ([float(a) if "." in a else int(a) for a in args.x_range.split(",")])
 	print x_range
-	p1s = np.linspace(*x_range) if args.x_type == "float" else range(*x_range)
+	if args.x_type != "bdt":
+		p1s = np.linspace(*x_range) if args.x_type == "float" else range(*x_range)
+	else:
+		p1s = np.linspace(*x_range) if args.x_type == "float" else range(*x_range)
+	if args.y_type != "bdt":
+		p2s = [x/100.-1. for x in range(0,200,10)]
+	else:
+		p2s = [x/100.-1. for x in range(0,200,10)]
+
 	p1_width = (max(p1s) - min(p1s)) / (len(p1s) -1)
 	y_range = ([float(a) if "." in a else int(a) for a in args.y_range.split(",")])
-	p2s = np.linspace(*y_range) if args.y_type == "float" else range(*y_range)
 	p2_width = (max(p2s) - min(p2s)) / (len(p2s) -1)
 
 	matrix = [[0 for x in range(len(p1s))] for y in range(len(p2s))]
@@ -49,12 +56,12 @@ if __name__ == "__main__":
 
 	for ip1, p1 in enumerate(p1s, start=1):
 		for ip2, p2 in enumerate(p2s, start=1):
-			in_raw =os.path.join(args.input_dir, str(p1)+"_"+str(p2), args.folder, str(mass), "higgsCombineTest.ProfileLikelihood.mH125.*.root")
+			in_raw =os.path.join(args.input_dir, "%1.1f"%p1+"_"+"%1.1f"%p2, args.folder, str(mass), "higgsCombineTest.ProfileLikelihood.mH125.*.root")
 			print in_raw
 			in_file = glob.glob( in_raw)[0] if len(glob.glob(in_raw)) == 1 else "invalid"
 			if (not os.path.isfile(in_file)):
 				continue
-			current_chain = ROOT.TChain("chain_%i_%f"%(p1, p2))
+			current_chain = ROOT.TChain("chain_%1.1f_%1.1f"%(p1, p2))
 			current_chain.Add(in_file+"/limit", -1)
 			for line in current_chain:
 					print "line: " + str(line)
@@ -73,10 +80,10 @@ if __name__ == "__main__":
 	im = plt.imshow(matrix, origin = "lower", cmap=plt.cm.Reds, interpolation="None", extent=[p1s[0]-p1_width/2, p1s[-1]+p1_width/2,p2s[0]-p2_width/2, p2s[-1]+p2_width/2], clim = (min_value,npmatrix.max()))
 	plt.yticks(p2s)
 	plt.xticks( p1s, rotation=70)
-	
+
 	ax.set_aspect(float((p1s[-1]-p1s[0]))/float((p2s[-1]-p2s[0])))
 	fig.colorbar(im, ax=ax)
-	labels = { "mjj" : "$m_{jj}$", "jdeta" : "$\Delta \eta_{jj}$", "hpt" : "$p_T^{H}$", "pt2" : "$p_T^2$"}
+	labels = { "mjj" : "$m_{jj}$", "jdeta" : "$\Delta \eta_{jj}$", "hpt" : "$p_T^{H}$", "pt2" : "$p_T^2$", "FakeBDT":"FakeBDT", "ZttBDT": "ZttBDT"}
 	ax.set_xlabel(labels[args.x_label])
 	ax.set_ylabel(labels[args.y_label])
 	plt.tight_layout()
