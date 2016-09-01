@@ -1,5 +1,5 @@
 {
-	"mt_classic" : {
+	"mt_new" : {
 		"include" : [
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2Analysis/Includes/settingsLooseElectronID.json",
 			"$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/ArtusConfigs/Run2Analysis/Includes/settingsLooseMuonID.json",
@@ -54,13 +54,6 @@
 		},
 		"DiTauPairMinDeltaRCut" : 0.5,
 		"DiTauPairIsTauIsoMVA": true,
-		"DiTauPairLepton1LowerPtCuts" : {
-			"nick" : {
-				"default" : [
-					"HLT_IsoMu19_eta2p1_LooseIsoPFTau20:20.0"
-				]
-			}
-		},
 		"DiTauPairHltPathsWithoutCommonMatchRequired" : { 
 			"nick": {
 				"default" : [
@@ -70,7 +63,7 @@
 		},
 		"DiTauPairNoHLT" : {
 			"nick" : {
-				"default" : false
+				"default" : true
 			}
 		},
 		"EventWeight" : "eventWeight",
