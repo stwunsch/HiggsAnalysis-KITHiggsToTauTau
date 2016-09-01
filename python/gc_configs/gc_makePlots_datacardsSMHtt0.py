@@ -24,7 +24,7 @@ cmssw_base = os.getenv("CMSSW_BASE") + "/src/"
 cfg.usertask.set("input files", [cmssw_base + "HiggsAnalysis/KITHiggsToTauTau/scripts/userjob_epilog.sh", cmssw_base + "HiggsAnalysis/KITHiggsToTauTau/scripts/makePlots_datacardsSMHtt.py"] )
 
 executable = 'makePlots_datacardsSMHtt.py'
-input_dataset = "-i /nfs/dust/cms/user/rfriese/htautau/artus/2016-08-12_2016NemoWSvFit/merged/"
+input_dataset = "-i /nfs/dust/cms/user/rfriese/htautau/artus/2016-08-31_13-12_2016VBFFixed/merged/"
 variable = "-x m_sv"
 mass = "-m 125"
 output_dir = "-o ."
@@ -55,14 +55,14 @@ for channel in channels:
 	if active == "1jet":
 		arguments = arguments +" 1jet_@P1@_@P2@ i1jet_@P1@_@P2@ "
 	else:
-		#arguments = arguments +" OneJet30 "
-		arguments = arguments +" 1jet_150_0 i1jet_150_0 "
+		arguments = arguments +" OneJet30 "
+		#arguments = arguments +" 1jet_150_0 i1jet_150_0 "
 
 	if active == "2jet":
 		arguments = arguments +" vbf_@P1@_@P2@ ivbf_@P1@_@P2@ "
 	else:
-		#arguments = arguments +" TwoJet30 "
-		arguments = arguments +" vbf_800_0.0 ivbf_800_0.0 "
+		arguments = arguments +" TwoJet30 "
+		#arguments = arguments +" vbf_800_0.0 ivbf_800_0.0 "
 
 cfg.usertask.set('arguments', "%s"%arguments)
 cfg.storage.set('se path', "/nfs/dust/cms/user/rfriese/" + project_name + "/" + active)
