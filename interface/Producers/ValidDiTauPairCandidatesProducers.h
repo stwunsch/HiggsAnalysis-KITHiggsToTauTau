@@ -86,9 +86,6 @@ public:
 				if (!settings.GetDiTauPairNoHLT())
 				{
 					std::vector<std::string> commonHltPaths = diTauPair.GetCommonHltPaths(product.m_detailedTriggerMatchedLeptons, settings.GetDiTauPairHltPathsWithoutCommonMatchRequired());
-					std::cout << "next " << std::endl;
-					for(auto a: commonHltPaths)
-						std::cout << a << std::endl;
 					validDiTauPair = validDiTauPair && (commonHltPaths.size() > 0);
 					
 					// pt cuts in case one or more HLT paths are matched
