@@ -36,6 +36,7 @@ public:
 	/// added by DiTauPairCandidatesProducers
 	std::vector<DiTauPair> m_validDiTauPairCandidates;
 	std::vector<DiTauPair> m_invalidDiTauPairCandidates;
+	bool diTauPairHLTMatch;
 
 	/// added by GenDiTauPairCandidatesProducers and GenDiTauPairAcceptanceProducer
 	std::vector<DiGenTauPair> m_genDiTauPairCandidates;

@@ -57,6 +57,10 @@ public:
 		{
 			return static_cast<int>(product.m_validDiTauPairCandidates.size()+product.m_invalidDiTauPairCandidates.size());
 		});
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("diTauPairHLTMatch", [](event_type const& event, product_type const& product)
+		{
+			return static_cast<bool>(product.diTauPairHLTMatch);
+		});
 	}
 	
 	virtual void Produce(event_type const& event, product_type & product, 
@@ -217,6 +221,21 @@ public:
 		          DiTauPairIsoPtComparator(&(product.m_leptonIsolationOverPt), settings.GetDiTauPairIsTauIsoMVA()));
 		std::sort(product.m_invalidDiTauPairCandidates.begin(), product.m_invalidDiTauPairCandidates.end(),
 		          DiTauPairIsoPtComparator(&(product.m_leptonIsolationOverPt), settings.GetDiTauPairIsTauIsoMVA()));
+		// save, if selected diTauPair matches the trigger
+		product.diTauPairHLTMatch = false;
+		if(product.m_validDiTauPairCandidates.size() > 0)
+		{
+			auto selectedDiTauPair = product.m_validDiTauPairCandidates[0];
+			std::vector<std::string> commonHltPaths = selectedDiTauPair.GetCommonHltPaths(product.m_detailedTriggerMatchedLeptons, settings.GetDiTauPairHltPathsWithoutCommonMatchRequired());
+			for(auto commonPath : commonHltPaths)
+			{
+				if(boost::regex_search(commonPath, boost::regex("HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v2", boost::regex::icase | boost::regex::extended)))
+				{
+					product.diTauPairHLTMatch = true;
+					break;
+				}
+			}
+		}
 	}
 	
 
