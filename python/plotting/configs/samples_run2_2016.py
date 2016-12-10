@@ -11,7 +11,7 @@ import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples as samples
 from Kappa.Skimming.registerDatasetHelper import get_nick_list
 from Artus.Utility.tools import make_multiplication, split_multiplication, clean_multiplication
 energy = 13
-default_lumi = 36.46*1000.0
+default_lumi = 12.9*1000.0
 
 class Samples(samples.SamplesBase):
 
@@ -188,7 +188,7 @@ class Samples(samples.SamplesBase):
 		query_rereco = {}
 		query_promptreco = {}
 		expect_n_results_rereco = 6 # adjust in if-statements if different depending on channel
-		expect_n_results_promptreco = 1
+		expect_n_results_promptreco = 3
 		if channel == "mt":
 			query_rereco = { "process" : "SingleMuon" }
 			query_promptreco = { "process" : "SingleMuon" }
@@ -207,15 +207,16 @@ class Samples(samples.SamplesBase):
 		else:
 			log.error("Sample config (Data) currently not implemented for channel \"%s\"!" % channel)
 
-		query_rereco["data"] = True
-		query_rereco["campaign"] = "Run2016(B|C|D|E|F|G)"
-		query_rereco["scenario"] = "23Sep2016v(1|3)"
+		#query_rereco["data"] = True
+		#query_rereco["campaign"] = "Run2016(B|C|D|E|F|G)"
+		#query_rereco["scenario"] = "23Sep2016v(1|3)"
 		query_promptreco["data"] = True
-		query_promptreco["campaign"] = "Run2016H"
+		query_promptreco["campaign"] = "Run2016(B|C|D)"
 		query_promptreco["scenario"] = "PromptRecov2"
-		rereco_files = self.artus_file_names(query_rereco, expect_n_results_rereco)
+		#rereco_files = self.artus_file_names(query_rereco, expect_n_results_rereco)
 		promptreco_files = self.artus_file_names(query_promptreco, expect_n_results_promptreco)
-		return rereco_files + " " + promptreco_files
+		#return rereco_files + " " + promptreco_files
+		return promptreco_files
 
 	def data(self, config, channel, category, weight, nick_suffix, exclude_cuts=None, cut_type="baseline", **kwargs):
 		if exclude_cuts is None:
