@@ -342,14 +342,14 @@ if __name__ == "__main__":
 		categories = cb.bin_set()
 		if len(channels) == 1:
 			if len(categories) == 1:
-				datacards_poi_ranges[datacard] = [-100.0, 100.0]
+				datacards_poi_ranges[datacard] = [0.0, 10.0]
 			else:
-				datacards_poi_ranges[datacard] = [-50.0, 50.0]
+				datacards_poi_ranges[datacard] = [0.0, 10.0]
 		else:
 			if len(categories) == 1:
-				datacards_poi_ranges[datacard] = [-50.0, 50.0]
+				datacards_poi_ranges[datacard] = [0.0, 10.0]
 			else:
-				datacards_poi_ranges[datacard] = [-25.0, 25.0]
+				datacards_poi_ranges[datacard] = [0.0, 10.0]
 	
 	datacards_workspaces = datacards.text2workspace(datacards_cbs, n_processes=args.n_processes)
 	
