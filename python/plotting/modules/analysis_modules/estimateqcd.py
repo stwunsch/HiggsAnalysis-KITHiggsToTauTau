@@ -20,7 +20,7 @@ class EstimateQcd(estimatebase.EstimateBase):
 
 	def modify_argument_parser(self, parser, args):
 		super(EstimateQcd, self).modify_argument_parser(parser, args)
-		
+
 		self.estimate_qcd_options = parser.add_argument_group("QCD estimation options")
 		self.estimate_qcd_options.add_argument("--qcd-shape-nicks", nargs="+",
 				help="Nicks for histogram to plot. [Default: %(default)s]")
@@ -39,13 +39,13 @@ class EstimateQcd(estimatebase.EstimateBase):
 
 	def prepare_args(self, parser, plotData):
 		super(EstimateQcd, self).prepare_args(parser, plotData)
-		
+
 		self._plotdict_keys = ["qcd_shape_nicks", "qcd_yield_nicks", "qcd_yield_subtract_nicks", "qcd_shape_subtract_nicks", "qcd_extrapolation_factors_ss_os"]
 		self.prepare_list_args(plotData, self._plotdict_keys)
 
-		plotData.plotdict["qcd_shape_subtract_nicks"] = [nicks.split() for nicks in plotData.plotdict["qcd_shape_subtract_nicks"]]	
-		plotData.plotdict["qcd_yield_subtract_nicks"] = [nicks.split() for nicks in plotData.plotdict["qcd_yield_subtract_nicks"]]	
-		
+		plotData.plotdict["qcd_shape_subtract_nicks"] = [nicks.split() for nicks in plotData.plotdict["qcd_shape_subtract_nicks"]]
+		plotData.plotdict["qcd_yield_subtract_nicks"] = [nicks.split() for nicks in plotData.plotdict["qcd_yield_subtract_nicks"]]
+
 		# make sure that all necessary histograms are available
 		for nicks in zip(*[plotData.plotdict[key] for key in self._plotdict_keys]):
 			for nick in nicks:
@@ -54,29 +54,34 @@ class EstimateQcd(estimatebase.EstimateBase):
 				elif (not isinstance(nick, float) and not isinstance(nick, bool)):
 					for subnick in nick:
 						assert isinstance(plotData.plotdict["root_objects"].get(subnick), ROOT.TH1)
-	
+
 	def run(self, plotData=None):
 		super(EstimateQcd, self).run(plotData)
-		
+
+                log.warning("Run analysis module: QCD")
+
 		for qcd_shape_nick, qcd_yield_nick, qcd_yield_subtract_nicks, qcd_shape_subtract_nicks, qcd_extrapolation_factor_ss_os in zip(*[plotData.plotdict[key] for key in self._plotdict_keys]):
-			
+
 			yield_qcd = tools.PoissonYield(plotData.plotdict["root_objects"][qcd_yield_nick])()
 			# estimate the QCD yield
 			# print "yield qcd total: " + str(yield_qcd)
 			for nick in qcd_yield_subtract_nicks:
 				yield_bkg = tools.PoissonYield(plotData.plotdict["root_objects"][nick])()
-				#print "minus " + nick + "  " + str(yield_bkg)	
+				#print "minus " + nick + "  " + str(yield_bkg)
 				yield_qcd -= yield_bkg
 			yield_qcd = max(0.0, yield_qcd)
 			if(yield_qcd == 0.0):
 				log.warning("QCD yield is 0!")
 			#  QCD shape
-			
+
 			#print "shape total: " + str(tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])())
 			for nick in qcd_shape_subtract_nicks:
-				#print "\t minus " + nick + " " + str(tools.PoissonYield(plotData.plotdict["root_objects"][nick])())
-				plotData.plotdict["root_objects"][qcd_shape_nick].Add(plotData.plotdict["root_objects"][nick], -1.0/plotData.plotdict["qcd_scale_factor"])
-			
+			    #print "\t minus " + nick + " " + str(tools.PoissonYield(plotData.plotdict["root_objects"][nick])())
+                            if yield_qcd == 0:
+                                log.warning('QCD yield before subtracting: {}'.format(tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])()))
+                                log.warning('Yield of nick used for subtracting: {}, {}'.format(nick, tools.PoissonYield(plotData.plotdict["root_objects"][nick])()))
+			    plotData.plotdict["root_objects"][qcd_shape_nick].Add(plotData.plotdict["root_objects"][nick], -1.0/plotData.plotdict["qcd_scale_factor"])
+
 			shape_yield = tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])()
 			if shape_yield != 0.0:
 				scale_factor = yield_qcd / shape_yield * qcd_extrapolation_factor_ss_os

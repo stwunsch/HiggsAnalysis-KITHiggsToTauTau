@@ -1178,8 +1178,9 @@ class Samples(samples.SamplesBase):
 						nick_suffix=nick_suffix
 				)
 
-				if not "EstimateWjets" in config.get("analysis_modules", []):
-					config.setdefault("analysis_modules", []).append("EstimateWjets")
+                                # NOTE: We use MC only W+Jets background estimation
+				#if not "EstimateWjets" in config.get("analysis_modules", []):
+				#	config.setdefault("analysis_modules", []).append("EstimateWjets")
 				if channel in ["mt", "et"] and fakefactor_method == "standard":
 					config["weights"][config["nicks"].index("wj")] = config["weights"][config["nicks"].index("wj")]+"*(gen_match_2 != 6)"
 					config.setdefault("wjets_from_mc", []).append(True)
@@ -1310,8 +1311,9 @@ class Samples(samples.SamplesBase):
 							nick_suffix=nick_suffix
 					)
 
-					if not "EstimateWjets" in config.get("analysis_modules", []):
-						config.setdefault("analysis_modules", []).append("EstimateWjets")
+                                        # NOTE: We use MC only W+Jets background estimation
+					#if not "EstimateWjets" in config.get("analysis_modules", []):
+					#	config.setdefault("analysis_modules", []).append("EstimateWjets")
 					config.setdefault("wjets_from_mc", []).append(False)
 					config.setdefault("wjets_shape_nicks", []).append("noplot_wj_ss"+nick_suffix)
 					config.setdefault("wjets_data_control_nicks", []).append("noplot_wj_ss_data_control"+nick_suffix)

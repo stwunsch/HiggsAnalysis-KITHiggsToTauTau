@@ -9,3 +9,5 @@ data/ArtusOutputs
 python/uncertainties/
 wiki
 *.pcm
+*.swp
+*.swo
