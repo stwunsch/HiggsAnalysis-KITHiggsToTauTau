@@ -64,7 +64,7 @@ class CategoriesDict(object):
                                                         }
                                                 }
 		for class_ in ['PyKeras']:
-                    for iClass in [0, 1, 2, 3, 4, 5]:
+                    for iClass in [0, 1, 2, 3]:
                         self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
                                         "channel": [
                                                 "mt_",
@@ -80,7 +80,27 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in range(0,275,25)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in np.linspace(0,250,25)]),
+                                                        }
+                                                }
+                                        }
+                    for iClass in [4, 5]:
+                        self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
+                                        "channel": [
+                                                "mt_",
+                                                ],
+                                        "expressions":{
+                                                "global":"class{}=={}".format(class_, iClass),
+                                                "analysis": [
+                                                        "catHtt13TeV_",
+                                                        ],
+                                                },
+                                        "binnings":{
+                                                "analysis": [
+                                                        "binningHtt13TeV_",
+                                                        ],
+                                                "global":{
+                                                        "_m_sv":" ".join([str(float(f)) for f in np.linspace(0,250,6)]),
                                                         }
                                                 }
                                         }
