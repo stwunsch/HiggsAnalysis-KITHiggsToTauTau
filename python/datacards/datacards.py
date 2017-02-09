@@ -949,8 +949,9 @@ class Datacards(object):
 							stacked_processes = []
 							if signal_stacked_on_bkg:
 								stacked_processes.extend(datacards_cbs[datacard].cp().bin([category]).signals().process_set())
-							#stacked_processes.extend(datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set())
+							stacked_processes.extend(datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set())
 
+                                                        """
                                                         # NOTE: Use ch.FilterProcs!
                                                         for process in datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set():
                                                             if process in ['W'] and category in ['mt_PyKerasClass_1', 'mt_PyKerasClass_4', 'mt_PyKerasClass_5']:
@@ -961,6 +962,7 @@ class Datacards(object):
                                                         print('DEBUG [stacked_processes, skimmed]:', stacked_processes)
                                                         print('DEBUG [stacked_processes, original]:', datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set())
                                                         datacards_cbs[datacard].cp().bin([category]).PrintObs().PrintProcs()
+                                                        """
 
 							stacked_processes.sort(key=lambda process: bkg_plotting_order.index(process) if process in bkg_plotting_order else len(bkg_plotting_order))
 
