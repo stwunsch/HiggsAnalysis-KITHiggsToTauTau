@@ -23,7 +23,7 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                hist2d_variables = ['pt_1', 'pt_2']
+                hist2d_variables = ['pt_1', 'pt_2', 'eta_1', 'eta_2']
                 hist2d_ranges = {
                         'pt_1' : [str(float(f)) for f in np.linspace(20, 120, 15)],
                         'pt_2' : [str(float(f)) for f in np.linspace(20, 120, 15)],
