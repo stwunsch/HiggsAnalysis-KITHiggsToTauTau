@@ -25,8 +25,8 @@ class CategoriesDict(object):
 		self.categoriesDict = {}
                 hist2d_variables = ['pt_1', 'pt_2']
                 hist2d_ranges = {
-                        'pt_1' : [str(float(f)) for f in range(20, 150, 10)],
-                        'pt_2' : [str(float(f)) for f in range(20, 150, 10)],
+                        'pt_1' : [str(float(f)) for f in np.linspace(20, 150, 10)],
+                        'pt_2' : [str(float(f)) for f in np.linspace(20, 150, 10)],
                         }
                 hist2d_categories = {
                         'inclusive' : '1',
