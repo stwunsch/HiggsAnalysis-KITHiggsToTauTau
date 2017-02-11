@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import itertools
 import pprint
-import numpy as np
+import numpy
 import copy
+import json
 
 class CategoriesDict(object):
 	def __init__(self):
@@ -23,16 +24,17 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                hist2d_variables = ['pt_1', 'pt_2', 'eta_1', 'eta_2']
-                hist2d_ranges = {
-                        'pt_1' : [str(float(f)) for f in np.linspace(20, 120, 15)],
-                        'pt_2' : [str(float(f)) for f in np.linspace(20, 120, 15)],
-                        'eta_1' : [str(float(f)) for f in np.linspace(-2.4, 2.4, 15)],
-                        'eta_2' : [str(float(f)) for f in np.linspace(-2.4, 2.4, 15)],
-                        }
-                hist2d_categories = {
-                        'inclusive' : '1',
-                        }
+
+                # Load config # FIXME: Hacky!
+                config = json.load(open('/portal/ekpbms2/home/wunsch/UncEst/framework/config_stat.json'))
+
+                hist2d_variables = config['variables']
+                hist2d_ranges_str = config['bins']
+                hist2d_ranges = {}
+                for key in hist2d_ranges_str:
+                    hist2d_ranges[key] = [str(float(f)) for f in eval(hist2d_ranges_str[key])]
+                hist2d_categories = config['categories']
+
                 for category in hist2d_categories:
                     for i_var1, var1 in enumerate(hist2d_variables):
                         for i_var2, var2 in enumerate(hist2d_variables):
@@ -82,7 +84,7 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in np.linspace(0,250,25)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(0,250,25)]),
                                                         }
                                                 }
                                         }
@@ -102,7 +104,7 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in np.linspace(0,250,6)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(0,250,6)]),
                                                         }
                                                 }
                                         }
