@@ -26,14 +26,23 @@ class CategoriesDict(object):
 		self.categoriesDict = {}
 
                 # Load config # FIXME: Hacky!
+                # NOTE: WTF, Combine does not take unicode strings...
                 config = json.load(open('/portal/ekpbms2/home/wunsch/UncEst/framework/config_stat.json'))
 
-                hist2d_variables = config['variables']
-                hist2d_ranges_str = config['bins']
+                hist2d_variables_unicode = config['variables']
+                hist2d_variables = []
+                for var in hist2d_variables_unicode:
+                    hist2d_variables.append(var.encode('ascii'))
+
+                hist2d_bins = config['bins']
                 hist2d_ranges = {}
-                for key in hist2d_ranges_str:
-                    hist2d_ranges[key] = [str(float(f)) for f in eval(hist2d_ranges_str[key])]
-                hist2d_categories = config['categories']
+                for key in hist2d_bins:
+                    hist2d_ranges[key] = [str(float(f)) for f in eval(hist2d_bins[key])]
+
+                hist2d_categories_unicode = config['categories']
+                hist2d_categories = {}
+                for key in hist2d_categories_unicode:
+                    hist2d_categories[key.encode('ascii')] = hist2d_categories_unicode[key].encode('ascii')
 
                 for category in hist2d_categories:
                     for i_var1, var1 in enumerate(hist2d_variables):
