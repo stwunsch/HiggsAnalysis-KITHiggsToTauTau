@@ -976,25 +976,28 @@ class Datacards(object):
 								stacked_processes.extend(datacards_cbs[datacard].cp().bin([category]).signals().process_set())
 							stacked_processes.extend(datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set())
 
-                                                        """
-                                                        # NOTE: Use ch.FilterProcs!
-                                                        for process in datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set():
-                                                            if process in ['W'] and category in ['mt_PyKerasClass_1', 'mt_PyKerasClass_4', 'mt_PyKerasClass_5']:
-                                                                print('DEBUG [dropped]:', category, process)
-                                                            else:
-                                                                stacked_processes.append(process)
-                                                        print('DEBUG [category]:', category)
-                                                        print('DEBUG [stacked_processes, skimmed]:', stacked_processes)
-                                                        print('DEBUG [stacked_processes, original]:', datacards_cbs[datacard].cp().bin([category]).backgrounds().process_set())
-                                                        datacards_cbs[datacard].cp().bin([category]).PrintObs().PrintProcs()
-                                                        """
-
 							stacked_processes.sort(key=lambda process: bkg_plotting_order.index(process) if process in bkg_plotting_order else len(bkg_plotting_order))
 
 							config = {}
 							config["files"] = [postfit_shapes]
 							config["folders"] = [category+"_"+level]
+
+                                                        # Check whether histogram is existent in ROOT file, otherwise drop it
+                                                        if len(config["files"]) != 1:
+                                                            raise Exception("More than one file in files list, dropping processes may fail: {}".format(config["files"]))
+                                                        if len(config["folders"]) != 1:
+                                                            raise Exception("More than one folder in folders list, dropping processes may fail: {}".format(config["folders"]))
+                                                        file_ = ROOT.TFile.Open(config["files"][0])
+                                                        drop_process = []
+                                                        for expr in stacked_processes:
+                                                            if file_.Get("{}/{}".format(config["folders"][0], expr)) == None:
+                                                                drop_process.append(expr)
+                                                        for expr in drop_process:
+                                                            log.warning("Dropping process for channel {}: {}".format(config["folders"][0], expr))
+                                                            stacked_processes.remove(expr)
+
 							config["x_expressions"] = [p.strip("_noplot") for p in stacked_processes] + ["TotalSig"] + ["data_obs", "TotalBkg"]
+
 							config["nicks"] = stacked_processes + ["TotalSig" + ("_noplot" if signal_stacked_on_bkg else "")] + ["data_obs", "TotalBkg" + ("_noplot" if signal_stacked_on_bkg else "")]
 							config["stacks"] = (["stack"]*len(stacked_processes)) + ([] if signal_stacked_on_bkg else ["sig"]) + ["data", "bkg_unc"]
 

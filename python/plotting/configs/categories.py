@@ -93,11 +93,11 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(0,250,25)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,20)]),
                                                         }
                                                 }
                                         }
-                    for iClass in [4, 5]:
+                    for iClass in [4]:
                         self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
                                         "channel": [
                                                 "mt_",
@@ -113,7 +113,27 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(0,250,6)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,4)]),
+                                                        }
+                                                }
+                                        }
+                    for iClass in [5]:
+                        self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
+                                        "channel": [
+                                                "mt_",
+                                                ],
+                                        "expressions":{
+                                                "global":"class{}=={}".format(class_, iClass),
+                                                "analysis": [
+                                                        "catHtt13TeV_",
+                                                        ],
+                                                },
+                                        "binnings":{
+                                                "analysis": [
+                                                        "binningHtt13TeV_",
+                                                        ],
+                                                "global":{
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,4)]),
                                                         }
                                                 }
                                         }

@@ -72,15 +72,19 @@ class EstimateQcd(estimatebase.EstimateBase):
 			yield_qcd = max(0.0, yield_qcd)
 			if(yield_qcd == 0.0):
 				log.warning("QCD yield is 0!")
+                                log.warning("Output file: {}".format(plotData.plotdict["filename"]))
 			#  QCD shape
 
 			#print "shape total: " + str(tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])())
 			for nick in qcd_shape_subtract_nicks:
 			    #print "\t minus " + nick + " " + str(tools.PoissonYield(plotData.plotdict["root_objects"][nick])())
                             if yield_qcd == 0:
+                                log.warning('Subtract nick: {}'.format(nick))
                                 log.warning('QCD yield before subtracting: {}'.format(tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])()))
                                 log.warning('Yield of nick used for subtracting: {}, {}'.format(nick, tools.PoissonYield(plotData.plotdict["root_objects"][nick])()))
 			    plotData.plotdict["root_objects"][qcd_shape_nick].Add(plotData.plotdict["root_objects"][nick], -1.0/plotData.plotdict["qcd_scale_factor"])
+                            if yield_qcd == 0:
+                                log.warning('QCD yield after subtracting: {}'.format(tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])()))
 
 			shape_yield = tools.PoissonYield(plotData.plotdict["root_objects"][qcd_shape_nick])()
 			if shape_yield != 0.0:
