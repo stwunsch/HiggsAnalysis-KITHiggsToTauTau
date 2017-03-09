@@ -29,34 +29,57 @@ class CategoriesDict(object):
                 # NOTE: WTF, Combine does not take unicode strings...
                 config = json.load(open('/portal/ekpbms2/home/wunsch/UncEst/framework/config_stat.json'))
 
-                hist2d_variables_unicode = config['variables']
-                hist2d_variables = []
-                for var in hist2d_variables_unicode:
-                    hist2d_variables.append(var.encode('ascii'))
+                hist_variables_unicode = config['variables']
+                hist_variables = []
+                for var in hist_variables_unicode:
+                    hist_variables.append(var.encode('ascii'))
 
-                hist2d_bins = config['bins']
-                hist2d_ranges = {}
-                for key in hist2d_bins:
-                    hist2d_ranges[key] = [str(float(f)) for f in eval(hist2d_bins[key])]
+                hist_bins = config['bins']
+                hist_ranges = {}
+                for key in hist_bins:
+                    hist_ranges[key] = [str(float(f)) for f in eval(hist_bins[key])]
 
-                hist2d_categories_unicode = config['categories']
-                hist2d_categories = {}
-                for key in hist2d_categories_unicode:
-                    hist2d_categories[key.encode('ascii')] = hist2d_categories_unicode[key].encode('ascii')
+                hist_categories_unicode = config['categories']
+                hist_categories = {}
+                for key in hist_categories_unicode:
+                    hist_categories[key.encode('ascii')] = hist_categories_unicode[key].encode('ascii')
 
-                for category in hist2d_categories:
-                    for i_var1, var1 in enumerate(hist2d_variables):
-                        for i_var2, var2 in enumerate(hist2d_variables):
+                for category in hist_categories:
+                    for i_var1, var1 in enumerate(hist_variables):
+                        # Add categories for single variables
+                        global_expression = "({})".format(hist_categories[category])
+                        self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(category, var1)] = {
+                                        "channel": [
+                                                    "mt_",
+                                                    ],
+                                        "expressions":{
+                                                    "global": global_expression,
+                                                    "analysis": [
+                                                                "catHtt13TeV_",
+                                                                ],
+                                                    },
+                                        "binnings":{
+                                                    "analysis": [
+                                                                "binningHtt13TeV_",
+                                                                ],
+                                                    "global":{
+                                                            "_{}".format(var1):" ".join(hist_ranges[var1]),
+                                                            }
+                                                    }
+                                            }
+
+                        # Add categories for variable pairs
+                        for i_var2, var2 in enumerate(hist_variables):
                             # Ensure that every pair appears only once
                             if i_var1 >= i_var2:
                                 continue
 
                             # Set up category for this slice
-                            for i_slice in range(len(hist2d_ranges[var2])-1):
+                            for i_slice in range(len(hist_ranges[var2])-1):
                                 global_expression = "({}) && ({}>{}) && ({}<{})".format(
-                                                            hist2d_categories[category],
-                                                            var2, hist2d_ranges[var2][i_slice],
-                                                            var2, hist2d_ranges[var2][i_slice+1])
+                                                            hist_categories[category],
+                                                            var2, hist_ranges[var2][i_slice],
+                                                            var2, hist_ranges[var2][i_slice+1])
                                 self.categoriesDict["{analysis}{channel}%s_%s_%s_%s{discriminator}"%(category, var1, var2, str(i_slice))] = {
                                                 "channel": [
                                                         "mt_",
@@ -72,7 +95,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_",
                                                                 ],
                                                         "global":{
-                                                                "_{}".format(var1):" ".join(hist2d_ranges[var1]),
+                                                                "_{}".format(var1):" ".join(hist_ranges[var1]),
                                                                 }
                                                         }
                                                 }
