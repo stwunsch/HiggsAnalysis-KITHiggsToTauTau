@@ -958,6 +958,62 @@ class Datacards(object):
 		return datacards_prefit_shapes
 
 
+        def test_gof_fromworkspace(self, datacards_cbs, datacards_workspaces, name, n_processes=1, algo="saturated"):
+		commands = []
+                commands.extend(["combineTool.py -M GoodnessOfFit -d {WORKSPACE} --algo=saturated -m {MASS} -n {NAME} --there".format(
+                                WORKSPACE=datacards_workspaces[datacard],
+                                MASS=125,
+                                NAME=name,
+                ) for datacard, cb in datacards_cbs.iteritems()])
+
+		tools.parallelize(_call_command, commands, n_processes=n_processes)
+
+
+        def toys_gof_fromworkspace(self, datacards_cbs, datacards_workspaces, num_toys, name, seed, n_processes=1):
+		commands = []
+                commands.extend(["combineTool.py -M GoodnessOfFit -d {WORKSPACE} --algo=saturated -t {NUM_TOYS} -s {SEED} -m {MASS} -n {NAME} --there".format(
+                                WORKSPACE=datacards_workspaces[datacard],
+                                MASS=125,
+                                NAME=name,
+                                NUM_TOYS=num_toys,
+                                SEED=seed,
+                ) for datacard, cb in datacards_cbs.iteritems()])
+
+		tools.parallelize(_call_command, commands, n_processes=n_processes)
+
+
+        def plot_gof(self, datacards_cbs, name, seed, n_processes=1):
+                # Collect test and toys
+                mass = 125
+                commands = []
+                for datacard, cb in datacards_cbs.iteritems():
+                    path_base = os.path.dirname(datacard)
+                    file_test = 'higgsCombine{}.GoodnessOfFit.mH{}.root'.format(name, mass)
+                    file_toys = 'higgsCombine{}.GoodnessOfFit.mH{}.{}.root'.format(name, mass, seed)
+                    file_output = 'higgsCombine{}.CollectGoodnessOfFit.mH{}.{}.json'.format(name, mass, seed)
+                    commands.extend(["combineTool.py -M CollectGoodnessOfFit --input {TEST} {TOYS} --output {OUTPUT} --there".format(
+                                    TEST=os.path.join(path_base, file_test),
+                                    TOYS=os.path.join(path_base, file_toys),
+                                    OUTPUT=os.path.join(path_base, file_output),
+                                    )])
+
+		tools.parallelize(_call_command, commands, n_processes=n_processes)
+
+                # Plot
+                commands = []
+                for datacard, cb in datacards_cbs.iteritems():
+                    path_base = os.path.dirname(datacard)
+                    file_input = 'higgsCombine{}.CollectGoodnessOfFit.mH{}.{}.json'.format(name, mass, seed)
+                    file_output = 'plotGof{}'.format(name)
+                    commands.extend(["plotGof.py --statistic saturated --mass {MASS:.1f} --output {OUTPUT} {INPUT}".format(
+                                    MASS=mass,
+                                    INPUT=os.path.join(path_base, file_input),
+                                    OUTPUT=file_output, # Set ~ at beginning so that the ./ of the script does not break everything
+                                    )])
+
+		tools.parallelize(_call_command, commands, n_processes=n_processes)
+
+
 	def prefit_postfit_plots(self, datacards_cbs, datacards_postfit_shapes, plotting_args=None, n_processes=1, signal_stacked_on_bkg=False, *args):
 		if plotting_args is None:
 			plotting_args = {}

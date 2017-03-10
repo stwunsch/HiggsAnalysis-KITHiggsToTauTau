@@ -136,7 +136,7 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,4)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,8)]),
                                                         }
                                                 }
                                         }
@@ -156,7 +156,7 @@ class CategoriesDict(object):
                                                         "binningHtt13TeV_",
                                                         ],
                                                 "global":{
-                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,4)]),
+                                                        "_m_sv":" ".join([str(float(f)) for f in numpy.linspace(50,200,8)]),
                                                         }
                                                 }
                                         }
