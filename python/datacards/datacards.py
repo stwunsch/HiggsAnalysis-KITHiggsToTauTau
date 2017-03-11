@@ -1005,10 +1005,10 @@ class Datacards(object):
                     path_base = os.path.dirname(datacard)
                     file_input = 'higgsCombine{}.CollectGoodnessOfFit.mH{}.{}.json'.format(name, mass, seed)
                     file_output = 'plotGof{}'.format(name)
-                    commands.extend(["./plotGof.py --statistic saturated --mass {MASS:.1f} --output {OUTPUT} {INPUT}".format(
+                    commands.extend(["python plotGof.py --statistic saturated --mass {MASS:.1f} --output {OUTPUT} {INPUT}".format(
                                     MASS=mass,
                                     INPUT=os.path.join(path_base, file_input),
-                                    OUTPUT=file_output, # Set ~ at beginning so that the ./ of the script does not break everything
+                                    OUTPUT=os.path.join(path_base, file_output),
                                     )])
 
 		tools.parallelize(_call_command, commands, n_processes=n_processes)
