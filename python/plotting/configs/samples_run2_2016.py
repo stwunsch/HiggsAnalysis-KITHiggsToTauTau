@@ -12,6 +12,8 @@ from Kappa.Skimming.registerDatasetHelper import get_nick_list
 from Artus.Utility.tools import make_multiplication, split_multiplication, clean_multiplication
 energy = 13
 default_lumi = 12.9*1000.0
+wjets_scale_factor = 0.8
+qcd_ss_os_scale_factor = 1.2
 
 class Samples(samples.SamplesBase):
 
@@ -1100,7 +1102,7 @@ class Samples(samples.SamplesBase):
 					config.setdefault("wjets_wj_final_selection", []).append(("noplot_wj_final_selection"+nick_suffix) if "newKIT" in estimationMethod else None)
 
 			if "classic" in estimationMethod:
-				shape_weight = mc_weight+"*"+weight+"*eventWeight*"+self.wj_stitchingweight()+"*"+self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type)
+				shape_weight = mc_weight+"*"+weight+"*eventWeight*"+self.wj_stitchingweight()+"*"+self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type)+"*"+str(wjets_scale_factor)
 				#if (not category is None) and (category != ""):
 					## relaxed isolation
 					#shape_weight = weight+"*eventWeight*"+self._cut_string(channel, exclude_cuts=exclude_cuts+["blind", "iso_2"], cut_type=cut_type)+"*(byCombinedIsolationDeltaBetaCorrRaw3Hits_2<10.0)"
@@ -1241,7 +1243,7 @@ class Samples(samples.SamplesBase):
 						self.files_wj(channel),
 						self.root_file_folder(channel),
 						lumi,
-						mc_weight+"*"+weight+"*eventWeight*"+self.wj_stitchingweight()+"*"+self._cut_string(channel, exclude_cuts=exclude_cuts+["os"], cut_type=cut_type)+"*((q_1*q_2)>0.0)",
+						mc_weight+"*"+weight+"*eventWeight*"+self.wj_stitchingweight()+"*"+self._cut_string(channel, exclude_cuts=exclude_cuts+["os"], cut_type=cut_type)+"*((q_1*q_2)>0.0)"+"*"+str(wjets_scale_factor),
 						"noplot_wj_ss",
 						nick_suffix=nick_suffix
 				)
@@ -1314,12 +1316,12 @@ class Samples(samples.SamplesBase):
                                         # NOTE: We use MC only W+Jets background estimation
 					#if not "EstimateWjets" in config.get("analysis_modules", []):
 					#	config.setdefault("analysis_modules", []).append("EstimateWjets")
-					config.setdefault("wjets_from_mc", []).append(False)
-					config.setdefault("wjets_shape_nicks", []).append("noplot_wj_ss"+nick_suffix)
-					config.setdefault("wjets_data_control_nicks", []).append("noplot_wj_ss_data_control"+nick_suffix)
-					config.setdefault("wjets_data_substract_nicks", []).append(" ".join([nick+nick_suffix for nick in "noplot_ztt_ss_mc_wj_control noplot_zll_ss_wj_control noplot_ttj_ss_wj_control noplot_vv_ss_wj_control".split()]))
-					config.setdefault("wjets_mc_signal_nicks", []).append("noplot_wj_ss_mc_signal"+nick_suffix)
-					config.setdefault("wjets_mc_control_nicks", []).append("noplot_wj_ss_mc_control"+nick_suffix)
+					#config.setdefault("wjets_from_mc", []).append(False)
+					#config.setdefault("wjets_shape_nicks", []).append("noplot_wj_ss"+nick_suffix)
+					#config.setdefault("wjets_data_control_nicks", []).append("noplot_wj_ss_data_control"+nick_suffix)
+					#config.setdefault("wjets_data_substract_nicks", []).append(" ".join([nick+nick_suffix for nick in "noplot_ztt_ss_mc_wj_control noplot_zll_ss_wj_control noplot_ttj_ss_wj_control noplot_vv_ss_wj_control".split()]))
+					#config.setdefault("wjets_mc_signal_nicks", []).append("noplot_wj_ss_mc_signal"+nick_suffix)
+					#config.setdefault("wjets_mc_control_nicks", []).append("noplot_wj_ss_mc_control"+nick_suffix)
 
 				# QCD
 				shape_weight = data_weight+"*"+weight+"*eventWeight*"+self._cut_string(channel, exclude_cuts=exclude_cuts+["os"], cut_type=cut_type)+"*((q_1*q_2)>0.0)"
@@ -1405,7 +1407,7 @@ class Samples(samples.SamplesBase):
 				elif channel == "et":
 					config.setdefault("qcd_extrapolation_factors_ss_os", []).append(1.0 + (0.0 if not "os" in exclude_cuts else 1.0))
 				elif channel == "mt":
-					config.setdefault("qcd_extrapolation_factors_ss_os", []).append(1.0 + (0.0 if not "os" in exclude_cuts else 1.0))
+					config.setdefault("qcd_extrapolation_factors_ss_os", []).append(qcd_ss_os_scale_factor + (0.0 if not "os" in exclude_cuts else 1.0))
 				else:
 					config.setdefault("qcd_extrapolation_factors_ss_os", []).append(1.06 + (0.0 if not "os" in exclude_cuts else 1.0))
 
