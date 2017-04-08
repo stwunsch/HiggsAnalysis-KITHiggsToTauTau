@@ -170,7 +170,7 @@ class Datacards(object):
 			ch.SystMap("era", "process")
 				( ["7TeV"], ["TTJ"], 1.08)
 				( ["8TeV"], ["TTJ"], 1.1)
-				(["13TeV"], ["TTJ", "TT"], 1.06) # CV https://indico.cern.ch/event/515350/contributions/1194776/attachments/1257261/1856581/HttNuisanceParamUpdate_2016Apr13.pdf
+				(["13TeV"], ["TTT", "TTJJ", "TTJ", "TT"], 1.06) # CV https://indico.cern.ch/event/515350/contributions/1194776/attachments/1257261/1856581/HttNuisanceParamUpdate_2016Apr13.pdf
 		]
 		self.ttj_extrapol_syst_args = [
 			"CMS_$ANALYSIS_ttjExtrapol_$ERA",
@@ -202,6 +202,12 @@ class Datacards(object):
 			"lnN",
 			ch.SystMap("era", "process")
 				(       ["13TeV"], ["WJ", "W"], 1.04) # CV https://indico.cern.ch/event/515350/contributions/1194776/attachments/1257261/1856581/HttNuisanceParamUpdate_2016Apr13.pdf
+		]
+                self.qcd_cross_section_syst_args = [
+			"CMS_$ANALYSIS_qcd_estimation_$ERA",
+			"lnN",
+			ch.SystMap("era", "process")
+                                (       ["13TeV"], ["QCD"], 1.15) # FIXME Random uncertainty
 		]
 		self.wj_extrapol_syst_args = [
 			"CMS_$ANALYSIS_wjExtrapol_$ERA",

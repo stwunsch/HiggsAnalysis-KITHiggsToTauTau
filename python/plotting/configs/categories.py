@@ -45,6 +45,28 @@ class CategoriesDict(object):
                     hist_categories[key.encode('ascii')] = hist_categories_unicode[key].encode('ascii')
 
                 for category in hist_categories:
+                    # Add generic categories without variable info
+                    global_expression = "({})".format(hist_categories[category])
+                    self.categoriesDict["{analysis}{channel}%s{discriminator}"%(category)] = {
+                                    "channel": [
+                                                "mt_",
+                                                ],
+                                    "expressions":{
+                                                "analysis": [
+                                                            "catHtt13TeV_",
+                                                            ],
+                                                "global": global_expression
+                                                },
+                                    "binnings":{
+                                                "analysis": [
+                                                            "binningHtt13TeV_",
+                                                            ],
+                                                "global":{
+                                                        "_{}".format("foo"):" 0.0 999.0",
+                                                        }
+                                                }
+                                        }
+
                     for i_var1, var1 in enumerate(hist_variables):
                         # Add categories for single variables
                         global_expression = "({})".format(hist_categories[category])

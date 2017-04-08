@@ -235,7 +235,8 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().process(["VV"]).AddSyst(self.cb, *self.vv_cross_section2016_syst_args)
 			else:
 				self.cb.cp().process(["VV"]).AddSyst(self.cb, *self.vv_cross_section_syst_args)
-			self.cb.cp().process(["W"]).channel(["em", "tt", "mm"]).AddSyst(self.cb, *self.wj_cross_section_syst_args) # automatically in other channels determined
+			self.cb.cp().process(["W"]).channel(["em", "tt", "mm", "mt"]).AddSyst(self.cb, *self.wj_cross_section_syst_args) # automatically in other channels determined
+			self.cb.cp().process(["QCD"]).channel(["mt"]).AddSyst(self.cb, *self.qcd_cross_section_syst_args)
 
 			# tau efficiency
 			# (hopefully) temporary fix
