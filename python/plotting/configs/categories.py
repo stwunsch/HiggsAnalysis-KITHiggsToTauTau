@@ -8,23 +8,11 @@ import json
 class CategoriesDict(object):
 	def __init__(self):
 		super(CategoriesDict, self).__init__()
-		boosted_higgs_string = "(H_pt>100)"
-		boosted_higgs_medium_string = "(H_pt>50)"
-		boosted_higgs_low_string = "(H_pt>30)"
-		vbf_medium_string = "(mjj>500&&jdeta>3.5)"
-		vbf_loose_string = "(mjj>200&&jdeta>2)"
-		jet2_string = "(njetspt30>1)"
-		jet2x_string = "(njetspt30==2)"
-		jet1_string = "(njetspt30==1)"
-		jet0_string = "(njetspt30==0)"
-		pt2_tight_string = "(pt_2>=45)"
-		pt2_medium_string = "(pt_2>=35)"
-		pt2_loose_string = "(pt_2>=25)"
-		eta_hard_string = "jdeta>4.0"
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
 
+                '''
                 # Load config # FIXME: Hacky!
                 # NOTE: WTF, Combine does not take unicode strings...
                 config = json.load(open('/portal/ekpbms2/home/wunsch/UncEst/framework/config_stat.json'))
@@ -121,6 +109,26 @@ class CategoriesDict(object):
                                                                 }
                                                         }
                                                 }
+                '''
+                self.categoriesDict["{analysis}{channel}inclusive{discriminator}"] = {
+                                    "channel": [
+                                                "mt_",
+                                                ],
+                                    "expressions":{
+                                                "analysis": [
+                                                            "catHtt13TeV_",
+                                                            ],
+                                                "global": "(1)"
+                                                },
+                                    "binnings":{
+                                                "analysis": [
+                                                            "binningHtt13TeV_",
+                                                            ],
+                                                "global":{
+                                                        "_foo":" 0.0 999.0",
+                                                        }
+                                                }
+                                        }
 		for class_ in ['PyKeras']:
                     for iClass in [0, 1, 2, 3]:
                         self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
