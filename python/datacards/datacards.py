@@ -457,6 +457,20 @@ class Datacards(object):
 				(["13TeV"], ["et"], 1.0)
 		]
 
+                self.phi_1_sin_syst_args = [
+			"CMS_phi_1_sin_$ERA",
+			"shape",
+			ch.SystMap("era")
+				(["13TeV"], 1.0)
+		]
+
+                self.phi_1_cos_syst_args = [
+			"CMS_phi_1_cos_$ERA",
+			"shape",
+			ch.SystMap("era")
+				(["13TeV"], 1.0)
+		]
+
 		# https://twiki.cern.ch/twiki/bin/view/LHCPhysics/CERNYellowReportPageAt1314TeV2014#s_13_0_TeV
 		self.htt_qcd_scale_syst_args = [
 			"QCD_scale_$PROCESS",

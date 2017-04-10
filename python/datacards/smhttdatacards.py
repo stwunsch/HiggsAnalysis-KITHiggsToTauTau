@@ -40,6 +40,12 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["mt"]).process(["ZTT", "TTT", "VV"]).AddSyst(self.cb, *self.tau_efficiency_syst_args)
 				self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.tau_efficiency_syst_args)
 
+                        # Phi shape
+			self.cb.cp().channel(["mt"]).process(["ZTT", "ZL", "ZJ", "TTT", "TTJJ", "VV", "W", "QCD"]).AddSyst(self.cb, *self.phi_1_sin_syst_args)
+			self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.phi_1_sin_syst_args)
+			self.cb.cp().channel(["mt"]).process(["ZTT", "ZL", "ZJ", "TTT", "TTJJ", "VV", "W", "QCD"]).AddSyst(self.cb, *self.phi_1_cos_syst_args)
+			self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.phi_1_cos_syst_args)
+
 			# Tau ES
 			self.cb.cp().channel(["mt"]).process(["ZTT", "TTJJ"]).AddSyst(self.cb, *self.tau_es_syst_args)
 			self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.tau_es_syst_args)
@@ -49,7 +55,7 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau2016_syst_args)
 			else:
 				self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau_syst_args)
-			
+
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["mt"], False)["mt"]:
 					self.cb.cp().channel(["mt"]).bin(["mt_"+category]).process(["ZTT"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
@@ -95,7 +101,7 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["et"]).process(["ZL"]).AddSyst(self.cb, *self.eFakeTau2016_syst_args)
 			else:
 				self.cb.cp().channel(["et"]).process(["ZL"]).AddSyst(self.cb, *self.eFakeTau_tight_syst_args)
-			
+
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["et"], False)["et"]:
 					self.cb.cp().channel(["et"]).bin(["et_"+category]).process(["ZTT"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
@@ -140,7 +146,7 @@ class SMHttDatacards(datacards.Datacards):
 
 			#self.cb.cp().channel(["em"]).process(["ZTT", "ZLL", "TT", "VV", "W", "QCD"]).AddSyst(self.cb, *self.btag_mistag_syst_args)
 			#self.cb.cp().channel(["em"]).signals().AddSyst(self.cb, *self.btag_mistag_syst_args)
-			
+
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["em"], False)["em"]:
 					self.cb.cp().channel(["em"]).bin(["em_"+category]).process(["ZTT"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
@@ -173,11 +179,11 @@ class SMHttDatacards(datacards.Datacards):
 			# fake-rate
 			#self.cb.cp().channel(["tt"]).process(["ZL", "ZJ"]).AddSyst(self.cb, *self.zllFakeTau_syst_args)
 			#self.cb.cp().channel(["tt"]).process(["ZL"]).AddSyst(self.cb, *self.eFakeTau_vloose_syst_args)
-			
+
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["tt"], False)["tt"]:
 					self.cb.cp().channel(["tt"]).bin(["tt_"+category]).process(["ZTT"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
-			
+
 			# ======================================================================
 			# MM channel
 			self.add_processes(
@@ -189,7 +195,7 @@ class SMHttDatacards(datacards.Datacards):
 					era=["13TeV"],
 					mass=higgs_masses
 			)
-			
+
 			# efficiencies
 			# (hopefully) temporary fix
 			if year == "2016":
@@ -198,7 +204,7 @@ class SMHttDatacards(datacards.Datacards):
 			else:
 				self.cb.cp().channel(["mm"]).process(["ZTT", "ZLL", "ZL", "ZJ", "TTTT", "TTJJ", "VV", "W"]).AddSyst(self.cb, *self.muon_efficiency_syst_args)
 				self.cb.cp().channel(["mm"]).signals().AddSyst(self.cb, *self.muon_efficiency_syst_args)
-			
+
 			if useRateParam:
 				for category in Categories.CategoriesDict().getCategories(["mm"], False)["mm"]:
 					self.cb.cp().channel(["mm"]).bin(["mm_"+category]).process(["ZLL"]).AddSyst(self.cb, "n_zll_"+category+"_norm", "rateParam", ch.SystMap()(1.0))
