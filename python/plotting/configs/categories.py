@@ -129,6 +129,26 @@ class CategoriesDict(object):
                                                         }
                                                 }
                                         }
+                for iClass in [0, 1, 2, 3, 4, 5]:
+                    self.categoriesDict["{analysis}{channel}ProbsExclusive_%i{discriminator}"%(iClass)] = {
+                                    "channel": [
+                                            "mt_",
+                                            ],
+                                    "expressions":{
+                                            "global":"classPyKeras=={}".format(iClass),
+                                            "analysis": [
+                                                    "catHtt13TeV_",
+                                                    ],
+                                            },
+                                    "binnings":{
+                                            "analysis": [
+                                                    "binningHtt13TeV_",
+                                                    ],
+                                            "global":{
+                                                    "_classPyKeras_prob":" ".join([str(float(f)) for f in numpy.linspace(0.0,1.0,20)]),
+                                                    }
+                                            }
+                                    }
 		for class_ in ['PyKeras']:
                     for iClass in [0, 1, 2, 3]:
                         self.categoriesDict["{analysis}{channel}%sClass_%i{discriminator}"%(class_, iClass)] = {
