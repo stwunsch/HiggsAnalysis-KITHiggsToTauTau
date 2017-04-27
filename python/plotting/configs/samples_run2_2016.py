@@ -16,8 +16,8 @@ default_lumi = 12.9*1000.0
 wjets_scale_factor = 0.8
 qcd_ss_os_scale_factor = 1.2
 phi_1_sin_cos_weight = "(1.0+cos(phi_1)*0.05*0.89)*(1.0+sin(phi_1)*0.05*0.52)"
-global_mc_weight = phi_1_sin_cos_weight
-#global_mc_weight = "(1.0)"
+#global_mc_weight = phi_1_sin_cos_weight
+global_mc_weight = "(1.0)"
 
 class Samples(samples.SamplesBase):
 

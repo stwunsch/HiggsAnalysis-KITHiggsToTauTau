@@ -41,10 +41,12 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.tau_efficiency_syst_args)
 
                         # Phi shape
+                        '''
 			self.cb.cp().channel(["mt"]).process(["ZTT", "ZL", "ZJ", "TTT", "TTJJ", "VV", "W", "QCD"]).AddSyst(self.cb, *self.phi_1_sin_syst_args)
 			self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.phi_1_sin_syst_args)
 			self.cb.cp().channel(["mt"]).process(["ZTT", "ZL", "ZJ", "TTT", "TTJJ", "VV", "W", "QCD"]).AddSyst(self.cb, *self.phi_1_cos_syst_args)
 			self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.phi_1_cos_syst_args)
+                        '''
 
 			# Tau ES
 			self.cb.cp().channel(["mt"]).process(["ZTT", "TTJJ"]).AddSyst(self.cb, *self.tau_es_syst_args)
