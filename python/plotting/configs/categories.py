@@ -23,6 +23,66 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
+                for tag in ['mva']:
+                    for channel in [0, 1, 2, 3, 4, 5, 6]:
+                        self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
+                                                "channel": [
+                                                        "mt_"
+                                                        ],
+                                                "expressions":{
+                                                        "global":"({}=={})".format(tag,channel),
+                                                        "analysis": [
+                                                                "catHtt13TeV_"
+                                                                ]
+                                                        },
+                                                "binnings":{
+                                                        "analysis": [
+                                                                "binningHtt13TeV_"
+                                                                ],
+                                                        "global":{
+                                                                "_m_sv":" ".join([str(f) for f in np.linspace(50,250,20)])
+                                                                }
+                                                        }
+                                                }
+                    for channel in ['backgroundDYJetsToTauTau', 'backgroundTT', 'backgroundWJetsToLNu', 'backgroundDYJetsToLL', 'signalGluGlu', 'signalVBF']:
+                        self.categoriesDict["{analysis}{channel}%s_%s_exclusive{discriminator}"%(tag,channel)] = {
+                                                "channel": [
+                                                        "mt_"
+                                                        ],
+                                                "expressions":{
+                                                        "global":"({}_{}_exclusive>0.0)".format(tag,channel),
+                                                        "analysis": [
+                                                                "catHtt13TeV_"
+                                                                ]
+                                                        },
+                                                "binnings":{
+                                                        "analysis": [
+                                                                "binningHtt13TeV_"
+                                                                ],
+                                                        "global":{
+                                                                "_{}_{}_exclusive".format(tag,channel):" ".join([str(f) for f in np.linspace(0.0, 1, 20)])
+                                                                }
+                                                        }
+                                                }
+                        self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
+                                                "channel": [
+                                                        "mt_"
+                                                        ],
+                                                "expressions":{
+                                                        "global":"(1.0)",
+                                                        "analysis": [
+                                                                "catHtt13TeV_"
+                                                                ]
+                                                        },
+                                                "binnings":{
+                                                        "analysis": [
+                                                                "binningHtt13TeV_"
+                                                                ],
+                                                        "global":{
+                                                                "_{}_{}".format(tag,channel):" ".join([str(f) for f in np.linspace(0.0, 1.0, 20)])
+                                                                }
+                                                        }
+                                                }
 		for mjj in range(0,1001,100):
 			for jdeta in np.linspace(0.0, 6.0, 13):
 				vbf_string = ("(mjj>" + str(mjj) + ")") if mjj >0 else ""
