@@ -60,7 +60,8 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_{}_exclusive".format(tag,channel):" ".join([str(f) for f in np.linspace(0.0, 1, 20)])
+                                                                "_{}_{}_exclusive".format(tag,channel):" ".join([str(f) for f in np.linspace(0.0, 1, 20)]),
+                                                                "_mva_prob".format(tag,channel):" ".join([str(f) for f in np.linspace(0.0, 1, 20)])
                                                                 }
                                                         }
                                                 }
