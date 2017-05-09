@@ -45,6 +45,8 @@ if __name__ == "__main__":
 	                    help="Quantity. [Default: %(default)s]")
 	parser.add_argument("--add-bbb-uncs", action="store_true", default=False,
 	                    help="Add bin-by-bin uncertainties. [Default: %(default)s]")
+	parser.add_argument("--nuisance-impacts", action="store_true", default=False,
+	                    help="Calculate nuisance impacts. [Default: %(default)s]")
 	parser.add_argument("--auto-rebin", action="store_true", default=False,
 	                    help="Do auto rebinning [Default: %(default)s]")
 	parser.add_argument("--lumi", type=float, default=samples.default_lumi/1000.0,
@@ -398,7 +400,8 @@ if __name__ == "__main__":
 	
 	# Max. likelihood fit and postfit plots
 	datacards.combine(datacards_cbs, datacards_workspaces, datacards_poi_ranges, args.n_processes, "-M MaxLikelihoodFit "+datacards.stable_options+" -n \"\"")
-	#datacards.nuisance_impacts(datacards_cbs, datacards_workspaces, args.n_processes)
+        if args.nuisance_impacts:
+	    datacards.nuisance_impacts(datacards_cbs, datacards_workspaces, args.n_processes)
 	datacards_postfit_shapes = datacards.postfit_shapes_fromworkspace(datacards_cbs, datacards_workspaces, False, args.n_processes, "--sampling" + (" --print" if args.n_processes <= 1 else ""))
 
 	# divide plots by bin width and change the label correspondingly
