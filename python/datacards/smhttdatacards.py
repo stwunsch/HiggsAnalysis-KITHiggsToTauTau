@@ -37,10 +37,7 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["mt"]).process(["ZTT", "TTT", "VVT"]).AddSyst(self.cb, *self.tau_efficiency2016_syst_args)
 				self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.tau_efficiency2016_syst_args)
 			else:
-				self.cb.cp().channel(["mt"]).process(["ZTT", "ZLL", "ZL", "ZJ", "TTT", "TTJJ", "VVT", "VVJ"]).AddSyst(self.cb, *self.muon_efficiency_syst_args)
-				self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.muon_efficiency_syst_args)
-				self.cb.cp().channel(["mt"]).process(["ZTT", "TTT", "VVT"]).AddSyst(self.cb, *self.tau_efficiency_syst_args)
-				self.cb.cp().channel(["mt"]).signals().AddSyst(self.cb, *self.tau_efficiency_syst_args)
+                            raise Exception('Year is not `2016`.')
 
 			# Tau ES
 			self.cb.cp().channel(["mt"]).process(["ZTT", "TTT", "VVT"]).AddSyst(self.cb, *self.tau_es_syst_args)
@@ -50,7 +47,7 @@ class SMHttDatacards(datacards.Datacards):
 			if year == "2016":
 				self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau2016_syst_args)
 			else:
-				self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau_syst_args)
+                            raise Exception('Year is not `2016`.')
 			
 			# ttbar shape
 			self.cb.cp().channel(["mt"]).process(["TTT", "TTJJ"]).AddSyst(self.cb, *self.ttj_syst_args)
@@ -228,11 +225,9 @@ class SMHttDatacards(datacards.Datacards):
 			if year == "2016":
 				self.cb.cp().signals().AddSyst(self.cb, *self.lumi2016_syst_args)
 				self.cb.cp().process(["ZTT", "ZLL", "ZL", "ZJ", "TTT", "TTJJ", "VVT", "VVJ"]).AddSyst(self.cb, *self.lumi2016_syst_args)
-				self.cb.cp().process(["W"]).channel(["em", "tt", "mm"]).AddSyst(self.cb, *self.lumi2016_syst_args) # automatically in other channels determined
+				self.cb.cp().process(["W"]).channel(["em", "tt", "mm", "mt"]).AddSyst(self.cb, *self.lumi2016_syst_args) # automatically in other channels determined
 			else:
-				self.cb.cp().signals().AddSyst(self.cb, *self.lumi_syst_args)
-				self.cb.cp().process(["ZTT", "ZLL", "ZL", "ZJ", "TTT", "TTJJ", "VVT", "VVJ"]).AddSyst(self.cb, *self.lumi_syst_args)
-				self.cb.cp().process(["W"]).channel(["em", "tt", "mm"]).AddSyst(self.cb, *self.lumi_syst_args) # automatically in other channels determined
+                            raise Exception('Year is not `2016`.')
 
 			# jets
 			self.cb.cp().process(["ZTT", "ZL", "ZJ", "TTT", "TTJJ", "VVT", "VVJ", "W", "QCD"]).AddSyst(self.cb, *self.jec_syst_args)
@@ -251,10 +246,11 @@ class SMHttDatacards(datacards.Datacards):
 			if year == "2016":
 				self.cb.cp().process(["VVT", "VVJ"]).AddSyst(self.cb, *self.vv_cross_section2016_syst_args)
 			else:
-				self.cb.cp().process(["VVT", "VVJ"]).AddSyst(self.cb, *self.vv_cross_section_syst_args)
-			self.cb.cp().process(["W"]).channel(["em", "tt", "mm"]).AddSyst(self.cb, *self.wj_cross_section_syst_args) # automatically in other channels determined
+                            raise Exception('Year is not `2016`.')
+			self.cb.cp().process(["W"]).channel(["em", "tt", "mm", "mt"]).AddSyst(self.cb, *self.wj_cross_section_syst_args) # automatically in other channels determined
 			
 			# QCD normalization from https://github.com/cms-analysis/CombineHarvester/blob/SM2016-dev/HTTSM2016/src/HttSystematics_SMRun2.cc#L355-L377
+                        '''
 			self.cb.cp().channel(["em"]).process(["QCD"]).bin_id(["em_ZeroJet2D"]).AddSyst(self.cb, "CMS_htt_QCD_0jet_em_13TeV", "lnN", ch.SystMap()(1.10))
 			self.cb.cp().channel(["em"]).process(["QCD"]).bin_id(["em_Boosted2D"]).AddSyst(self.cb, "CMS_htt_QCD_boosted_em_13TeV", "lnN", ch.SystMap()(1.10))
 			self.cb.cp().channel(["em"]).process(["QCD"]).bin_id(["em_Vbf2D"]).AddSyst(self.cb, "CMS_htt_QCD_VBF_em_13TeV", "lnN", ch.SystMap()(1.20))
@@ -262,9 +258,10 @@ class SMHttDatacards(datacards.Datacards):
 			self.cb.cp().channel(["tt"]).process(["QCD"]).bin_id(["em_ZeroJet2D"]).AddSyst(self.cb, "CMS_htt_QCD_0jet_tt_13TeV", "lnN", ch.SystMap()(1.027))
 			self.cb.cp().channel(["tt"]).process(["QCD"]).bin_id(["em_Boosted2D"]).AddSyst(self.cb, "CMS_htt_QCD_boosted_tt_13TeV", "lnN", ch.SystMap()(1.027))
 			self.cb.cp().channel(["tt"]).process(["QCD"]).bin_id(["em_Vbf2D"]).AddSyst(self.cb, "CMS_htt_QCD_VBF_tt_13TeV", "lnN", ch.SystMap()(1.15))
+                        '''
 			
-			self.cb.cp().channel(["mt"]).process(["QCD"]).AddSyst(self.cb, "QCD_Extrap_Iso_nonIso_mt_13TeV", "lnN". ch.SystMap()(1.20))
-			self.cb.cp().channel(["et"]).process(["QCD"]).AddSyst(self.cb, "QCD_Extrap_Iso_nonIso_et_13TeV", "lnN". ch.SystMap()(1.20))
+			self.cb.cp().channel(["mt"]).process(["QCD"]).AddSyst(self.cb, "QCD_Extrap_Iso_nonIso_mt_13TeV", "lnN", ch.SystMap()(1.20))
+			self.cb.cp().channel(["et"]).process(["QCD"]).AddSyst(self.cb, "QCD_Extrap_Iso_nonIso_et_13TeV", "lnN", ch.SystMap()(1.20))
 
 			# tau efficiency
 			# (hopefully) temporary fix
@@ -274,8 +271,7 @@ class SMHttDatacards(datacards.Datacards):
 				self.cb.cp().channel(["mt", "et"]).signals().AddSyst(self.cb, *self.tau_efficiency2016_corr_syst_args)
 				self.cb.cp().channel(["tt"]).signals().AddSyst(self.cb, *self.tau_efficiency2016_tt_corr_syst_args)
 			else:
-				self.cb.cp().channel(["mt", "et", "tt"]).process(["ZTT", "TTT", "VVT"]).AddSyst(self.cb, *self.tau_efficiency_corr_syst_args)
-				self.cb.cp().channel(["mt", "et", "tt"]).signals().AddSyst(self.cb, *self.tau_efficiency_corr_syst_args)
+                            raise Exception('Year is not `2016`.')
 			# signal
 			self.cb.cp().signals().AddSyst(self.cb, *self.htt_qcd_scale_syst_args)
 			self.cb.cp().signals().AddSyst(self.cb, *self.htt_pdf_scale_syst_args)

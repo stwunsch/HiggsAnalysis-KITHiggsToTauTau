@@ -10,8 +10,13 @@ import sys
 import HiggsAnalysis.KITHiggsToTauTau.plotting.configs.samples as samples
 from Kappa.Skimming.registerDatasetHelper import get_nick_list
 from Artus.Utility.tools import make_multiplication, split_multiplication, clean_multiplication
+
 energy = 13
 default_lumi =  35.87*1000.0
+
+#global_mc_weight = "(mvaWeight)"
+global_mc_weight = "(1.0)"
+
 class Samples(samples.SamplesBase):
 
 
@@ -208,7 +213,7 @@ class Samples(samples.SamplesBase):
 
 	def projection(self, kwargs):
 		data_weight = "(1.0)"
-		mc_weight = "(1.0)"
+		mc_weight = global_mc_weight
 		if kwargs.get("project_to_lumi", False):
 			data_weight = "({projection})*".format(projection=kwargs["project_to_lumi"]) + data_weight
 			mc_weight = "({projection})*".format(projection=kwargs["project_to_lumi"]) + mc_weight
@@ -895,7 +900,7 @@ class Samples(samples.SamplesBase):
 
 		data_weight, mc_weight = self.projection(kwargs)
 
-		if channel in ["mt", "et"]:
+		if channel in ["et"]:
 			high_mt_cut_type = cut_type + "highMtControlRegionWJ"
 			high_mt_ss_cut_type = cut_type + "highMtSSControlRegionWJ"
 			exclude_cuts_high_mt = [cut for cut in exclude_cuts if cut not in ["mt"]]
@@ -1476,7 +1481,7 @@ class Samples(samples.SamplesBase):
 				config.setdefault("wjets_mc_signal_nicks", []).append("noplot_wj_mc_signal"+nick_suffix)
 				config.setdefault("wjets_mc_control_nicks", []).append("noplot_wj_mc_control"+nick_suffix)
 
-		elif channel in ["em", "tt", "mm", "ee"]:
+		elif channel in ["em", "tt", "mm", "ee", "mt"]:
 			Samples._add_input(
 					config,
 					self.files_wj(channel),
@@ -1538,7 +1543,7 @@ class Samples(samples.SamplesBase):
 						nick_suffix=nick_suffix
 				)
 
-				if channel in ["mt", "et"]:
+				if channel in ["et"]:
 					high_mt_ss_cut_type = cut_type + "highMtSSControlRegionWJ"
 					exclude_cuts_high_mt = [cut for cut in exclude_cuts if cut not in ["mt"]]
 					exclude_cuts_high_mt_ss = copy.deepcopy(exclude_cuts_high_mt)+["os"]
@@ -2548,7 +2553,7 @@ class Samples(samples.SamplesBase):
 
 
 	def files_qqh(self, channel, mass=125):
-		return self.artus_file_names({"process" : "VBFHToTauTau_M"+str(mass), "data": False, "campaign" : self.mc_campaign}, 1)
+                return self.artus_file_names({"process" : "VBFHToTauTau_M"+str(mass), "data": False, "campaign" : self.mc_campaign, "scenario" : "PUMoriond17"}, 1)
 	
 	def qqh(self, config, channel, category, weight, nick_suffix, higgs_masses, normalise_signal_to_one_pb=False, lumi=default_lumi, exclude_cuts=None, cut_type="baseline", **kwargs):
 		if exclude_cuts is None:
