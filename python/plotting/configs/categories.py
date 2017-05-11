@@ -23,7 +23,7 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                for tag in ['mva', 'mva2', 'mva3', 'mva4']:
+                for tag in ['mva']:
                     for channel in [0, 1, 2, 3, 4, 5, 6]:
                         self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
                                                 "channel": [
@@ -82,7 +82,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
+                                                                    "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
                                                                 }
                                                         }
                                                 }
@@ -102,7 +102,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0]])
                                                                 }
                                                         }
                                                 }
@@ -122,7 +122,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
                                                                 }
                                                         }
                                                 }
@@ -142,7 +142,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0]])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.4, 0.5, 0.6, 0.7, 1.0]])
                                                                 }
                                                         }
                                                 }
@@ -162,7 +162,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.3, 1.0]])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.3, 0.5, 1.0]])
                                                                 }
                                                         }
                                                 }
@@ -182,7 +182,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.0, 0.3, 0.4, 0.5, 0.6, 1.0]])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.17, 0.3, 0.4, 0.5, 0.6, 0.7, 1.0]])
                                                                 }
                                                         }
                                                 }
