@@ -2572,7 +2572,7 @@ class Samples(samples.SamplesBase):
 						self.files_qqh(channel, mass),
 						self.root_file_folder(channel),
 						lumi*kwargs.get("scale_signal", 1.0),
-						mc_weight+"*"+weight+"*eventWeight*"+self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type),
+                                                mc_weight+"*"+weight+"*eventWeight/abs(generatorWeight)*0.998431372549*"+self._cut_string(channel, exclude_cuts=exclude_cuts, cut_type=cut_type), # FIXME: Remove generatorWeight
 						"qqh"+str(mass)+("_"+str(int(kwargs["scale_signal"])) if kwargs.get("scale_signal", 1.0) != 1.0 else ""),
 						nick_suffix=nick_suffix
 			)
