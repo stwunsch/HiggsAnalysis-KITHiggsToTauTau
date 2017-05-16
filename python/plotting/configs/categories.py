@@ -44,8 +44,7 @@ class CategoriesDict(object):
                                                                 }
                                                         }
                                                 }
-                    '''
-                    for channel in ['backgroundDYJetsToTauTau', 'backgroundTT', 'backgroundWJetsToLNu', 'backgroundDYJetsToLL', 'signalGluGlu', 'signalVBF']:
+                    for channel in ['backgroundDYJetsToTauTau', 'backgroundTT', 'backgroundWJetsToLNu', 'backgroundDYJetsToLL', 'backgroundDiBoson', 'backgroundQCD', 'signalGluGlu', 'signalVBF', 'signalAll']:
                         self.categoriesDict["{analysis}{channel}%s_%s_exclusive{discriminator}"%(tag,channel)] = {
                                                 "channel": [
                                                         "mt_"
@@ -61,7 +60,7 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in np.linspace(0.0, 1.0, 11)])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in np.linspace(0.2, 1.0, 13)])
                                                                 }
                                                         }
                                                 }
@@ -186,6 +185,27 @@ class CategoriesDict(object):
                                                                 }
                                                         }
                                                 }
+                    for channel in ['signalAll']:
+                        self.categoriesDict["{analysis}{channel}%s_%s_exclusive{discriminator}"%(tag,channel)] = {
+                                                "channel": [
+                                                        "mt_"
+                                                        ],
+                                                "expressions":{
+                                                        "global":"({}_{}_exclusive>0.0)".format(tag,channel),
+                                                        "analysis": [
+                                                                "catHtt13TeV_"
+                                                                ]
+                                                        },
+                                                "binnings":{
+                                                        "analysis": [
+                                                                "binningHtt13TeV_"
+                                                                ],
+                                                        "global":{
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.1666, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
+                                                                }
+                                                        }
+                                                }
+                    '''
 		for mjj in range(0,1001,100):
 			for jdeta in np.linspace(0.0, 6.0, 13):
 				vbf_string = ("(mjj>" + str(mjj) + ")") if mjj >0 else ""
