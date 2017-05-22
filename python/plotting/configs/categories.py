@@ -23,7 +23,7 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                for tag in ['mva']:
+                for tag in ['mva_{}'.format(i) for i in range(1, 10)]:
                     for channel in [0, 1, 2, 3, 4, 5, 6]:
                         self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
                                                 "channel": [
@@ -44,7 +44,7 @@ class CategoriesDict(object):
                                                                 }
                                                         }
                                                 }
-                    for channel in ['backgroundDYJetsToTauTau', 'backgroundTT', 'backgroundWJetsToLNu', 'backgroundDYJetsToLL', 'backgroundDiBoson', 'backgroundQCD', 'signalGluGlu', 'signalVBF', 'signalAll']:
+                    for channel in ['backgroundDYJetsToTauTau', 'backgroundTT', 'backgroundWJetsToLNu', 'backgroundDYJetsToLL', 'backgroundDiBoson', 'backgroundQCD']:
                         self.categoriesDict["{analysis}{channel}%s_%s_exclusive{discriminator}"%(tag,channel)] = {
                                                 "channel": [
                                                         "mt_"
@@ -60,7 +60,27 @@ class CategoriesDict(object):
                                                                 "binningHtt13TeV_"
                                                                 ],
                                                         "global":{
-                                                                "_{}_prob".format(tag):" ".join([str(f) for f in np.linspace(0.2, 1.0, 13)])
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0]])
+                                                                }
+                                                        }
+                                                }
+                    for channel in ['signalGluGlu', 'signalVBF', 'signalAll']:
+                        self.categoriesDict["{analysis}{channel}%s_%s_exclusive{discriminator}"%(tag,channel)] = {
+                                                "channel": [
+                                                        "mt_"
+                                                        ],
+                                                "expressions":{
+                                                        "global":"({}_{}_exclusive>0.0)".format(tag,channel),
+                                                        "analysis": [
+                                                                "catHtt13TeV_"
+                                                                ]
+                                                        },
+                                                "binnings":{
+                                                        "analysis": [
+                                                                "binningHtt13TeV_"
+                                                                ],
+                                                        "global":{
+                                                                "_{}_prob".format(tag):" ".join([str(f) for f in [0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 1.0]])
                                                                 }
                                                         }
                                                 }
