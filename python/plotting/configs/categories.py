@@ -23,7 +23,7 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                for tag in ['mva_{}'.format(i) for i in range(1, 10)]:
+                for tag in ['mva_{}'.format(i) for i in range(100)]:
                     for channel in [0, 1, 2, 3, 4, 5, 6]:
                         self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
                                                 "channel": [
@@ -368,11 +368,11 @@ class CategoriesDict(object):
 						"_decayMode_2": auto_rebin_binning
 						},
 					"mt_" : {
-						"_decayMode_2" : "0 1 10",
+						"_decayMode_2" : "0 1 10 11",
 						"_m_vis" : "0.0 "+" ".join([str(float(f)) for f in range(60, 110, 5)+range(110,401,290)])
 						},
 					"et_" : {
-						"_decayMode_2" : "0 1 10",
+						"_decayMode_2" : "0 1 10 11",
 						"_m_vis" : "0.0 "+" ".join([str(float(f)) for f in range(60, 110, 5)+range(110,401,290)])
 						},
 					"em_" : {
