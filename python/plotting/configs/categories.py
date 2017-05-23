@@ -23,7 +23,7 @@ class CategoriesDict(object):
 		auto_rebin_binning = " ".join([str(float(f)) for f in range(0,251,10)])
 		self.pp = pprint.PrettyPrinter(indent=4)
 		self.categoriesDict = {}
-                for tag in ['mva_{}'.format(i) for i in range(100)]:
+                for tag in ['mva_{}'.format(i) for i in range(100)] + ['mva']:
                     for channel in [0, 1, 2, 3, 4, 5, 6]:
                         self.categoriesDict["{analysis}{channel}%s_%s{discriminator}"%(tag,channel)] = {
                                                 "channel": [
