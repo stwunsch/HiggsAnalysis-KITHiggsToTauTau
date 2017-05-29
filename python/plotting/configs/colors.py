@@ -126,8 +126,8 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["zll"] = "#000000 #4496C8"
 			self.colors_dict["zmm"] = self.colors_dict["zll"]
 			self.colors_dict["zee"] = self.colors_dict["zll"]
-			self.colors_dict["zl"]  = "#000000 #4496C8"
-			self.colors_dict["zj"]  = "#000000 #64DE6A"
+			self.colors_dict["zl"]  = "#000000 "+self.colors_dict["kit_blau_1"]
+			self.colors_dict["zj"]  = "#000000 "+self.colors_dict["kit_blau_2"]
 			self.colors_dict["ztt"] = "#000000 #FFCC66"
 			self.colors_dict["zttpospol"] = "#000000 #FFEEBB"
 			self.colors_dict["zttnegpol"] = "#000000 #FFCC66"
@@ -144,9 +144,9 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["wjets"]  = self.colors_dict["wj"]
 			self.colors_dict["w"]  = self.colors_dict["wj"]
 			self.colors_dict["vv"]  = "#000000 #6F2D35"
-			self.colors_dict["vvt"]  = self.colors_dict["kit_gelb_1"]
-			self.colors_dict["vvl"]  = self.colors_dict["kit_gelb_2"]
-			self.colors_dict["vvj"]  = self.colors_dict["kit_gelb_3"]
+			self.colors_dict["vvt"]  = "#000000 #F4FF3F"
+			self.colors_dict["vvl"]  = "#000000 "+self.colors_dict["kit_gruen_3"]
+			self.colors_dict["vvj"]  = "#000000 #F7FF70"
 			self.colors_dict["dibosons"]  = self.colors_dict["wj"]
 			self.colors_dict["ewk"]  = self.colors_dict["wj"]
 			self.colors_dict["qcd"] = "#000000 #FFCCFF"
