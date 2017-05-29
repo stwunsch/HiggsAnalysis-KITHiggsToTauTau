@@ -27,6 +27,8 @@ class SystematicsFactory(dict):
 		self["CMS_ztt_jetFakeTau_frac_w_Shape_13TeV"] = JetFakeTauFracWShapeSystematic
 		self["CMS_ztt_jetFakeTau_frac_tt_Shape_13TeV"] = JetFakeTauFracTTShapeSystematic
 		self["CMS_ztt_jetFakeTau_frac_dy_Shape_13TeV"] = JetFakeTauFracDYShapeSystematic
+		self["CMS_mFakeTau_1prong_13TeV"] = MuonToTauOneProngFakeSystematic
+		self["CMS_mFakeTau_1prong1pizero_13TeV"] = MuonToTauOneProngPiZerosFakeSystematic
 		self["CMS_eff_b_13TeV"] = BTagSystematic
 		self["CMS_mistag_b_13TeV"] = BMistagSystematic
 		
@@ -417,5 +419,34 @@ class BMistagSystematic(SystematicShiftBase):
 					plot_config["folders"][index] = folder[0:3] + "bMistagUp/ntuple"
 				elif shift < 0.0:
 					plot_config["folders"][index] = folder[0:3] + "bMistagDown/ntuple"
+		
+		return plot_config
+
+class MuonToTauOneProngFakeSystematic(SystematicShiftBase):
+	
+	def get_config(self, shift=0.0):
+		plot_config = super(MuonToTauOneProngFakeSystematic, self).get_config(shift=shift)
+		
+		for index, weight in enumerate(plot_config.get("weights", [])):
+			if not "Run201" in plot_config["files"][index]:
+				if shift > 0.0:
+					plot_config["weights"][index] = weight.replace("(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))", "(((decayMode_2 == 0)*0.75*1.25) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))")
+				elif shift < 0.0:
+					plot_config["weights"][index] = weight.replace("(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))", "(((decayMode_2 == 0)*0.75*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))")
+		
+		return plot_config
+
+
+class MuonToTauOneProngPiZerosFakeSystematic(SystematicShiftBase):
+	
+	def get_config(self, shift=0.0):
+		plot_config = super(MuonToTauOneProngPiZerosFakeSystematic, self).get_config(shift=shift)
+		
+		for index, weight in enumerate(plot_config.get("weights", [])):
+			if not "Run201" in plot_config["files"][index]:
+				if shift > 0.0:
+					plot_config["weights"][index] = weight.replace("(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))", "(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.25) + ((decayMode_2 == 10)*1.0))")
+				elif shift < 0.0:
+					plot_config["weights"][index] = weight.replace("(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*1.0) + ((decayMode_2 == 10)*1.0))", "(((decayMode_2 == 0)*0.75) + ((decayMode_2 == 1 || decayMode_2 == 2)*0.75) + ((decayMode_2 == 10)*1.0))")
 		
 		return plot_config
