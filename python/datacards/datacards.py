@@ -59,7 +59,7 @@ class Datacards(object):
 
 		self.configs = datacardconfigs.DatacardConfigs()
 		
-		self.stable_options = r"--robustFit 1 --preFitValue 1.0 --minimizerAlgoForMinos Minuit2 --minimizerAlgo Minuit2 --minimizerStrategy 0 --minimizerTolerance 0.1 --cminFallbackAlgo Minuit2,0:1.0"
+		self.stable_options = r"--robustFit 1"
 
 		# common systematics
 		self.lumi_syst_args = [
@@ -1134,7 +1134,7 @@ class Datacards(object):
 		
 		commandsInitialFit = []
 		commandsInitialFit.extend([[
-				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --minimizerTolerance 0.1 --minimizerStrategy 0 --minimizerAlgoForMinos Minuit2,migrad --doInitialFit --allPars {ARGS}".format(
+				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --doInitialFit --allPars {ARGS}".format(
 						MASS=[mass for mass in datacards_cbs[datacard].mass_set() if mass != "*"][0] if len(datacards_cbs[datacard].mass_set()) > 1 else "0",
 						ARGS=tmp_args.format(),
 						WORKSPACE=workspace
@@ -1144,7 +1144,7 @@ class Datacards(object):
 		
 		commandsFits = []
 		commandsFits.extend([[
-				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --minimizerTolerance 0.1 --minimizerStrategy 0 --minimizerAlgoForMinos Minuit2,migrad --doFits --parallel {NPROCS} --allPars {ARGS}".format(
+				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --doFits --parallel {NPROCS} --allPars {ARGS}".format(
 						MASS=[mass for mass in datacards_cbs[datacard].mass_set() if mass != "*"][0] if len(datacards_cbs[datacard].mass_set()) > 1 else "0",
 						ARGS=tmp_args.format(),
 						WORKSPACE=workspace,
@@ -1155,7 +1155,7 @@ class Datacards(object):
 		
 		commandsOutput = []
 		commandsOutput.extend([[
-				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --minimizerTolerance 0.1 --minimizerStrategy 0 --minimizerAlgoForMinos Minuit2,migrad --output impacts.json --parallel {NPROCS} --allPars {ARGS}".format(
+				"combineTool.py -M Impacts -d {WORKSPACE} -m {MASS} --robustFit 1 --output impacts.json --parallel {NPROCS} --allPars {ARGS}".format(
 						MASS=[mass for mass in datacards_cbs[datacard].mass_set() if mass != "*"][0] if len(datacards_cbs[datacard].mass_set()) > 1 else "0",
 						ARGS=tmp_args.format(),
 						WORKSPACE=workspace,
