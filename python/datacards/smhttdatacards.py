@@ -279,7 +279,7 @@ class SMHttDatacards(datacards.Datacards):
 			# signal
 			self.cb.cp().signals().AddSyst(self.cb, *self.htt_qcd_scale_syst_args)
 			self.cb.cp().signals().AddSyst(self.cb, *self.htt_pdf_scale_syst_args)
-			self.cb.cp().signals().AddSyst(self.cb, *self.htt_ueps_syst_args)
+			#self.cb.cp().signals().AddSyst(self.cb, *self.htt_ueps_syst_args)
 
 			if log.isEnabledFor(logging.DEBUG):
 				self.cb.PrintAll()
