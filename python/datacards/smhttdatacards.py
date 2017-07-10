@@ -46,12 +46,7 @@ class SMHttDatacards(datacards.Datacards):
 			# mu->tau fake-rate
                         self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, "CMS_mFakeTau_1prong_13TeV", "shape", ch.SystMap()(1.0))
                         self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, "CMS_mFakeTau_1prong1pizero_13TeV", "shape", ch.SystMap()(1.0))
-                        '''
-			if year == "2016":
-				self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau2016_syst_args)
-			else:
-                            raise Exception('Year is not `2016`.')
-                        '''
+			self.cb.cp().channel(["mt"]).process(["ZL"]).AddSyst(self.cb, *self.muFakeTau2016_syst_args)
 			
 			# ttbar shape
 			self.cb.cp().channel(["mt"]).process(["TTT", "TTJJ"]).AddSyst(self.cb, *self.ttj_syst_args)
